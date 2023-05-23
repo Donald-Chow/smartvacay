@@ -4,6 +4,7 @@ class ItinerariesController < ApplicationController
   end
 
   def create
+    Itinerary.new
   end
 
   def update
