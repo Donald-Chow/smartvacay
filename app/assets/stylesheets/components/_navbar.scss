@@ -1,12 +1,33 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+/* Place the navbar at the bottom of the page, and make it stick */
+.navbar {
+  background-color: #EDEDED;
+  opacity: 70%;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  min-width: fit-content;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+/* Style the links inside the navigation bar */
+.navbar a {
+  float: left;
+  display: block;
+  color: #000000;
+  text-align: center;
+  padding: 1px 1px;
+  margin: 1px 10px;
+  text-decoration: none;
+  font-size: 20px;
+  opacity: 75%;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.nav-text {
+  font-size: 12px;
+}
+
+/* Add a color to the active/current link */
+.navbar a.active {
+  font-weight: bold;
+  opacity: 100%;
 }

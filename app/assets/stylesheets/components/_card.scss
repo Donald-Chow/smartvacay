@@ -23,3 +23,81 @@
     color: white;
   }
 }
+.card-day h3 {
+  padding: 16px;
+  background: $white;
+  height: 60px;
+  margin:0px;
+}
+
+// itinerary card
+
+.card-itinerary {
+  overflow: hidden;
+  height: 160px;
+  background: $white;
+  box-shadow: 0 0 1px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.card-itinerary-box {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card-itinerary img {
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 12px;
+}
+
+.card-itinerary h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-itinerary p {
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 16px;
+}
+
+.card-itinerary .card-itinerary-infos {
+  padding: 16px;
+}
+
+// direction card
+.card-direction {
+  overflow: hidden;
+  height: 80px;
+  background: $white;
+  box-shadow: 0 0 1px rgba(0,0,0,0.2);
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-direction h2 {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card-direction p {
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  text-align: center;
+}

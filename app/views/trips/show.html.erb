@@ -1,1 +1,64 @@
-<h1>TRIP SHOW</h1>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+url(<%= "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}" %>);">
+	<div class="container">
+		<h1><%= @trip.destination %> 2023</h1>
+		<p><%= @trip.start_date %></p>
+	</div>
+</div>
+<div class="card-day">
+	<div>
+		<h3><i class="fa-solid fa-chevron-down"></i>  Mon, 5 June</h3>
+	</div>
+
+	<div class="cards-itinerary">
+		<div class="card-itinerary">
+			<div class="card-itinerary-box">
+				<div class="card-itinerary-infos">
+					<h2><i class="fa-solid fa-location-dot"></i>  Tokyo Tower</h2>
+					<p>9:00 am</p>
+				</div>
+				<img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
+			</div>
+		</div>
+
+		<div class="card-direction">
+			<h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-chevron-down"></i></h2>
+			<p>About 10m (700m)</p>
+		</div>
+
+		<div class="card-itinerary">
+			<div class="card-itinerary-box">
+				<div class="card-itinerary-infos">
+					<h2><i class="fa-solid fa-location-dot"></i>  Tokyo Tower</h2>
+					<p>9:00 am</p>
+				</div>
+				<img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="card-day">
+	<div>
+		<h3><i class="fa-solid fa-chevron-right"></i>  Tues, 6 June</h3>
+	</div>
+</div>
+
+<div class="card-day">
+	<div>
+		<h3><i class="fa-solid fa-chevron-right"></i>  Wed, 7 June</h3>
+	</div>
+	<% @trip.itineraries.each do |itin| %>
+		<div class="cards-itinerary">
+			<div class="card-itinerary">
+				<div class="card-itinerary-box">
+					<div class="card-itinerary-infos">
+						<h2><i class="fa-solid fa-location-dot"></i>  <%= itin.location.name %></h2>
+						<p><%= itin.start_time.strftime('%I:%M %p') %></p>
+					</div>
+					<img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>

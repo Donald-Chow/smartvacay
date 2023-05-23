@@ -1,7 +1,17 @@
 * {
 	box-sizing: border-box;
+  margin: 0px;
 }
 
 body {
   background-color: $bg-color;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar{
+  display: none;
+}
+
+.btn {
+  color: white;
 }

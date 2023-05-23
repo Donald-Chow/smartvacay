@@ -1,8 +1,11 @@
 class TripsController < ApplicationController
+  before_action :set_trip, only: [:show]
+
   def index
   end
 
   def show
+    authorize @trip
   end
 
   def create
@@ -17,6 +20,10 @@ class TripsController < ApplicationController
   end
 
   private
+
+  def set_trip
+    @trip = Trip.find(params[:id])
+  end
 
   def trip_params
     params.require(:trip).permit(:destination, :start_date, :end_date)
