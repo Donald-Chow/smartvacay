@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :trips
   has_many :itineraries, through: :trips
   has_many :location, through: :itineraries
+
+  acts_as_favoritor
 end

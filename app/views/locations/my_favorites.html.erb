@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>All my favorites!</h1>
+  <% @all_favorites.each do |favorite| %>
+    <div class="card-locations">
+      <%= image_tag "sample_card_image.jpeg", alt: "my-favorite" %>
+      <%= favorite.favoritable.name %>
+    </div>
+  <% end %>
+</div>
