@@ -25,7 +25,9 @@ Location.create(
     price_level: 3,
     amenities: "Wi-Fi, parking, restaurants, observation decks, shops.",
     type_of_place: "point_of_interest",
-    geometry: "lat: -33.866489, lng: 151.1958561",
+    geometry: "lat: 35.7101, lng: 139.8107",
+    latitude: 35.7101,
+    longitude: 139.8107,
     duration: 2,
     description: "World's tallest freestanding broadcasting tower with an observation deck boasting 360-degree views."
 )
@@ -45,6 +47,8 @@ Location.create(
     amenities: "restaurants, toilets, good for kids.",
     type_of_place: "point_of_interest",
     geometry: "lat: -33.866489, lng: 151.1958561",
+    latitude: 35.6762,
+    longitude: 139.6503,
     duration: 3,
     description: "Stately museum complex devoted to the art & antiquities of Japan, as well as other Asian countries."
 )
@@ -62,7 +66,9 @@ Location.create(
     price_level: 3,
     amenities: "toilets, good for kids.",
     type_of_place: "meal_takeaway, restaurant, food",
-    geometry: "lat: 35.6943949, lng: 139.7015417",
+    geometry: "lat: 35.6944, lng: 139.7015",
+    latitude: 35.6944,
+    longitude: 139.7015,
     duration: 1,
     description: "Informal ramen restaurant with a specialty for tonkotsu ramen in a pork bone broth."
 )
