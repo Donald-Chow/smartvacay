@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Manually installed gems
 gem "faker"
+gem 'acts_as_favoritor'
 
 ruby "3.1.2"
 
