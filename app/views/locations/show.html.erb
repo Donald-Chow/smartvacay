@@ -19,7 +19,6 @@
     <div class="map-display mx-3">
       <!-- <h2>MAPMAP</h2> -->
       <!--this div done just for organization purpose, bottom is the map-->
-      <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}&callback=Function.prototype" %>
       <div id="map"
 
     data-controller="google-maps"
