@@ -17,7 +17,7 @@
 							<!--<p><%= itin.start_time.strftime('%a %d %b %Y') %></p>-->
 							<p><%= itin.start_time.strftime('%I:%M %p') %></p>
 						</div>
-						<img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
+						<img src="<%= itin.location.photo %>" alt="<%"#{itin.location.name}-photo"%>">
 					</div>
 				</div>
 			</div>
