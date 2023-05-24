@@ -10,5 +10,8 @@ application.register("flatpickr", FlatpickrController)
 import GoogleMapsController from "./google_maps_controller"
 application.register("google-maps", GoogleMapsController)
 
+import GoogleSearchController from "./google_search_controller"
+application.register("google-search", GoogleSearchController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

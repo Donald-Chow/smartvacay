@@ -5,6 +5,7 @@
       <h2><%= @location.name %></h2>
       <h3><%= @location.description  %></h3>
     </div>
+
     <div class="carousel">
       <!--remain place for carousel-->
     </div>
@@ -20,6 +21,7 @@
       <!--this div done just for organization purpose, bottom is the map-->
       <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}&callback=Function.prototype" %>
       <div id="map"
+
     data-controller="google-maps"
     style="width: 500px; height:100%;"
     data-markers="<%= @marker.to_json %>">
