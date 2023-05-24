@@ -7,6 +7,7 @@ class TripsController < ApplicationController
 
   def show
     authorize @trip
+    @grouped_itins = @trip.itineraries.group_by { |itin| itin[:start_time].to_date }
   end
 
   def create
@@ -22,7 +23,8 @@ class TripsController < ApplicationController
 
   def generate
     authorize @trip
-    @result = TripGenerator.new(current_user.favorited_location, @trip).call
+    TripGenerator.new(current_user.favorited_location, @trip).call
+    redirect_to trip_path(@trip)
   end
 
   private
