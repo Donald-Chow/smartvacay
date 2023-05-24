@@ -9,10 +9,16 @@
 require "open-uri"
 require "json"
 
-type_of_places = ["tourist_attraction"]
+type_of_places = ["tourist_attraction", "restaurant", "department_store"]
+
+puts "Cleaning database..."
+
+Location.destroy_all
+
+puts "Creating Test Locations"
 
 type_of_places.each do |place|
-  url = "https://maps.googleapis.com/maps/api/place/textsearch/json?type=#{place}&key=AIzaSyAdXEaYE70yz10EX5VPXXaSiz7M-KZH6dM"
+  url = "https://maps.googleapis.com/maps/api/place/textsearch/json?type=#{place}&language=en&key=AIzaSyAdXEaYE70yz10EX5VPXXaSiz7M-KZH6dM"
   response = URI.open(url).read
   parsed_response = JSON.parse(response)
   # puts parsed_response
@@ -38,6 +44,8 @@ type_of_places.each do |place|
     )
   end
 end
+
+puts "... created #{Location.count} locations"
 
 # puts "Cleaning database..."
 

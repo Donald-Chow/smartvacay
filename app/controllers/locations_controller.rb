@@ -27,5 +27,26 @@ class LocationsController < ApplicationController
     @all_favorites = current_user.all_favorites
     # Favorite.for_favoritor(current_user) would also work
     authorize @all_favorites
+
+    @category = params[:category]
+    @locations = []
+
+    @all_favorites.each do |favorite|
+      location = favorite.favoritable
+      if location.type_of_place.include?("restaurant") || location.type_of_place.include?("meal_takeaway") || location.type_of_place.include?("food")
+        location.category = "food"
+      elsif location.type_of_place.include?("department_store")
+        location.category = "shopping"
+      elsif location.type_of_place.include?("tourist_attraction")
+        location.category = "sightseeing"
+      else
+        location.category = "miscellaneous"
+      end
+      @locations << location
+    end
+
+    if @category.present?
+      return @locations_by_category = @locations.select { |location| location.category == @category }
+    end
   end
 end

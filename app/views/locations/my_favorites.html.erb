@@ -2,18 +2,61 @@
   <div class="container">
     <h1>All my favorites!</h1>
     <button type="button" class="btn btn-secondary">Generate itinerary</button>
-    <% @all_favorites.each do |favorite| %>
-      <div class="card-locations">
-        <div class="bookmark">
-          <% if current_user %>
-            <%= link_to favorite_location_path(favorite.favoritable), class: "#{"text-success" if current_user.favorited?(favorite.favoritable)}", onclick: "this.classList.toggle('text-success')" do %>
-              <i class="fa-solid fa-bookmark"></i>
-            <% end %>
-          <% end %>
+    <div class="category-avatars">
+      <%= link_to my_favorites_locations_path(category: "sightseeing") do %>
+        <div class="category-avatar">
+          <i class="fas fa-binoculars"></i>
+          <span>Sightseeing</span>
         </div>
-        <%= favorite.favoritable.photo.present? ? image_tag(favorite.favoritable.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
-        <%= favorite.favoritable.name %>
-      </div>
+      <% end %>
+      <%= link_to my_favorites_locations_path(category: "food") do %>
+        <div class="category-avatar">
+          <i class="fas fa-utensils"></i>
+          <span>Restaurants</span>
+        </div>
+      <% end %>
+      <%= link_to my_favorites_locations_path(category: "shopping") do %>
+        <div class="category-avatar">
+          <i class="fas fa-shopping-bag"></i>
+          <span>Shopping</span>
+        </div>
+      <% end %>
+      <%= link_to my_favorites_locations_path(category: "miscellaneous") do %>
+        <div class="category-avatar">
+          <i class="fas fa-shopping-bag"></i>
+          <span>Miscellaneous</span>
+        </div>
+      <% end %>
+      <%= link_to "all bookmarks", my_favorites_locations_path %>
+    </div>
+    <% if @category.present? %>
+      <% @locations_by_category.each do |favorite| %>
+        <div class="card-locations">
+          <div class="bookmark">
+            <% if current_user %>
+              <%= link_to favorite_location_path(favorite), class: "#{"text-success" if current_user.favorited?(favorite)}", onclick: "this.classList.toggle('text-success')" do %>
+                <i class="fa-solid fa-bookmark"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <%= favorite.photo.present? ? image_tag(favorite.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
+          <%= favorite.name %>
+        </div>
+      <% end %>
+    <% else %>
+      <% @all_favorites.each do |favorite| %>
+        <div class="card-locations">
+          <div class="bookmark">
+            <% if current_user %>
+              <%= link_to favorite_location_path(favorite.favoritable), class: "#{"text-success" if current_user.favorited?(favorite.favoritable)}", onclick: "this.classList.toggle('text-success')" do %>
+                <i class="fa-solid fa-bookmark"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <%= favorite.favoritable.photo.present? ? image_tag(favorite.favoritable.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
+          <%= favorite.favoritable.name %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
