@@ -18,7 +18,7 @@ export default class extends Controller {
     const service = new google.maps.places.PlacesService(map);
     const request = {
       query,
-      fields: ["name", "geometry"],
+      fields: ["name", "geometry", "formatted_address", "rating", "formatted_address"]
     };
 
     service.findPlaceFromQuery(request, (results, status) => {
@@ -27,5 +27,9 @@ export default class extends Controller {
       }
     });
   }
+
+
+
+
 
 }
