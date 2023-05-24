@@ -4,17 +4,17 @@
     <br>
     <span class="nav-text">Home</span>
   <% end %>
-  <%= link_to root_path do %>
-    <i class="fas fa-suitcase"></i>
+  <%= link_to locations_path do %>
+    <i class="fa-solid fa-magnifying-glass"></i>
     <br>
-    <span class="nav-text">Trips</span>
+    <span class="nav-text">Explore</span>
   <% end %>
   <%= link_to root_path do %>
     <i class="fa-solid fa-heart"></i>
     <br>
     <span class="nav-text">Fav. List</span>
   <% end %>
-  <%= link_to root_path do %>
+  <%= link_to trips_path(@trip) do %>
     <i class="fas fa-plane"></i>
     <br>
     <span class="nav-text">Itineraries</span>
