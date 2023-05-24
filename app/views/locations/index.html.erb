@@ -15,13 +15,14 @@
 			</div>
 		</div>
 
+		<div id="card-container"></div>
+		<!-- this is where results are displaying from google_search_controller-->
 		<% @locations.each do |location| %>
 			<div class="card-locations">
 				<div class="bookmark">
 					<% if current_user %>
 						<%= link_to favorite_location_path(location), class: "#{"text-success" if current_user.favorited?(location)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-success')" do %>
 							<i class="fa-solid fa-bookmark"></i>
-
 						<% end %>
 					<% end %>
 				</div>
@@ -38,6 +39,6 @@
 				<% end %>
 			</div>
 			<p><%= location.name %></p>
-		</div>
-	<% end %>
+		<% end %>
+	</div>
 </div>
