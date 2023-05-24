@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show]
+  before_action :set_trip, only: %i[show generate]
 
   def index
     @trips = policy_scope(Trip)
@@ -18,6 +18,11 @@ class TripsController < ApplicationController
     else
       render "pages/home", status: :unprocessable_entity
     end
+  end
+
+  def generate
+    authorize @trip
+    @result = TripGenerator.new(current_user.favorited_location, @trip).call
   end
 
   private

@@ -32,7 +32,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Added Manually
-
+gem 'kmeans-clusterer'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
