@@ -1,1 +1,85 @@
+<% @grouped_itins.each do |date, itins| %>
+	<div class="card-day" data-controller="itin-collapse">
+		<div>
+			<h3 data-action="click->itin-collapse#toggle"><i data-itin-collapse-target='date' class="fa-solid fa-chevron-down"></i>  <%= date.strftime('%a, %d %b')  %></h3>
+		</div>
+		<div class="cards-itinerary" data-itin-collapse-target='list'>
+			<% itins.each do |itin| %>
+				<div class="card-itinerary">
+					<%= link_to "", location_path(itin.location) %>
+					<div class="card-itinerary-box">
+						<div class="card-itinerary-infos">
+							<h2>
+								<% if itin.location.type_of_place.split(", ").include? "restaurant"%>
+									<i class="fa-solid fa-utensils"></i>
+								<% else %>
+									<i class="fa-solid fa-location-dot"></i>
+								<% end %>  <%= itin.location.name %></h2>
+							<!--<p><%= itin.start_time.strftime('%a %d %b %Y') %></p>-->
+							<p><%= itin.start_time.strftime('%I:%M %p') %></p>
+						</div>
+						<img src="<%= itin.location.photo %>" alt="<%"#{itin.location.name}-photo"%>">
+					</div>
+				</div>
+			<% end %>
+		</div>
+
+	</div>
+<% end %>
+
+<h2>########################</h2>
+<h2>BELOW IS HARD CODE DRAFT</h2>
+<!--
+<p>
+	<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample"
+  role="button" aria-expanded="false" aria-controls="collapseExample">
+		Link with href
+	</a>
+	<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+  data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+		Button with data-bs-target
+	</button>
+</p>
+<div class="collapse" id="collapseExample">
+	<div class="card card-body">
+		Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+	</div>
+</div>
+-->
 <h1>INTINERARIES INDEX</h1>
+<div class="card-day">
+	<div>
+		<h3>
+			<i class="fa-solid fa-chevron-down"></i>  Mon, 5 June</h3>
+	</div>
+
+	<div class="cards-itinerary">
+		<div class="card-itinerary">
+			<div class="card-itinerary-box">
+				<div class="card-itinerary-infos">
+					<h2><i class="fa-solid fa-location-dot"></i>  Tokyo Tower</h2>
+					<p>9:00 am</p>
+				</div>
+				<img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
+			</div>
+		</div>
+		<div class="card-direction">
+			<h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-chevron-down"></i></h2>
+			<p>About 10m (700m)</p>
+		</div>
+		<div class="card-itinerary">
+			<div class="card-itinerary-box">
+				<div class="card-itinerary-infos">
+					<h2><i class="fa-solid fa-burger-soda"></i>  Tokyo Tower</h2>
+					<p>9:00 am</p>
+				</div>
+				<img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="card-day">
+	<div>
+		<h3><i class="fa-solid fa-chevron-right"></i>  Tues, 6 June</h3>
+	</div>
+</div>

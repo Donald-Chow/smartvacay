@@ -13,4 +13,8 @@ class TripPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def generate?
+    true
+  end
 end

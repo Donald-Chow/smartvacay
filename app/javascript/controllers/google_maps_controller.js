@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 // Don't forget to import GMaps!
-import GMaps from 'gmaps/gmaps.js';
+import GMaps from 'gmaps';
 
 // Connects to data-controller="google-maps"
 export default class extends Controller {
@@ -16,5 +16,24 @@ export default class extends Controller {
     } else {
       map.fitLatLngBounds(markers);
     }
+    console.log(map);
+    console.log(markers);
   }
+
+  findPlaceFromQuery(e) {
+    e.preventDefault();
+    console.log('submit');
+    const service = new google.maps.places.PlacesService(map);
+    const request = {
+      query: "tokyo",
+      fields: ["name", "geometry"],
+    };
+
+    service.findPlaceFromQuery(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        console.log(results);
+      }
+    });
+  }
+
 }

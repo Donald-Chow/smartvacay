@@ -18,5 +18,7 @@ Rails.application.routes.draw do
     resources :itineraries, only: [:create]
   end
 
+  get '/trips/:id/generate', to: 'trips#generate', as: 'generate_trip'
+
   resources :itineraries, only: [:index, :update]
 end
