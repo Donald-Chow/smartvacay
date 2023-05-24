@@ -1,0 +1,18 @@
+<% @result.each do |cluster|%>
+	<%cluster.points.each do |c| %>
+		<%= c.label %>
+	<% end %>
+<% end %>
+<p>
+	############################################
+</p>
+<% @result.each do |day| %>
+	<p>
+		<% day.points.map do |c| %>
+			<%= Location.find(c.label) %>
+		<% end %>
+	</p>
+	<p>
+		<%= day.points %>
+	</p>
+<% end %>
