@@ -1,18 +1,15 @@
 <div class="page-content">
-  <h1>LOCATION SHOW (TEST PURPOSE)</h1>
   <div class="container">
     <div class="location-header">
       <h2><%= @location.name %></h2>
-      <h3><%= @location.description  %></h3>
+      <p><%= @location.description  %></p>
     </div>
-
-    <div class="carousel">
-      <!--remain place for carousel-->
+    <div class="container carousel">
+      <%= render "shared/carousel" %>
     </div>
     <div class="card mb-5">
-      <img src="<%= @location.photo %>" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title"><%= @location.name %></h5>
+        <h5 class="card-title">Address</h5>
         <p class="card-text"><%= @location.address %></p>
       </div>
     </div>
