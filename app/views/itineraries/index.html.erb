@@ -6,6 +6,7 @@
 		<div class="cards-itinerary" data-itin-collapse-target='list'>
 			<% itins.each do |itin| %>
 				<div class="card-itinerary">
+					<%= link_to "", location_path(itin.location) %>
 					<div class="card-itinerary-box">
 						<div class="card-itinerary-infos">
 							<h2>
