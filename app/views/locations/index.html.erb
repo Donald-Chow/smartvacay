@@ -20,25 +20,20 @@
 		<% @locations.each do |location| %>
 			<div class="card-locations">
 				<div class="bookmark">
-					<% if current_user %>
+					<% if user_signed_in? %>
 						<%= link_to favorite_location_path(location), class: "#{"text-success" if current_user.favorited?(location)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-success')" do %>
 							<i class="fa-solid fa-bookmark"></i>
 						<% end %>
 					<% end %>
 				</div>
 				<div>
-					<%= location.photo.present? ? image_tag(location.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
+					<%= link_to location_path(location) do %>
+						<%= location.photo.present? ? image_tag(location.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
+					<% end %>
 				</div>
 				<p><%= location.name %></p>
 				<p><%= location.description %></p>
 			</div>
-
-			<div>
-				<%= link_to location_path(location) do %>
-					<%= image_tag "sample_card_image.jpeg", alt:"location-image" %>
-				<% end %>
-			</div>
-			<p><%= location.name %></p>
 		<% end %>
 	</div>
 </div>
