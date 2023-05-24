@@ -1,13 +1,15 @@
 require 'kmeans-clusterer'
 
 class TripGenerator
-  attr_reader :locations
+  attr_reader :locations, :trip
 
-  def initialize(locations)
+  def initialize(locations, trip)
     @locations = locations
+    @trip = trip
   end
 
-  def make_itin
+  def call
+    trip.itineraries.destroy_all
     # fl = user.favorited_location
     # sl = fl.sort_by do |location|
     #   Geocoder::Calculations.distance_between(user_location, location.coordinates)
@@ -33,21 +35,20 @@ class TripGenerator
       labels.push(location.id)
       data.push([location.latitude, location.longitude])
     end
-
-    k = 2 # Optimal K found using the elbow method
+    k = 1
+    # k = (trip.end_date - trip.start_date).to_i # Optimal K found using the elbow method
     groupings = KMeansClusterer.run k, data, labels:, runs: 100
 
     days = groupings.clusters
-    grouped_location = {}
-    day = 1
     days.each do |day|
-      grouped_location["#{day}"] =
-        day.points.map do |c|
-          Location.find(c.label)
-        end
+      date = trip.start_date + day.id.to_i
+      day_locations = []
+      day.points.each do |c|
+        day_locations << Location.find(c.label)
+      end
+      create_day(day_locations, date)
     end
 
-    return days
     # kmeans.clusters.map do |cluster|
 
     #   cluster.points.each do |element|
@@ -61,4 +62,55 @@ class TripGenerator
     # end
     # return kmeans.clusters
   end
+
+  # day_locations should be an array of location instance
+  # HOW TO PARSE THIS!
+
+  def create_day(day_locations, date)
+    set_restaurants(day_locations, date)
+    set_attractions(day_locations, date)
+  end
+
+  def set_restaurants(day_locations, date)
+    # select if location category is restaruant
+    restaurants = day_locations.select do |location|
+      location.type_of_place.split(", ").include? "restaurant"
+    end
+    # lunch
+    restaurant = restaurants.sample
+    create_itin(restaurant, date, 12)
+    # Dinner
+    restaurants.delete(restaurant)
+    restaurant = restaurants.sample
+    create_itin(restaurant, date, 19)
+  end
+
+  def set_attractions(day_locations, date)
+    # select if location category not restaurant
+    attractions = day_locations.reject do |location|
+      location.type_of_place.split(", ").include? "restaurant"
+    end
+    # morning
+    attraction = attractions.sample
+    create_itin(attraction, date, 9)
+    # afternoon
+    attractions.delete(attraction)
+    attraction = attractions.sample
+    create_itin(attraction, date, 15)
+  end
+
+  def create_itin(type, date, hour)
+    item = Itinerary.new(
+      location: type,
+      trip:,
+      start_time: DateTime.new(date.year, date.mon, date.mday, hour, 0, 0)
+    )
+    item.save
+  end
 end
+
+# Itinerary.new(
+#   location: Location.find(day.points[0].label),
+#   trip:,
+#   start_time: DateTime.new(date.year, date.mon, date.mday, 9, 0, 0)
+# )

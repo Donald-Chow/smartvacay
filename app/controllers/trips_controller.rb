@@ -21,7 +21,7 @@ class TripsController < ApplicationController
 
   def generate
     authorize @trip
-    @result = TripGenerator.new(current_user.favorited_location).make_itin
+    @result = TripGenerator.new(current_user.favorited_location, @trip).call
   end
 
   private
