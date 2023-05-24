@@ -1,4 +1,8 @@
+<div class="container page-content">
 <div class="container" data-controller="google-search">
+
+
+
   <h1>Suggested locations</h1>
 
 
@@ -27,7 +31,9 @@
         <% end %>
       </div>
       <div>
-        <%= image_tag "sample_card_image.jpeg", alt:"location-image" %>
+        <%= link_to location_path(location) do %>
+          <%= image_tag "sample_card_image.jpeg", alt:"location-image" %>
+        <% end %>
       </div>
       <p><%= location.name %></p>
     </div>

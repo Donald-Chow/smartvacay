@@ -16,6 +16,8 @@ export default class extends Controller {
     } else {
       map.fitLatLngBounds(markers);
     }
+    console.log(map);
+    console.log(markers);
   }
 
   findPlaceFromQuery(e) {

@@ -6,7 +6,8 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  min-width: fit-content;
+  min-width: 350px;
+  justify-content: space-evenly;
 }
 
 /* Style the links inside the navigation bar */
@@ -15,11 +16,10 @@
   display: block;
   color: #000000;
   text-align: center;
-  padding: 1px 1px;
-  margin: 1px 10px;
   text-decoration: none;
   font-size: 20px;
   opacity: 75%;
+  width: 60px;
 }
 
 .nav-text {

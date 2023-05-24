@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Smartvacay</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<%= csrf_meta_tags %>
-		<%= csp_meta_tag %>
-		<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
 
-		<%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-	</head>
-	<body >
-		<%= render "shared/navbar" %>
-		<%= render "shared/flashes" %>
-		<%= yield %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}&callback=Function.prototype" %>
-	</body>
+  <head>
+    <title>Smartvacay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
+  </head>
+  <body>
+    <%= render "shared/header" %>
+    <%= yield %>
+    <%= render "shared/navbar" %>
+    <%= render "shared/flashes" %>
+  </body>
+
 </html>
