@@ -1,4 +1,4 @@
-<% Itinerary.all.sort_by { |itin| itin.start_time }.each do |itinerary| %>
+<% Trip.find(2).itineraries.sort_by { |itin| itin.start_time }.each do |itinerary| %>
 	<div class="cards-itinerary">
 		<div class="card-itinerary">
 			<div class="card-itinerary-box">

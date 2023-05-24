@@ -35,13 +35,14 @@ class TripGenerator
       labels.push(location.id)
       data.push([location.latitude, location.longitude])
     end
-    k = 1
-    # k = (trip.end_date - trip.start_date).to_i # Optimal K found using the elbow method
+    # k = 1
+    k = (trip.end_date - trip.start_date).to_i # Optimal K found using the elbow method
     groupings = KMeansClusterer.run k, data, labels:, runs: 100
 
     days = groupings.clusters
     days.each do |day|
       date = trip.start_date + day.id.to_i
+
       day_locations = []
       day.points.each do |c|
         day_locations << Location.find(c.label)
