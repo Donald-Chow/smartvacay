@@ -8,7 +8,12 @@
 				<div class="card-itinerary">
 					<div class="card-itinerary-box">
 						<div class="card-itinerary-infos">
-							<h2><i class="fa-solid fa-location-dot"></i>  <%= itin.location.name %></h2>
+							<h2>
+								<% if itin.location.type_of_place.split(", ").include? "restaurant"%>
+									<i class="fa-solid fa-utensils"></i>
+								<% else %>
+									<i class="fa-solid fa-location-dot"></i>
+								<% end %>  <%= itin.location.name %></h2>
 							<!--<p><%= itin.start_time.strftime('%a %d %b %Y') %></p>-->
 							<p><%= itin.start_time.strftime('%I:%M %p') %></p>
 						</div>
@@ -45,7 +50,7 @@
 		<div class="card-itinerary">
 			<div class="card-itinerary-box">
 				<div class="card-itinerary-infos">
-					<h2><i class="fa-solid fa-location-dot"></i>  Tokyo Tower</h2>
+					<h2><i class="fa-solid fa-burger-soda"></i>  Tokyo Tower</h2>
 					<p>9:00 am</p>
 				</div>
 				<img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
