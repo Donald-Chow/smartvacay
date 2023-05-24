@@ -1,40 +1,45 @@
 <div class="page-content">
   <div class="container">
-    <h1>All my favorites!</h1>
+    <h1>All my favorites</h1>
     <button type="button" class="btn btn-secondary">Generate itinerary</button>
     <div class="category-avatars">
+      <%= link_to my_favorites_locations_path do %>
+        <div class="category-avatar">
+          <%= image_tag "sample_card_image.jpeg", class: "avatar-location" %>
+          <p>All favorites</p>
+        </div>
+      <% end %>
       <%= link_to my_favorites_locations_path(category: "sightseeing") do %>
         <div class="category-avatar">
-          <i class="fas fa-binoculars"></i>
-          <span>Sightseeing</span>
+          <%= image_tag "sample_card_image.jpeg", class: "avatar-location" %>
+          <p>Sightseeing</p>
         </div>
       <% end %>
       <%= link_to my_favorites_locations_path(category: "food") do %>
         <div class="category-avatar">
-          <i class="fas fa-utensils"></i>
-          <span>Restaurants</span>
+          <%= image_tag "sample_card_image.jpeg", class: "avatar-location" %>
+          <p>Restaurants</p>
         </div>
       <% end %>
       <%= link_to my_favorites_locations_path(category: "shopping") do %>
         <div class="category-avatar">
-          <i class="fas fa-shopping-bag"></i>
-          <span>Shopping</span>
+          <%= image_tag "sample_card_image.jpeg", class: "avatar-location" %>
+          <p>Shopping</p>
         </div>
       <% end %>
       <%= link_to my_favorites_locations_path(category: "miscellaneous") do %>
         <div class="category-avatar">
-          <i class="fas fa-shopping-bag"></i>
-          <span>Miscellaneous</span>
+          <%= image_tag "sample_card_image.jpeg", class: "avatar-location" %>
+          <p>Miscellaneous</p>
         </div>
       <% end %>
-      <%= link_to "all bookmarks", my_favorites_locations_path %>
     </div>
     <% if @category.present? %>
       <% @locations_by_category.each do |favorite| %>
         <div class="card-locations">
           <div class="bookmark">
             <% if current_user %>
-              <%= link_to favorite_location_path(favorite), class: "#{"text-success" if current_user.favorited?(favorite)}", onclick: "this.classList.toggle('text-success')" do %>
+              <%= link_to favorite_location_path(favorite), class: "#{"text-success" if current_user.favorited?(favorite)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-success')" do %>
                 <i class="fa-solid fa-bookmark"></i>
               <% end %>
             <% end %>
@@ -48,7 +53,7 @@
         <div class="card-locations">
           <div class="bookmark">
             <% if current_user %>
-              <%= link_to favorite_location_path(favorite.favoritable), class: "#{"text-success" if current_user.favorited?(favorite.favoritable)}", onclick: "this.classList.toggle('text-success')" do %>
+              <%= link_to favorite_location_path(favorite.favoritable), class: "#{"text-success" if current_user.favorited?(favorite.favoritable)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-success')" do %>
                 <i class="fa-solid fa-bookmark"></i>
               <% end %>
             <% end %>

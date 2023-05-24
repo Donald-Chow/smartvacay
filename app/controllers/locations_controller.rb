@@ -46,7 +46,7 @@ class LocationsController < ApplicationController
     end
 
     if @category.present?
-      return @locations_by_category = @locations.select { |location| location.category == @category }
+      @locations_by_category = @locations.select { |location| location.category == @category }
     end
   end
 end
