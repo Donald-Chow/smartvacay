@@ -4,7 +4,7 @@
 			<h3 data-action="click->itin-collapse#toggle"><i data-itin-collapse-target='date' class="fa-solid fa-chevron-down"></i>  <%= date.strftime('%a, %d %b')  %></h3>
 		</div>
 		<div class="cards-itinerary" data-itin-collapse-target='list'>
-			<% itins.each do |itin| %>
+			<% itins.sort_by { |itin| itin.start_time }.each do |itin| %>
 				<div class="card-itinerary">
 					<%= link_to "", location_path(itin.location) %>
 					<div class="card-itinerary-box">
