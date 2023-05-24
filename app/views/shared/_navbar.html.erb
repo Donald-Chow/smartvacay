@@ -1,5 +1,5 @@
-<div class="navbar">
-  <%= link_to root_path, class:"active" do %>
+<div class="navbar" id="bottom-navbar">
+  <%= link_to root_path do %>
     <i class="fas fa-home"></i>
     <br>
     <span class="nav-text">Home</span>
@@ -14,7 +14,7 @@
     <br>
     <span class="nav-text">Fav. List</span>
   <% end %>
-  <%= link_to trips_path(@trip) do %>
+  <%= link_to trips_path do %>
     <i class="fas fa-plane"></i>
     <br>
     <span class="nav-text">Itineraries</span>
