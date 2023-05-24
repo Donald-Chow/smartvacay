@@ -1,41 +1,48 @@
 <div class="banner" id="hero">
-  <img class="bg-img" src="https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1492&q=80">
-  <div class="banner-form">
-    <%= simple_form_for(@trip) do |f| %>
-      <%= f.input :destination, label: false, placeholder: "Where to? ie. Tokyo", class: "form-control"%>
-      <div class="d-flex">
-        <div class="col ml-1">
-          <%= f.input :start_date, as: :string,  placeholder: "Start Date",
+	<img class="bg-img" src="https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1492&q=80">
+
+	<% if current_user.trip.nil? %>
+		<div class="banner-form">
+			<%= simple_form_for(@trip) do |f| %>
+				<%= f.input :destination, label: false, placeholder: "Where to? ie. Tokyo", class: "form-control"%>
+				<div class="d-flex">
+					<div class="col ml-1">
+						<%= f.input :start_date, as: :string, placeholder: "Start Date", label: false,
                 wrapper_html: { class: "mb-4" },
                 label_html: { class: "form-label text-secondary fw-bold" },
                 input_html: { data: { controller: "flatpickr" } } %>
-        </div>
-        <div class="col ml-1">
-          <%= f.input :end_date, as: :string, placeholder: "End Date",
+					</div>
+					<div class="col ml-1">
+						<%= f.input :end_date, as: :string, placeholder: "End Date", label: false,
                 wrapper_html: { class: "mb-4" },
                 label_html: { class: "form-label text-secondary fw-bold" },
                 input_html: { data: { controller: "flatpickr" } } %>
-        </div>
-      </div>
-      <%= f.submit class: "btn btn-primary" %>
-    <% end %>
-  </div>
+					</div>
+				</div>
+				<%= f.submit class: "btn btn-primary" %>
+			<% end %>
+		</div>
+	<% else %>
+		<h1><%= current_user.trip.destination%></h1>
+		<p><%= current_user.trip.start_date %> - <%= current_user.trip.end_date %></p>
+	<% end %>
+
 </div>
 <div class="container page-content">
-  <h2>HOW TO USE THIS APP</h2>
-  <div class="d-flex justify-content-between">
-    <p>DO THIS</p>
-    <p>DO THAT</p>
-    <p>BOOM!</p>
-  </div>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam et odit, sequi ipsam similique eveniet ipsum. Consequuntur natus, reiciendis blanditiis ratione quaerat harum quae ex. Eos, recusandae? Culpa, excepturi. Magnam?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos provident aliquam neque nihil praesentium veritatis officia officiis fuga cum aut! Sapiente rerum atque dicta veritatis aut ipsa dignissimos fugiat quos?
-  Quaerat quam nisi esse, et dolorum corrupti necessitatibus praesentium laborum aspernatur velit alias officiis, deserunt cum deleniti. Dolor eum incidunt illum commodi exercitationem obcaecati reiciendis qui laudantium. Nihil, fugit. Vero.
-  Quos aperiam repellat, impedit velit eum aut obcaecati quia. Dolor repellat praesentium eum architecto, error minima asperiores aliquid facilis beatae reprehenderit saepe sapiente ratione eius quibusdam qui totam sunt dolore!
-  Quam delectus accusantium repellat nemo atque numquam accusamus perferendis harum maxime est quod quae, suscipit, ipsa illo sunt libero ea dolore fugit, cupiditate aperiam a ratione. Temporibus quasi dignissimos obcaecati.
-  Nostrum, mollitia itaque? Iusto vel commodi ratione cumque fuga qui obcaecati error tenetur hic, dolorum ad quas, a autem cupiditate nesciunt sit vitae, fugiat itaque fugit possimus ducimus similique. Temporibus.
-  Magnam magni cupiditate quis qui nisi, molestiae adipisci? Provident, et perferendis cum ipsam, harum esse doloribus quis unde impedit minima odio ducimus voluptatem ab inventore consequuntur fugit distinctio saepe atque!
-  Consequuntur, ea sit quod perferendis nam, voluptates ullam molestiae a rem libero ipsum sed earum unde eos explicabo vitae iste vel reprehenderit facere deserunt. Quod, ipsa. Eligendi et obcaecati veniam.
-  Debitis alias doloremque cupiditate exercitationem laboriosam vero eaque autem modi quia eligendi itaque consequatur dolores numquam atque, magnam fugiat a maxime, mollitia laborum excepturi unde facere ad! Doloremque, architecto aliquid?
-  Quisquam quae harum necessitatibus praesentium. At, laudantium officia. Deserunt, aperiam cumque! Quo culpa ipsa tempora! Odit, officiis porro temporibus nihil soluta fuga deleniti! Voluptatibus eveniet, accusantium ratione quae fugiat illum?
-  Incidunt, autem eaque minima earum repellat reiciendis? Voluptatem qui earum delectus impedit, doloremque dolorem iste beatae accusamus nemo ipsum quasi laudantium dolorum tenetur magnam nam! In asperiores perspiciatis doloribus nisi.
+	<h2>HOW TO USE THIS APP</h2>
+	<div class="d-flex justify-content-between">
+		<p>DO THIS</p>
+		<p>DO THAT</p>
+		<p>BOOM!</p>
+	</div>
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam et odit, sequi ipsam similique eveniet ipsum. Consequuntur natus, reiciendis blanditiis ratione quaerat harum quae ex. Eos, recusandae? Culpa, excepturi. Magnam?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos provident aliquam neque nihil praesentium veritatis officia officiis fuga cum aut! Sapiente rerum atque dicta veritatis aut ipsa dignissimos fugiat quos?
+	Quaerat quam nisi esse, et dolorum corrupti necessitatibus praesentium laborum aspernatur velit alias officiis, deserunt cum deleniti. Dolor eum incidunt illum commodi exercitationem obcaecati reiciendis qui laudantium. Nihil, fugit. Vero.
+	Quos aperiam repellat, impedit velit eum aut obcaecati quia. Dolor repellat praesentium eum architecto, error minima asperiores aliquid facilis beatae reprehenderit saepe sapiente ratione eius quibusdam qui totam sunt dolore!
+	Quam delectus accusantium repellat nemo atque numquam accusamus perferendis harum maxime est quod quae, suscipit, ipsa illo sunt libero ea dolore fugit, cupiditate aperiam a ratione. Temporibus quasi dignissimos obcaecati.
+	Nostrum, mollitia itaque? Iusto vel commodi ratione cumque fuga qui obcaecati error tenetur hic, dolorum ad quas, a autem cupiditate nesciunt sit vitae, fugiat itaque fugit possimus ducimus similique. Temporibus.
+	Magnam magni cupiditate quis qui nisi, molestiae adipisci? Provident, et perferendis cum ipsam, harum esse doloribus quis unde impedit minima odio ducimus voluptatem ab inventore consequuntur fugit distinctio saepe atque!
+	Consequuntur, ea sit quod perferendis nam, voluptates ullam molestiae a rem libero ipsum sed earum unde eos explicabo vitae iste vel reprehenderit facere deserunt. Quod, ipsa. Eligendi et obcaecati veniam.
+	Debitis alias doloremque cupiditate exercitationem laboriosam vero eaque autem modi quia eligendi itaque consequatur dolores numquam atque, magnam fugiat a maxime, mollitia laborum excepturi unde facere ad! Doloremque, architecto aliquid?
+	Quisquam quae harum necessitatibus praesentium. At, laudantium officia. Deserunt, aperiam cumque! Quo culpa ipsa tempora! Odit, officiis porro temporibus nihil soluta fuga deleniti! Voluptatibus eveniet, accusantium ratione quae fugiat illum?
+	Incidunt, autem eaque minima earum repellat reiciendis? Voluptatem qui earum delectus impedit, doloremque dolorem iste beatae accusamus nemo ipsum quasi laudantium dolorum tenetur magnam nam! In asperiores perspiciatis doloribus nisi.
 </div>

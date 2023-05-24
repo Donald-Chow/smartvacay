@@ -14,7 +14,7 @@
     <br>
     <span class="nav-text">Fav. List</span>
   <% end %>
-  <%= link_to trips_path do %>
+  <%= link_to trip_path(current_user.trip) do %>
     <i class="fas fa-plane"></i>
     <br>
     <span class="nav-text">Itineraries</span>
