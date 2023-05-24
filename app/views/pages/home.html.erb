@@ -4,8 +4,18 @@
     <%= simple_form_for(@trip) do |f| %>
       <%= f.input :destination, label: false, placeholder: "Where to? ie. Tokyo", class: "form-control"%>
       <div class="d-flex">
-        <%= f.input :start_date, class: "form-control date" %>
-        <%= f.input :end_date, class: "form-control date" %>
+        <div class="col ml-1">
+          <%= f.input :start_date, as: :string, placeholder: "Start Date", label: false,
+                wrapper_html: { class: "mb-4" },
+                label_html: { class: "form-label text-secondary fw-bold" },
+                input_html: { data: { controller: "flatpickr" } } %>
+        </div>
+        <div class="col ml-1">
+          <%= f.input :end_date, as: :string, placeholder: "End Date", label: false,
+                wrapper_html: { class: "mb-4" },
+                label_html: { class: "form-label text-secondary fw-bold" },
+                input_html: { data: { controller: "flatpickr" } } %>
+        </div>
       </div>
       <%= f.submit class: "btn btn-primary" %>
     <% end %>
