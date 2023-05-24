@@ -6,12 +6,12 @@
       <div class="card-locations">
         <div class="bookmark">
           <% if current_user %>
-            <%= link_to favorite_location_path(favorite.favoritable), class: "#{"text-success" if current_user.favorited?(favorite.favoritable)}", data: {turbo_method: :post, turbo_confirm: "Remove bookmark before generating itinerary?"}, onclick: "this.classList.toggle('text-success')" do %>
+            <%= link_to favorite_location_path(favorite.favoritable), class: "#{"text-success" if current_user.favorited?(favorite.favoritable)}", onclick: "this.classList.toggle('text-success')" do %>
               <i class="fa-solid fa-bookmark"></i>
             <% end %>
           <% end %>
         </div>
-        <%= image_tag favorite.favoritable.photo, alt: "my-favorite" %>
+        <%= favorite.favoritable.photo.present? ? image_tag(favorite.favoritable.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
         <%= favorite.favoritable.name %>
       </div>
     <% end %>

@@ -11,7 +11,7 @@
           <% end %>
         </div>
         <div>
-          <%= image_tag location.photo, alt:"location-image" %>
+          <%= location.photo.present? ? image_tag(location.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
         </div>
         <p><%= location.name %></p>
         <p><%= location.description %></p>
