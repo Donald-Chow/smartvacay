@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container page-content">
   <h1>Suggested locations</h1>
   <% @locations.each do |location| %>
     <div class="card-locations">
@@ -10,7 +10,9 @@
         <% end %>
       </div>
       <div>
-        <%= image_tag "sample_card_image.jpeg", alt:"location-image" %>
+        <%= link_to location_path(location) do %>
+          <%= image_tag "sample_card_image.jpeg", alt:"location-image" %>
+        <% end %>
       </div>
       <p><%= location.name %></p>
     </div>
