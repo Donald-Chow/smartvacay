@@ -15,3 +15,6 @@ application.register("google-search", GoogleSearchController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ItinCollapseController from "./itin_collapse_controller"
+application.register("itin-collapse", ItinCollapseController)
