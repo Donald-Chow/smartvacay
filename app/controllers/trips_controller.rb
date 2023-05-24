@@ -2,6 +2,7 @@ class TripsController < ApplicationController
   before_action :set_trip, only: %i[show generate]
 
   def index
+    @trips = policy_scope(Trip)
   end
 
   def show
@@ -13,7 +14,7 @@ class TripsController < ApplicationController
     @trip.user = current_user
     authorize @trip
     if @trip.save
-      redirect_to trip_path(@trip)
+      redirect_to locations_path
     else
       render "pages/home", status: :unprocessable_entity
     end

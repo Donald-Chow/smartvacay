@@ -1,17 +1,17 @@
-<%= render "shared/header" %>
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
-  <div class="container">
+<div class="banner" id="hero">
+  <img class="bg-img" src="https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1492&q=80">
+  <div class="banner-form">
     <%= simple_form_for(@trip) do |f| %>
       <%= f.input :destination, label: false, placeholder: "Where to? ie. Tokyo", class: "form-control"%>
       <div class="d-flex">
         <%= f.input :start_date, class: "form-control date" %>
         <%= f.input :end_date, class: "form-control date" %>
       </div>
-      <%= f.submit class: "btn btn-secondary" %>
+      <%= f.submit class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
-<div class="container">
+<div class="container page-content">
   <h2>HOW TO USE THIS APP</h2>
   <div class="d-flex justify-content-between">
     <p>DO THIS</p>

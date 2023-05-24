@@ -1,20 +1,22 @@
-.banner {
-  background-size: cover;
-  background-position: center;
+#hero {
+  overflow: hidden;
+  position: relative;
+  margin-top: 50px;
   padding: 80px 36px;
+
+}
+.bg-img {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
+  filter: blur(5px);
 }
 
-.banner h1 {
-  margin: 0;
-  color: $primary;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  font-size: 32px;
-  font-weight: bold;
-}
-
-.banner p {
-  font-size: 20px;
-  color: white;
-  opacity: .7;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-}
+// .banner-form {
+//   background-color: rgb(0,0,0); /* Fallback color */
+//   background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+// }

@@ -1,22 +1,29 @@
-<h1>LOCATION SHOW (TEST PURPOSE)</h1>
-
-
-<div class="Container d-flex justify-content-center ">
-  <div class="card" style="width: 18rem;">
-    <img src="<%= @location.photo %>" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><%= @location.name %></h5>
-      <p class="card-text"><%= @location.address %></p>
+<div class="page-content">
+  <h1>LOCATION SHOW (TEST PURPOSE)</h1>
+  <div class="container">
+    <div class="location-header">
+      <h2><%= @location.name %></h2>
+      <h3><%= @location.description  %></h3>
+    </div>
+    <div class="carousel">
+      <!--remain place for carousel-->
+    </div>
+    <div class="card mb-5">
+      <img src="<%= @location.photo %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= @location.name %></h5>
+        <p class="card-text"><%= @location.address %></p>
+      </div>
+    </div>
+    <div class="map-display mx-3">
+      <!-- <h2>MAPMAP</h2> -->
+      <!--this div done just for organization purpose, bottom is the map-->
+      <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}&callback=Function.prototype" %>
+      <div id="map"
+    data-controller="google-maps"
+    style="width: 500px;"
+    data-markers="<%= @marker.to_json %>">
+      </div>
     </div>
   </div>
-  <div class="map-display mx-3"> <!--this div done just for organization purpose, bottom is the map-->
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}&callback=Function.prototype" %>
-    <div id="map"
-    data-controller="google-maps"
-    style="width: 500px;
-    height: 400px;"
-    data-markers="<%= @marker.to_json %>"
-  > </div>
-  </div>
-
 </div>
