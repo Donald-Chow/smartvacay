@@ -3,65 +3,37 @@
     <h1>All my favorites</h1>
     <button type="button" class="btn btn-secondary">Generate itinerary</button>
     <div class="category-avatars">
-      <%= link_to my_favorites_locations_path do %>
-        <div class="category-avatar">
-          <%= image_tag "sample_card_image.jpeg", class: "avatar-location" %>
-          <p>All favorites</p>
-        </div>
-      <% end %>
-      <%= link_to my_favorites_locations_path(category: "sightseeing") do %>
-        <div class="category-avatar">
-          <%= image_tag "sample_card_image.jpeg", class: "avatar-location" %>
-          <p>Sightseeing</p>
-        </div>
-      <% end %>
-      <%= link_to my_favorites_locations_path(category: "food") do %>
-        <div class="category-avatar">
-          <%= image_tag "sample_card_image.jpeg", class: "avatar-location" %>
-          <p>Restaurants</p>
-        </div>
-      <% end %>
-      <%= link_to my_favorites_locations_path(category: "shopping") do %>
-        <div class="category-avatar">
-          <%= image_tag "sample_card_image.jpeg", class: "avatar-location" %>
-          <p>Shopping</p>
-        </div>
-      <% end %>
-      <%= link_to my_favorites_locations_path(category: "miscellaneous") do %>
-        <div class="category-avatar">
-          <%= image_tag "sample_card_image.jpeg", class: "avatar-location" %>
-          <p>Miscellaneous</p>
-        </div>
+      <% categories = [
+      { display: "All favorites", image: "sample_card_image.jpeg" },
+      { display: "Sightseeing", image: "sample_card_image.jpeg", query: "sightseeing" },
+      { display: "Restaurants", image: "sample_card_image.jpeg", query: "food" },
+      { display: "Shopping", image: "sample_card_image.jpeg", query: "shopping" },
+      { display: "Miscellaneous", image: "sample_card_image.jpeg", query: "miscellaneous" }
+      ] %>
+      <% categories.each do |category| %>
+        <%= link_to my_favorites_locations_path(category: category[:query]) do %>
+          <div class="category-avatar">
+            <%= image_tag category[:image], class: "avatar-location" %>
+            <p><%= category[:display] %></p>
+          </div>
+        <% end %>
       <% end %>
     </div>
-    <% if @category.present? %>
-      <% @locations_by_category.each do |favorite| %>
-        <div class="card-locations">
-          <div class="bookmark">
-            <% if current_user %>
-              <%= link_to favorite_location_path(favorite), class: "#{"text-success" if current_user.favorited?(favorite)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-success')" do %>
-                <i class="fa-solid fa-bookmark"></i>
-              <% end %>
+    <% @favorites.each do |favorite| %>
+      <% favoritable = @category.present? ? favorite : favorite.favoritable %>
+      <div class="card-locations">
+        <div class="bookmark">
+          <% if current_user %>
+            <%= link_to favorite_location_path(favoritable), class: "#{"text-success" if current_user.favorited?(favoritable)}", data: { turbo_method: :post }, onclick: "this.classList.toggle('text-success')" do %>
+              <i class="fa-solid fa-bookmark"></i>
             <% end %>
-          </div>
-          <%= favorite.photo.present? ? image_tag(favorite.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
-          <%= favorite.name %>
+          <% end %>
         </div>
-      <% end %>
-    <% else %>
-      <% @all_favorites.each do |favorite| %>
-        <div class="card-locations">
-          <div class="bookmark">
-            <% if current_user %>
-              <%= link_to favorite_location_path(favorite.favoritable), class: "#{"text-success" if current_user.favorited?(favorite.favoritable)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-success')" do %>
-                <i class="fa-solid fa-bookmark"></i>
-              <% end %>
-            <% end %>
-          </div>
-          <%= favorite.favoritable.photo.present? ? image_tag(favorite.favoritable.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
-          <%= favorite.favoritable.name %>
-        </div>
-      <% end %>
+        <%= link_to location_path(favoritable) do %>
+          <%= favoritable.photo.present? ? image_tag(favoritable.photo) : image_tag("sample_card_image.jpeg") %>
+          <%= favoritable.name %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
