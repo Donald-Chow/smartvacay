@@ -17,37 +17,37 @@
             placeholder: "Type a keyword"
         %>
 
-				<%= submit_tag "Search", name: "", class: "btn btn-primary" %>
-			<% end %>
-		</div>
-
-
-		<% if @results.present? %>
-			<h2>Search Results</h2>
-			<div class="card-locations">
-				<% @results.each do |location| %>
-					<%= render "location_card", location: location%>
-				<% end %>
-			</div>
-		<% end %>
-
-	</div>
-
-	<div>
-		<h1>Top <%= current_user.trip.destination %> attractions</h1>
-		<div class="card-locations">
-			<% @top_attractions.each do |location| %>
-				<%= render "location_card", location: location%>
-			<% end %>
-		</div>
-	</div>
-	<div>
-		<h1>Top <%= current_user.trip.destination %> restaurants</h1>
-		<div class="card-locations">
-			<% @top_restaurants.each do |location| %>
-				<%= render "location_card", location: location%>
-			<% end %>
-		</div>
-	</div>
+        <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+    <% if @results.present? %>
+      <div class="location-text">
+        <h1>Search Results</h1>
+      </div>
+      <div class="card-locations">
+        <% @results.each do |location| %>
+          <%= render "location_card", location: location%>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <div class="location-text">
+      <h1>Top <%= current_user.trip.destination %> attractions</h1>
+    </div>
+    <div class="card-locations">
+      <% @top_attractions.each do |location| %>
+        <%= render "location_card", location: location%>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <h1>Top <%= current_user.trip.destination %> restaurants</h1>
+    <div class="card-locations">
+      <% @top_restaurants.each do |location| %>
+        <%= render "location_card", location: location%>
+      <% end %>
+    </div>
+  </div>
 
 </div>
