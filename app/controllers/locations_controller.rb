@@ -1,4 +1,5 @@
 require "uri"
+require "net/http"
 
 class LocationsController < ApplicationController
   before_action :set_location, only: %i[show favorite]
@@ -65,8 +66,11 @@ class LocationsController < ApplicationController
     Location.create(
       name: location["name"],
       place_id: location["place_id"],
-      address: location["formatted_address"],
+      address: location["formatted_address"] || "",
+      phone: location['"formatted_phone_number"'],
+      website: location['website'],
       rating: location["rating"],
+      review: location['reviews'],
       photo: if location.include?("photos")
                "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{location['photos'][0]['photo_reference']}&key=#{ENV.fetch(
                  'GOOGLE_API_SERVER_KEY', nil
@@ -74,6 +78,21 @@ class LocationsController < ApplicationController
              else
                "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}"
              end,
+      # if location.include?("photos")
+      #          photos = location['photos'].map { |photo| photo['photo_reference'] }
+      #          photos.map do |photo|
+      #            "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{photo}&key=#{ENV.fetch(
+      #              'GOOGLE_API_SERVER_KEY', nil
+      #            )}"
+      #          end
+      #        else
+      #          "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}"
+      #        end,
+      opening_hours: location['opening_hours'] ? location['opening_hours']['weekday_text'] : nil,
+      price_level: location['price_level'],
+      type_of_place: location['types'].join(", "),
+      geometry: location['geometry'],
+      description: location['editorial_summary'] ? location['editorial_summary']['overview'] : nil,
       latitude: location['geometry']["location"]["lat"],
       longitude: location['geometry']["location"]["lng"]
     )
