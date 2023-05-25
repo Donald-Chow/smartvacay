@@ -15,10 +15,18 @@
 		<span class="nav-text">Fav. List</span>
 	<% end %>
 	<% if user_signed_in? %>
-		<%= link_to trip_path(current_user.trip) do %>
-			<i class="fas fa-plane"></i>
-			<br>
-			<span class="nav-text">Itineraries</span>
+		<% if current_user.trip.present? %>
+			<%= link_to trip_path(current_user.trip) do %>
+				<i class="fas fa-plane"></i>
+				<br>
+				<span class="nav-text">Itineraries</span>
+			<% end %>
+		<% else %>
+			<%= link_to root_path do %>
+				<i class="fas fa-plane"></i>
+				<br>
+				<span class="nav-text">Itineraries</span>
+			<% end %>
 		<% end %>
 	<% else %>
 		<%= link_to new_user_session_path do %>
