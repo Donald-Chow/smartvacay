@@ -9,7 +9,14 @@
 
 			<div id="map" >
 				<div id="results">
-
+					<% @results.each do |location| %>
+						<div class="card-location">
+							<div class="card-location-info">
+								<h4><%= location["name"] %></h4>
+								<p><%= location["formatted_address"] %></p>
+							</div>
+						</div>
+					<% end %>
 					<!-- Results will be dynamically inserted here , if remove the search doesnt work-->
 				</div>
 			</div>

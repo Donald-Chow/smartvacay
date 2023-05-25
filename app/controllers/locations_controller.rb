@@ -3,6 +3,7 @@ class LocationsController < ApplicationController
 
   def index
     @locations = policy_scope(Location)
+    @results = GooglePlaces.new("Le Wagon Tokyo").call["candidates"]
   end
 
   def show
@@ -29,12 +30,11 @@ class LocationsController < ApplicationController
     @all_favorites.each do |favorite|
       type_of_place = favorite.favoritable.type_of_place
       location = favorite.favoritable
-      location.category = case
-                          when type_of_place.include?("restaurant") || type_of_place.include?("meal_takeaway") || type_of_place.include?("food")
+      location.category = if type_of_place.include?("restaurant") || type_of_place.include?("meal_takeaway") || type_of_place.include?("food")
                             "food"
-                          when type_of_place.include?("department_store") || type_of_place.include?("shopping_mall")
+                          elsif type_of_place.include?("department_store") || type_of_place.include?("shopping_mall")
                             "shopping"
-                          when type_of_place.include?("tourist_attraction")
+                          elsif type_of_place.include?("tourist_attraction")
                             "sightseeing"
                           else
                             "miscellaneous"
@@ -45,10 +45,10 @@ class LocationsController < ApplicationController
     @category = params[:category]
 
     @favorites = if @category.present?
-      @locations.select { |location| location.category == @category }
-    else
-      @all_favorites
-    end
+                   @locations.select { |location| location.category == @category }
+                 else
+                   @all_favorites
+                 end
   end
 
   private
