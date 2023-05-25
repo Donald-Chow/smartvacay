@@ -7,20 +7,7 @@ class LocationsController < ApplicationController
     @locations = policy_scope(Location)
     if params[:query].present?
       @results = GooglePlaces.new(params[:query]).call.map do |location|
-        Location.create(
-          name: location["name"],
-          address: location["formatted_address"],
-          rating: location["rating"],
-          photo: if location.include?("photos")
-                   "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{location['photos'][0]['photo_reference']}&key=#{ENV.fetch(
-                     'GOOGLE_API_SERVER_KEY', nil
-                   )}"
-                 else
-                   "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}"
-                 end,
-          latitude: location['geometry']["location"]["lat"],
-          longitude: location['geometry']["location"]["lng"]
-        )
+        Location.find_by_place_id(location["place_id"]) || location_from_google(location)
       end
     else
       @results = []
@@ -73,6 +60,24 @@ class LocationsController < ApplicationController
   end
 
   private
+
+  def location_from_google(location)
+    Location.create(
+      name: location["name"],
+      place_id: location["place_id"],
+      address: location["formatted_address"],
+      rating: location["rating"],
+      photo: if location.include?("photos")
+               "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{location['photos'][0]['photo_reference']}&key=#{ENV.fetch(
+                 'GOOGLE_API_SERVER_KEY', nil
+               )}"
+             else
+               "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}"
+             end,
+      latitude: location['geometry']["location"]["lat"],
+      longitude: location['geometry']["location"]["lng"]
+    )
+  end
 
   def set_location
     @location = Location.find(params[:id])
