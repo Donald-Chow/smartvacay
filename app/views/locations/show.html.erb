@@ -1,5 +1,10 @@
 <div class="page-content container">
 	<div class="container">
+		<div class="back-btn">
+			<%= link_to locations_path do %>
+				<i class="fa-solid fa-chevron-left"></i>
+			<% end %>
+		</div>
 		<div class="location-header">
 			<h2><%= @location.name %></h2>
 			<p><%= @location.description  %></p>
