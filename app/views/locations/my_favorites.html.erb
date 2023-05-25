@@ -29,10 +29,12 @@
             <% end %>
           <% end %>
         </div>
-        <%= link_to location_path(favoritable) do %>
-          <%= favoritable.photo.present? ? image_tag(favoritable.photo) : image_tag("sample_card_image.jpeg") %>
-          <%= favoritable.name %>
-        <% end %>
+        <div class="card-location">
+          <%= link_to location_path(favoritable) do %>
+            <%= favoritable.photo.present? ? image_tag(favoritable.photo) : image_tag("sample_card_image.jpeg") %>
+            <%= favoritable.name %>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>

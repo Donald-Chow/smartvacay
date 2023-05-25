@@ -9,7 +9,8 @@
 require "open-uri"
 require "json"
 
-type_of_places = ["tourist_attraction", "restaurant", "department_store"]
+# type_of_places = ["tourist_attraction", "restaurant", "department_store"]
+type_of_places = ["cafe"]
 
 puts "Cleaning database..."
 Itinerary.destroy_all
@@ -23,24 +24,29 @@ type_of_places.each do |place|
   parsed_response = JSON.parse(response)
   # puts parsed_response
   parsed_response['results'].each do |result|
+    result_place_id = result["place_id"]
+    url_detail = "https://maps.googleapis.com/maps/api/place/details/json?place_id=#{result_place_id}&language=en&key=#{ENV['GOOGLE_API_SERVER_KEY']}"
+    response_detail = URI.open(url_detail).read
+    parsed_response_detail = JSON.parse(response_detail)
+
+    r = parsed_response_detail['result']
     Location.create!(
-      name: result["name"],
-      place_id: result["place_id"],
-      address: result["formatted_address"],
-      phone: result["formatted_phone_number"],
-      website: result["website"],
-      rating: result["rating"],
-      # review:
-      # photo:
+      name: r["name"],
+      address: r["formatted_address"],
+      phone: r["formatted_phone_number"],
+      website: r["website"],
+      rating: r["rating"],
+      # review
+      photo: "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}",
       # opening_hours:
-      # price_level:
+      price_level: r["price_level"],
       # amenities:
-      type_of_place: result["types"].join(", "),
-      geometry: "lat: #{result['geometry']['location']['lat']}, lng: #{result['geometry']['location']['lng']}",
-      latitude: result['geometry']['location']['lat'],
-      longitude: result['geometry']['location']['lng']
+      type_of_place: r["types"].join(", "),
+      latitude: r['geometry']['location']['lat'],
+      longitude: r['geometry']['location']['lng'],
+      geometry: "lat: #{r['geometry']['location']['lat']}, lng: #{r['geometry']['location']['lng']}",
       # duration:
-      # description:
+      description: r['editorial_summary']
     )
   end
 end

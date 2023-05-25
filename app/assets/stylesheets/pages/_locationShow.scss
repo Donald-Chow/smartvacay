@@ -5,3 +5,18 @@
 .location-header p {
   color: $secondary;
 }
+
+#show-bookmark {
+    text-align: center;
+    a:visited, a:hover, a:active {
+      color: $primary;
+    }
+}
+
+#bookmark-click {
+  font-size: 30px;
+}
+
+#location-details {
+  background-color: rgba(217, 217, 217, 0.3)
+}
