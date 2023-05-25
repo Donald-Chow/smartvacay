@@ -18,7 +18,7 @@ export default class extends Controller {
 
     const service = new google.maps.places.PlacesService(map);
     const request = {
-      locationBias: '500', // Cordinates defining the area to search, can use location
+      locationBias: '10000', // Cordinates defining the area to search, can use location
       query,
       fields: ["name", "geometry", "formatted_address", "rating", "photos", "types", "place_id"]
     };
@@ -51,11 +51,12 @@ export default class extends Controller {
           rating.textContent = `place_id: ${results[i].place_id}`;
           card.appendChild(place_id);
 
-
-          const photo = document.createElement('img');
-          const photoUrl = results[i].photos[0].getUrl({ maxWidth: 500, maxHeight: 333 });
-          photo.src = photoUrl;
-          card.appendChild(photo);
+          if (results[i].photos) {
+            const photo = document.createElement('img');
+            const photoUrl = results[i].photos[0].getUrl({ maxWidth: 500, maxHeight: 333 });
+            photo.src = photoUrl;
+            card.appendChild(photo);
+          }
 
           // I am taking just the first type to now overwhelm with info
           const types = document.createElement('p');
