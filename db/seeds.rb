@@ -6,124 +6,124 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-# require "open-uri"
-# require "json"
+require "open-uri"
+require "json"
 
-# type_of_places = ["tourist_attraction", "restaurant", "department_store"]
+type_of_places = ["tourist_attraction", "restaurant", "department_store"]
 
-# puts "Cleaning database..."
-# Itinerary.destroy_all
-# Location.destroy_all
+puts "Cleaning database..."
+Itinerary.destroy_all
+Location.destroy_all
 
-# puts "Creating Test Locations"
+puts "Creating Test Locations"
 
-# type_of_places.each do |place|
-#   url = "https://maps.googleapis.com/maps/api/place/textsearch/json?type=#{place}&language=en&key=#{ENV['GOOGLE_API_SERVER_KEY']}"
-#   response = URI.open(url).read
-#   parsed_response = JSON.parse(response)
-#   # puts parsed_response
-#   parsed_response['results'].each do |result|
-#     Location.create!(
-#       name: result["name"],
-#       place_id: result["place_id"],
-#       address: result["formatted_address"],
-#       phone: result["formatted_phone_number"],
-#       website: result["website"],
-#       rating: result["rating"],
-#       # review:
-#       # photo:
-#       # opening_hours:
-#       # price_level:
-#       # amenities:
-#       type_of_place: result["types"].join(", "),
-#       geometry: "lat: #{result['geometry']['location']['lat']}, lng: #{result['geometry']['location']['lng']}",
-#       latitude: result['geometry']['location']['lat'],
-#       longitude: result['geometry']['location']['lng']
-#       # duration:
-#       # description:
-#     )
-#   end
-# end
+type_of_places.each do |place|
+  url = "https://maps.googleapis.com/maps/api/place/textsearch/json?type=#{place}&language=en&key=#{ENV['GOOGLE_API_SERVER_KEY']}"
+  response = URI.open(url).read
+  parsed_response = JSON.parse(response)
+  # puts parsed_response
+  parsed_response['results'].each do |result|
+    Location.create!(
+      name: result["name"],
+      place_id: result["place_id"],
+      address: result["formatted_address"],
+      phone: result["formatted_phone_number"],
+      website: result["website"],
+      rating: result["rating"],
+      # review:
+      # photo:
+      # opening_hours:
+      # price_level:
+      # amenities:
+      type_of_place: result["types"].join(", "),
+      geometry: "lat: #{result['geometry']['location']['lat']}, lng: #{result['geometry']['location']['lng']}",
+      latitude: result['geometry']['location']['lat'],
+      longitude: result['geometry']['location']['lng']
+      # duration:
+      # description:
+    )
+  end
+end
 
-Location.create(
-  name: "Tokyo Skytree 2",
-  place_id: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
-  address: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
-  phone: "0570-550-634",
-  website: "http://www.tokyo-skytree.jp/",
-  rating: 5,
-  review: "Absolutely stunning!\n\nThe surrounding area was perfect during summer.",
-  photo: 'https://lh5.googleusercontent.com/p/AF1QipO9sg1RHEe7tDbrXPUz0HTy14J_uS-TogiG6_MD=w408-h544-k-no',
-  opening_hours: 'Monday to Friday 9am-5pm',
-  price_level: 3,
-  amenities: "Wi-Fi, parking, restaurants, observation decks, shops.",
-  type_of_place: "point_of_interest",
-  geometry: "lat: 35.7101, lng: 139.8107",
-  latitude: 35.7121,
-  longitude: 139.8137,
-  duration: 2,
-  description: "World's tallest freestanding broadcasting tower with an observation deck boasting 360-degree views."
-)
+# Location.create(
+#   name: "Tokyo Skytree 2",
+#   place_id: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
+#   address: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
+#   phone: "0570-550-634",
+#   website: "http://www.tokyo-skytree.jp/",
+#   rating: 5,
+#   review: "Absolutely stunning!\n\nThe surrounding area was perfect during summer.",
+#   photo: 'https://lh5.googleusercontent.com/p/AF1QipO9sg1RHEe7tDbrXPUz0HTy14J_uS-TogiG6_MD=w408-h544-k-no',
+#   opening_hours: 'Monday to Friday 9am-5pm',
+#   price_level: 3,
+#   amenities: "Wi-Fi, parking, restaurants, observation decks, shops.",
+#   type_of_place: "point_of_interest",
+#   geometry: "lat: 35.7101, lng: 139.8107",
+#   latitude: 35.7121,
+#   longitude: 139.8137,
+#   duration: 2,
+#   description: "World's tallest freestanding broadcasting tower with an observation deck boasting 360-degree views."
+# )
 
-Location.create(
-  name: "Tokyo Skytree 3",
-  place_id: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
-  address: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
-  phone: "0570-550-634",
-  website: "http://www.tokyo-skytree.jp/",
-  rating: 5,
-  review: "Absolutely stunning!\n\nThe surrounding area was perfect during summer.",
-  photo: 'https://lh5.googleusercontent.com/p/AF1QipO9sg1RHEe7tDbrXPUz0HTy14J_uS-TogiG6_MD=w408-h544-k-no',
-  opening_hours: 'Monday to Friday 9am-5pm',
-  price_level: 3,
-  amenities: "Wi-Fi, parking, restaurants, observation decks, shops.",
-  type_of_place: "point_of_interest",
-  geometry: "lat: 35.7101, lng: 139.8107",
-  latitude: 35.7221,
-  longitude: 139.8037,
-  duration: 2,
-  description: "World's tallest freestanding broadcasting tower with an observation deck boasting 360-degree views."
-)
+# Location.create(
+#   name: "Tokyo Skytree 3",
+#   place_id: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
+#   address: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
+#   phone: "0570-550-634",
+#   website: "http://www.tokyo-skytree.jp/",
+#   rating: 5,
+#   review: "Absolutely stunning!\n\nThe surrounding area was perfect during summer.",
+#   photo: 'https://lh5.googleusercontent.com/p/AF1QipO9sg1RHEe7tDbrXPUz0HTy14J_uS-TogiG6_MD=w408-h544-k-no',
+#   opening_hours: 'Monday to Friday 9am-5pm',
+#   price_level: 3,
+#   amenities: "Wi-Fi, parking, restaurants, observation decks, shops.",
+#   type_of_place: "point_of_interest",
+#   geometry: "lat: 35.7101, lng: 139.8107",
+#   latitude: 35.7221,
+#   longitude: 139.8037,
+#   duration: 2,
+#   description: "World's tallest freestanding broadcasting tower with an observation deck boasting 360-degree views."
+# )
 
-Location.create(
-  name: "Tokyo Skytree 4",
-  place_id: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
-  address: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
-  phone: "0570-550-634",
-  website: "http://www.tokyo-skytree.jp/",
-  rating: 5,
-  review: "Absolutely stunning!\n\nThe surrounding area was perfect during summer.",
-  photo: 'https://lh5.googleusercontent.com/p/AF1QipO9sg1RHEe7tDbrXPUz0HTy14J_uS-TogiG6_MD=w408-h544-k-no',
-  opening_hours: 'Monday to Friday 9am-5pm',
-  price_level: 3,
-  amenities: "Wi-Fi, parking, restaurants, observation decks, shops.",
-  type_of_place: "point_of_interest",
-  geometry: "lat: 35.7101, lng: 139.8107",
-  latitude: 35.7231,
-  longitude: 139.8097,
-  duration: 2,
-  description: "World's tallest freestanding broadcasting tower with an observation deck boasting 360-degree views."
-)
-Location.create(
-  name: "Tokyo Skytree 5",
-  place_id: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
-  address: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
-  phone: "0570-550-634",
-  website: "http://www.tokyo-skytree.jp/",
-  rating: 5,
-  review: "Absolutely stunning!\n\nThe surrounding area was perfect during summer.",
-  photo: 'https://lh5.googleusercontent.com/p/AF1QipO9sg1RHEe7tDbrXPUz0HTy14J_uS-TogiG6_MD=w408-h544-k-no',
-  opening_hours: 'Monday to Friday 9am-5pm',
-  price_level: 3,
-  amenities: "Wi-Fi, parking, restaurants, observation decks, shops.",
-  type_of_place: "point_of_interest",
-  geometry: "lat: 35.7101, lng: 139.8107",
-  latitude: 35.8231,
-  longitude: 139.8297,
-  duration: 2,
-  description: "World's tallest freestanding broadcasting tower with an observation deck boasting 360-degree views."
-)
-puts "... created #{Location.count} locations"
+# Location.create(
+#   name: "Tokyo Skytree 4",
+#   place_id: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
+#   address: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
+#   phone: "0570-550-634",
+#   website: "http://www.tokyo-skytree.jp/",
+#   rating: 5,
+#   review: "Absolutely stunning!\n\nThe surrounding area was perfect during summer.",
+#   photo: 'https://lh5.googleusercontent.com/p/AF1QipO9sg1RHEe7tDbrXPUz0HTy14J_uS-TogiG6_MD=w408-h544-k-no',
+#   opening_hours: 'Monday to Friday 9am-5pm',
+#   price_level: 3,
+#   amenities: "Wi-Fi, parking, restaurants, observation decks, shops.",
+#   type_of_place: "point_of_interest",
+#   geometry: "lat: 35.7101, lng: 139.8107",
+#   latitude: 35.7231,
+#   longitude: 139.8097,
+#   duration: 2,
+#   description: "World's tallest freestanding broadcasting tower with an observation deck boasting 360-degree views."
+# )
+# Location.create(
+#   name: "Tokyo Skytree 5",
+#   place_id: 'ChIJN1t_tDeuEmsRUsoyG83frY4',
+#   address: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
+#   phone: "0570-550-634",
+#   website: "http://www.tokyo-skytree.jp/",
+#   rating: 5,
+#   review: "Absolutely stunning!\n\nThe surrounding area was perfect during summer.",
+#   photo: 'https://lh5.googleusercontent.com/p/AF1QipO9sg1RHEe7tDbrXPUz0HTy14J_uS-TogiG6_MD=w408-h544-k-no',
+#   opening_hours: 'Monday to Friday 9am-5pm',
+#   price_level: 3,
+#   amenities: "Wi-Fi, parking, restaurants, observation decks, shops.",
+#   type_of_place: "point_of_interest",
+#   geometry: "lat: 35.7101, lng: 139.8107",
+#   latitude: 35.8231,
+#   longitude: 139.8297,
+#   duration: 2,
+#   description: "World's tallest freestanding broadcasting tower with an observation deck boasting 360-degree views."
+# )
+# puts "... created #{Location.count} locations"
 
 # puts "Cleaning database..."
 
