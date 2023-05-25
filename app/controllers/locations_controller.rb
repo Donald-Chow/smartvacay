@@ -3,7 +3,20 @@ class LocationsController < ApplicationController
 
   def index
     @locations = policy_scope(Location)
-    @results = GooglePlaces.new("Le Wagon Tokyo").call["candidates"]
+    if params[:query].present?
+      @results = GooglePlaces.new(params[:query]).call["candidates"].map do |location|
+        Location.create(
+          name: location["name"],
+          address: location["formatted_address"],
+          rating: location["rating"],
+          photo: location['photos'],
+          latitude: location['geometry']["location"]["lat"],
+          longitude: location['geometry']["location"]["lng"]
+        )
+      end
+    else
+      @results = []
+    end
   end
 
   def show
