@@ -14,12 +14,20 @@
     <br>
     <span class="nav-text">Fav. List</span>
   <% end %>
-  <%= link_to trip_path(current_user.trip) do %>
-    <i class="fas fa-plane"></i>
-    <br>
-    <span class="nav-text">Itineraries</span>
+  <% if user_signed_in? %>
+    <%= link_to trip_path(current_user.trip) do %>
+      <i class="fas fa-plane"></i>
+      <br>
+      <span class="nav-text">Itineraries</span>
+    <% end %>
+  <% else %>
+    <%= link_to new_user_session_path do %>
+      <i class="fas fa-plane"></i>
+      <br>
+      <span class="nav-text">Itineraries</span>
+    <% end %>
   <% end %>
-  <%if user_signed_in? %>
+  <% if user_signed_in? %>
     <%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
       <i class="fa-solid fa-user"></i>
       <br>
