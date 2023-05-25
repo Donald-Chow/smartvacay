@@ -1,38 +1,37 @@
 <div class="banner" id="hero">
-	<img class="bg-img" src="https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1492&q=80">
-
-	<% if user_signed_in? %>
-		<% if current_user.trip.nil? %>
-			<div class="banner-form">
-				<%= simple_form_for(@trip) do |f| %>
-					<%= f.input :destination, label: false, placeholder: "Where to? ie. Tokyo", class: "form-control"%>
-					<div class="d-flex">
-						<div class="col ml-1">
-							<%= f.input :start_date, as: :string, placeholder: "Start Date", label: false,
+  <img class="bg-img" src="https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1492&q=80">
+  <% if user_signed_in? %>
+    <% if current_user.trip.nil? %>
+      <div class="banner-form">
+        <%= simple_form_for(@trip) do |f| %>
+          <%= f.input :destination, label: false, placeholder: "Where to? ie. Tokyo", class: "form-control"%>
+          <div class="d-flex">
+            <div class="col ml-1">
+              <%= f.input :start_date, as: :string, placeholder: "Start Date", label: false,
                 wrapper_html: { class: "mb-4" },
                 label_html: { class: "form-label text-secondary fw-bold" },
                 input_html: { data: { controller: "flatpickr" } } %>
-						</div>
-						<div class="col ml-1">
-							<%= f.input :end_date, as: :string, placeholder: "End Date", label: false,
+            </div>
+            <div class="col ml-1">
+              <%= f.input :end_date, as: :string, placeholder: "End Date", label: false,
                 wrapper_html: { class: "mb-4" },
                 label_html: { class: "form-label text-secondary fw-bold" },
                 input_html: { data: { controller: "flatpickr" } } %>
-						</div>
-					</div>
-					<%= f.submit class: "btn btn-primary" %>
-				<% end %>
-			</div>
-		<% else %>
-			<h1><%= current_user.trip.destination%></h1>
-			<p><%= current_user.trip.start_date %> - <%= current_user.trip.end_date %></p>
-		<% end %>
-	<% else %>
-		<%= link_to "Sign in", new_user_session_path, class: 'btn btn-secondary' %>
-	<% end %>
-
+            </div>
+          </div>
+          <%= f.submit class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    <% else %>
+      <h1><%= current_user.trip.destination%></h1>
+      <p><%= current_user.trip.start_date %> - <%= current_user.trip.end_date %></p>
+    <% end %>
+  <% else %>
+    <%= link_to "Sign in", new_user_session_path, class: 'btn btn-secondary' %>
+  <% end %>
 </div>
 <div class="container page-content">
+
 	<h2>HOW TO USE THIS APP</h2>
 	<div class="d-flex justify-content-between">
 		<!--
@@ -45,4 +44,5 @@
 		<h2>Tell us your destination</h2>
 		<h2>Let us know where you're headed, and we'll take care of the rest.</h2>
 	</div>
+
 </div>
