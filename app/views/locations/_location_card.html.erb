@@ -8,7 +8,7 @@
 	</div>
 	<div>
 		<%= link_to location_path(location) do %>
-			<%= location.photo.present? ? image_tag(location.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
+			<%= image_tag location.photo, alt: "text" %>
 		<% end %>
 	</div>
 	<div class="card-location-info">

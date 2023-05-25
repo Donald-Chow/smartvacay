@@ -25,4 +25,23 @@ class GooglePlaces
     results = JSON.parse(response.read_body)["results"]
     return results
   end
+
+  def details
+    key = ENV.fetch('GOOGLE_API_SERVER_KEY', nil)
+
+    # fields = ["website", "formatted_phone_number", "editorial_summary", "name", "geometry", "formatted_address", "rating",
+    #           "photos", "types", "place_id", "reviews", "opening_hours", "price_level"].join("%2C") &fields=#{fields}
+
+    url = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{query}&key=#{key}")
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+
+    request = Net::HTTP::Get.new(url)
+
+    response = https.request(request)
+    puts response.read_body
+    result = JSON.parse(response.read_body)["result"]
+    puts result
+    return result
+  end
 end
