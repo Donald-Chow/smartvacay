@@ -1,0 +1,26 @@
+// Specific CSS for your home-page
+
+// Setting a scroller height to avoid page content covering the navbar
+.page-content {
+  margin-bottom: 80px; /* Adjust the margin as needed to avoid covering the navbar */
+  overflow-y: auto;
+  max-height: calc(100vh - 80px); /* Adjust the max-height as needed */
+}
+
+.bookmark {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  a {
+    color: white;
+  }
+}
+
+.category-avatars {
+  display: flex;
+  justify-content: center;
+}
+
+.category-avatars img {
+  margin: 10px;
+}

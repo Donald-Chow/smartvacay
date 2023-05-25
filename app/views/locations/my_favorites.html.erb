@@ -1,9 +1,39 @@
-<div class="container">
-  <h1>All my favorites!</h1>
-  <% @all_favorites.each do |favorite| %>
-    <div class="card-locations">
-      <%= image_tag "sample_card_image.jpeg", alt: "my-favorite" %>
-      <%= favorite.favoritable.name %>
+<div class="page-content">
+  <div class="container">
+    <h1>All my favorites</h1>
+    <button type="button" class="btn btn-secondary">Generate itinerary</button>
+    <div class="category-avatars">
+      <% categories = [
+      { display: "All favorites", image: "sample_card_image.jpeg" },
+      { display: "Sightseeing", image: "sample_card_image.jpeg", query: "sightseeing" },
+      { display: "Restaurants", image: "sample_card_image.jpeg", query: "food" },
+      { display: "Shopping", image: "sample_card_image.jpeg", query: "shopping" },
+      { display: "Miscellaneous", image: "sample_card_image.jpeg", query: "miscellaneous" }
+      ] %>
+      <% categories.each do |category| %>
+        <%= link_to my_favorites_locations_path(category: category[:query]) do %>
+          <div class="category-avatar">
+            <%= image_tag category[:image], class: "avatar-location" %>
+            <p><%= category[:display] %></p>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-  <% end %>
+    <% @favorites.each do |favorite| %>
+      <% favoritable = @category.present? ? favorite : favorite.favoritable %>
+      <div class="card-locations">
+        <div class="bookmark">
+          <% if current_user %>
+            <%= link_to favorite_location_path(favoritable), class: "#{"text-success" if current_user.favorited?(favoritable)}", data: { turbo_method: :post }, onclick: "this.classList.toggle('text-success')" do %>
+              <i class="fa-solid fa-bookmark"></i>
+            <% end %>
+          <% end %>
+        </div>
+        <%= link_to location_path(favoritable) do %>
+          <%= favoritable.photo.present? ? image_tag(favoritable.photo) : image_tag("sample_card_image.jpeg") %>
+          <%= favoritable.name %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

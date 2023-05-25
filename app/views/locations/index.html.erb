@@ -1,41 +1,39 @@
 <div class="container page-content">
-<div class="container" data-controller="google-search">
+	<div class="container" data-controller="google-search">
 
+		<h1>Suggested locations</h1>
 
+		<%= form_with data: { action: "submit->google-search#findPlaceFromQuery"}  do |form| %>
+			<%= form.text_field :query, placeholder: 'Enter your search query', data: {google_search_target: "input"} %>
+			<%= form.submit 'Search' %>
+		<% end %>
 
-  <h1>Suggested locations</h1>
+		<div id="map" >
+			<div id="results">
 
+				<!-- Results will be dynamically inserted here , if remove the search doesnt work-->
+			</div>
+		</div>
 
-  <%= form_with data: { action: "submit->google-search#findPlaceFromQuery"}  do |form| %>
-    <%= form.text_field :query, placeholder: 'Enter your search query', data: {google_search_target: "input"} %>
-    <%= form.submit 'Search' %>
-  <% end %>
-
-  <div id="map" >
-    <div id="results">
-
-      <!-- Results will be dynamically inserted here , if remove the search doesnt work-->
-    </div>
-  </div>
-
-
-
-
-  <% @locations.each do |location| %>
-    <div class="card-locations">
-      <div class="bookmark">
-        <% if current_user %>
-          <%= link_to favorite_location_path(location), class: "#{"text-success" if current_user.favorited?(location)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-success')" do %>
-            <i class="fa-solid fa-bookmark"></i>
-          <% end %>
-        <% end %>
-      </div>
-      <div>
-        <%= link_to location_path(location) do %>
-          <%= image_tag "sample_card_image.jpeg", alt:"location-image" %>
-        <% end %>
-      </div>
-      <p><%= location.name %></p>
-    </div>
-  <% end %>
+		<div id="card-container"></div>
+		<!-- this is where results are displaying from google_search_controller-->
+		<% @locations.each do |location| %>
+			<div class="card-locations">
+				<div class="bookmark">
+					<% if user_signed_in? %>
+						<%= link_to favorite_location_path(location), class: "#{"text-success" if current_user.favorited?(location)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-success')" do %>
+							<i class="fa-solid fa-bookmark"></i>
+						<% end %>
+					<% end %>
+				</div>
+				<div>
+					<%= link_to location_path(location) do %>
+						<%= location.photo.present? ? image_tag(location.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
+					<% end %>
+				</div>
+				<p><%= location.name %></p>
+				<p><%= location.description %></p>
+			</div>
+		<% end %>
+	</div>
 </div>
