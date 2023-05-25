@@ -4,11 +4,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
-  justify-items: center;
+
+  justify-items: center; // does this work? - Donald
 }
 
 .card-location {
-  margin: 0 16px 10px; /* Adding 16px between and 10px  bottom */
+  margin: 0 16px 10px; /* Adding 16px between and 10px  bottom */;
+
   width: 160px;
   height: 200px;
   box-shadow: 1px 1px 10px rgba(0,0,0,0.2);

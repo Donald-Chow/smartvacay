@@ -11,9 +11,10 @@
 
 # type_of_places = ["tourist_attraction", "restaurant", "department_store"]
 
-# puts "Cleaning database..."
-# Itinerary.destroy_all
-# Location.destroy_all
+puts "Cleaning database..."
+Itinerary.destroy_all
+Trip.destroy_all
+Location.destroy_all
 
 # puts "Creating Test Locations"
 
