@@ -8,8 +8,8 @@
 
 .card-location {
   margin: 0;
-  width:160px;
-  height: 180px;
+  width: 160px;
+  height: 200px;
   box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
   position: relative;
   border-radius: 11px;
@@ -17,10 +17,11 @@
 
 .card-location img {
   width: 100%;
-  height: 75%;
+  // height: 75%;
+  height: 125px;
   margin: 0 auto;
   object-fit: cover;
-  border-radius: 11px;
+  border-radius: 11px 11px 0px 0px;
 }
 
 .card-location-info {
@@ -34,8 +35,12 @@
     font-size: 8px;
     margin:0px;
     bottom:0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
+
 
 // .card-locations .bookmark {
 //   position: absolute;

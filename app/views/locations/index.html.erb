@@ -1,44 +1,43 @@
 <div class="container page-content">
-	<div class="container" data-controller="google-search">
-
-		<div class="search-box">
-			<%= form_with data: { action: "submit->google-search#findPlaceFromQuery"}  do |form| %>
-				<%= form.text_field :query, placeholder: 'Enter your search query', data: {google_search_target: "input"} %>
-				<%= form.submit 'Search' %>
-			<% end %>
-
-			<div id="map" >
-				<div id="results">
-
-					<!-- Results will be dynamically inserted here , if remove the search doesnt work-->
-				</div>
-			</div>
-		</div>
-
-		<h1>Suggested locations</h1>
-		<div id="card-container"></div>
-		<!-- this is where results are displaying from google_search_controller-->
-		<div class="card-locations">
-			<% @locations.each do |location| %>
-				<div class="card-location">
-					<div class="bookmark">
-						<% if user_signed_in? %>
-							<%= link_to favorite_location_path(location), class: "#{"text-success" if current_user.favorited?(location)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-success')" do %>
-								<i class="fa-solid fa-bookmark"></i>
-							<% end %>
-						<% end %>
-					</div>
-					<div>
-						<%= link_to location_path(location) do %>
-							<%= location.photo.present? ? image_tag(location.photo, alt: "location-image") : image_tag("sample_card_image.jpeg", alt: "location-image") %>
-						<% end %>
-					</div>
-					<div class="card-location-info">
-						<h4><%= location.name %></h4>
-						<p><%= location.address %></p>
-					</div>
-				</div>
-			<% end %>
-		</div>
-	</div>
+  <div class="container" data-controller="google-search">
+    <h1>Suggested locations</h1>
+    <div id="card-container"></div>
+    <!-- this is where results are displaying from google_search_controller-->
+    <div class="card-locations">
+      <% @locations.each do |location| %>
+        <div class="card-location">
+          <div class="bookmark">
+            <% if user_signed_in? %>
+              <%= link_to favorite_location_path(location), class: "#{"text-success" if current_user.favorited?(location)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-success')" do %>
+                <i class="fa-solid fa-bookmark"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to location_path(location) do %>
+              <% image = "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}" %>
+              <%= location.photo.present? ? image_tag(location.photo, alt: "location-image") : image_tag(image, alt: "location-image") %>
+            <% end %>
+          </div>
+          <div class="card-location-info">
+            <h4><%= location.name %></h4>
+            <p><%= location.address %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="search-box-fixed-bottom">
+      <div class="search-box">
+        <%= form_with data: { action: "submit->google-search#findPlaceFromQuery"}  do |form| %>
+          <%= form.text_field :query, placeholder: 'Enter your search query', data: {google_search_target: "input"} %>
+          <%= form.submit 'Search' %>
+        <% end %>
+        <div id="map" >
+          <div id="results">
+            <!-- Results will be dynamically inserted here , if remove the search doesnt work-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
