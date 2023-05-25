@@ -15,7 +15,7 @@ body::-webkit-scrollbar{
 .page-content {
   margin-bottom: 80px; /* Adjust the margin as needed to avoid covering the navbar */
   margin-top: 55px;
-  // max-height: calc(100vh - 80px); /* Adjust the max-height as needed */
+  max-height: calc(100vh - 80px); /* Adjust the max-height as needed */
   // overflow-y: auto;
   // overflow-x: hidden;
 }

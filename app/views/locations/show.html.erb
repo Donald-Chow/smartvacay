@@ -1,4 +1,4 @@
-<div class="page-content">
+<div class="page-content container">
   <div class="container">
     <div class="location-header">
       <h2><%= @location.name %></h2>
@@ -46,14 +46,15 @@
     </div>
     <h5 class="card-title">Map</h5>
     <div class="card mb-5">
-      <div class="map-display">
+      <div class="map-display" id="map-container">
         <!--this div done just for organization purpose, bottom is the map-->
-        <div id="map"
+        <div id="map" class="mb-5"
             data-controller="google-maps"
-            style="width: 500px; height:100%;"
+            style="width: 350px; height:100%;"
             data-markers="<%= @marker.to_json %>">
         </div>
       </div>
     </div>
+    <br>
   </div>
 </div>
