@@ -17,25 +17,32 @@
 			<%= submit_tag "Search", name: "", class: "btn btn-primary" %>
 		<% end %>
 
-		<div id="map" >
-			<div id="results">
-				<div class="card-container">
-					<div id="card-locations"></div>
-					<% @results.each do |location| %>
-						<%= render "location_card", location: location%>
-					<% end %>
-					<!-- Results will be dynamically inserted here , if remove the search doesnt work-->
-				</div>
-			</div>
+		<div class="card-container">
+			<div id="card-locations"></div>
+			<% @results.each do |location| %>
+				<%= render "location_card", location: location%>
+			<% end %>
+			<!-- Results will be dynamically inserted here , if remove the search doesnt work-->
 		</div>
+	</div>
 
-		<h1>Suggested locations</h1>
+	<div>
+		<h1>Top <%= current_user.trip.destination %> attractions</h1>
 		<div id="card-container"></div>
-		<!-- this is where results are displaying from google_search_controller-->
 		<div class="card-locations">
-			<% @locations.each do |location| %>
+			<% @top_attractions.each do |location| %>
 				<%= render "location_card", location: location%>
 			<% end %>
 		</div>
 	</div>
+	<div>
+		<h1>Top <%= current_user.trip.destination %> restaurants</h1>
+		<div id="card-container"></div>
+		<div class="card-locations">
+			<% @top_restaurants.each do |location| %>
+				<%= render "location_card", location: location%>
+			<% end %>
+		</div>
+	</div>
+
 </div>
