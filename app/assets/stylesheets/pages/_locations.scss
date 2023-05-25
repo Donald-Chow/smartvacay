@@ -3,3 +3,24 @@
   width: 300px;
   height: 300px;
 }
+
+.container.page-content {
+  position: relative;
+  min-height: 100vh; /* Ensure the container covers the full height of the viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // This will put the content in the center
+  margin-left: -5px;
+}
+
+.search-box-fixed-bottom {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 80px;
+  z-index: 9999
+}
