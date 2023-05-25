@@ -1,27 +1,59 @@
-<div class="page-content">
-  <div class="container">
-    <div class="location-header">
-      <h2><%= @location.name %></h2>
-      <p><%= @location.description  %></p>
-    </div>
-    <div class="container carousel">
-      <%= render "shared/carousel" %>
-    </div>
-    <div class="card mb-5">
-      <div class="card-body">
-        <h5 class="card-title">Address</h5>
-        <p class="card-text"><%= @location.address %></p>
-      </div>
-    </div>
-    <div class="map-display mx-3">
-      <!-- <h2>MAPMAP</h2> -->
-      <!--this div done just for organization purpose, bottom is the map-->
-      <div id="map"
-
-    data-controller="google-maps"
-    style="width: 500px; height:100%;"
-    data-markers="<%= @marker.to_json %>">
-      </div>
-    </div>
-  </div>
+<div class="page-content container">
+	<div class="container">
+		<div class="location-header">
+			<h2><%= @location.name %></h2>
+			<p><%= @location.description  %></p>
+		</div>
+		<div class="container" id="carousel-container">
+			<%= render "shared/carousel" %>
+		</div>
+		<div id="show-bookmark"  data-controller="itin-collapse">
+			<% if user_signed_in? %>
+				<% if current_user.favorited?(@location)%>
+					<%= link_to favorite_location_path(@location), data: {turbo_method: :post} do %>
+						<span id="bookmark-click">
+							<i data-itin-collapse-target='bookmark' data-action='click->itin-collapse#toggle_bookmark' class="fa-solid fa-bookmark"></i>
+						</span>
+					<% end %>
+				<% else %>
+					<%= link_to favorite_location_path(@location), data: {turbo_method: :post} do %>
+						<span id="bookmark-click">
+							<i data-itin-collapse-target='bookmark' data-action="click->itin-collapse#toggle_bookmark" class="fa-regular fa-bookmark"></i>
+						</span>
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="card mb-5">
+			<div class="card-body" id="location-details">
+				<h5 class="card-title">Address</h5>
+				<p class="card-text"><%= @location.address %></p>
+				<h5 class="card-title">Geometry</h5>
+				<p class="card-text"><%= @location.geometry %></p>
+				<h5 class="card-title">Description</h5>
+				<p class="card-text"><%= @location.description %></p>
+				<h5 class="card-title">Phone Number</h5>
+				<p class="card-text"><%= @location.phone %></p>
+				<h5 class="card-title">Price Level</h5>
+				<p class="card-text"><%= @location.price_level %></p>
+				<h5 class="card-title">Type of Place</h5>
+				<p class="card-text"><%= @location.type_of_place %></p>
+				<h5 class="card-title">Rating</h5>
+				<p class="card-text"><%= @location.rating %></p>
+				<h5 class="card-title">Website</h5>
+				<p class="card-text"><%= @location.website %></p>
+			</div>
+		</div>
+		<h5 class="card-title">Map</h5>
+		<div class="card mb-5">
+			<div class="map-display" id="map-container">
+				<!--this div done just for organization purpose, bottom is the map-->
+				<div id="map" class="mb-5"
+            data-controller="google-maps"
+            style="width: 350px; height:100%;"
+            data-markers="<%= @marker.to_json %>">
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
