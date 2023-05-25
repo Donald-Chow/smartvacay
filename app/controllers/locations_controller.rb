@@ -1,15 +1,19 @@
+require "uri"
+
 class LocationsController < ApplicationController
   before_action :set_location, only: %i[show favorite]
 
   def index
     @locations = policy_scope(Location)
     if params[:query].present?
-      @results = GooglePlaces.new(params[:query]).call["candidates"].map do |location|
+      @results = GooglePlaces.new(params[:query]).call.map do |location|
         Location.create(
           name: location["name"],
           address: location["formatted_address"],
           rating: location["rating"],
-          photo: location['photos'],
+          # photo: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{location['photos'][0]['photo_reference']}&key=#{ENV.fetch(
+          #   'GOOGLE_API_SERVER_KEY', nil
+          # )}",
           latitude: location['geometry']["location"]["lat"],
           longitude: location['geometry']["location"]["lng"]
         )

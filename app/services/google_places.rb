@@ -11,8 +11,10 @@ class GooglePlaces
 
   def call
     key = ENV.fetch('GOOGLE_API_SERVER_KEY', nil)
-    fields = "formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry"
-    url = URI("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{query}&inputtype=textquery&fields=#{fields}&key=#{key}")
+
+    fields = ["name", "geometry", "formatted_address", "rating", "photos", "types", "place_id"].join("%2C")
+
+    url = URI("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{query}&inputtype=textquery&fields=#{fields}&key=#{key}")
 
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
@@ -21,9 +23,6 @@ class GooglePlaces
 
     response = https.request(request)
 
-    result = JSON.parse(response.read_body)
-
-    # beatles = JSON.parse(response)
-    return result
+    results = JSON.parse(response.read_body)["results"]
   end
 end
