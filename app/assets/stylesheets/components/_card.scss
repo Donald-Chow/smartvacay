@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr ;
   grid-gap: 16px;
+  justify-items: center; // does this work? - Donald
 }
 
 .card-location {
