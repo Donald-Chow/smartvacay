@@ -3,14 +3,33 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="google-search"
 export default class extends Controller {
-  static targets = ["input"];
+  static targets = ["input", "list"];
 
   connect() {
     console.log('Google Search Controller connected');
   }
 
-  findPlaceFromQuery(e) {
-    e.preventDefault();
+  search(event) {
+    event.preventDefault();
+    console.log("SEARCHING!");
+    console.log(this.element);
+    console.log(this.inputTarget);
+
+    fetch(this.inputTarget.action, {
+      method: "GET",
+      headers: { "Accept": "application/json" },
+      body: new FormData(this.formTarget)
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+      })
+  }
+
+  findPlaceFromQuery(event) {
+    event.preventDefault();
+
+
     const query = this.inputTarget.value
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15
