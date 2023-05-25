@@ -1,43 +1,53 @@
 <div class="navbar" id="bottom-navbar">
-	<%= link_to root_path do %>
-		<i class="fas fa-home"></i>
-		<br>
-		<span class="nav-text">Home</span>
-	<% end %>
-	<%= link_to locations_path do %>
-		<i class="fa-solid fa-magnifying-glass"></i>
-		<br>
-		<span class="nav-text">Explore</span>
-	<% end %>
-	<%= link_to root_path do %>
-		<i class="fa-solid fa-heart"></i>
-		<br>
-		<span class="nav-text">Fav. List</span>
-	<% end %>
-	<% if user_signed_in? %>
-		<%= link_to trip_path(current_user.trip) do %>
-			<i class="fas fa-plane"></i>
-			<br>
-			<span class="nav-text">Itineraries</span>
-		<% end %>
-	<% else %>
-		<%= link_to new_user_session_path do %>
-			<i class="fas fa-plane"></i>
-			<br>
-			<span class="nav-text">Itineraries</span>
-		<% end %>
-	<% end %>
-	<% if user_signed_in? %>
-		<%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
-			<i class="fa-solid fa-user"></i>
-			<br>
-			<span class="nav-text">User</span>
-		<% end %>
-	<% else %>
-		<%= link_to new_user_session_path do %>
-			<i class="fa-solid fa-user"></i>
-			<br>
-			<span class="nav-text">User</span>
-		<% end %>
-	<% end %>
+
+  <%= link_to root_path do %>
+    <i class="fas fa-home"></i>
+    <br>
+    <span class="nav-text">Home</span>
+  <% end %>
+  <%= link_to locations_path do %>
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <br>
+    <span class="nav-text">Explore</span>
+  <% end %>
+  <%= link_to my_favorites_locations_path do %>
+    <i class="fa-solid fa-heart"></i>
+    <br>
+    <span class="nav-text">Fav. List</span>
+  <% end %>
+  <% if user_signed_in? %>
+    <% if current_user.trip.present? %>
+      <%= link_to trip_path(current_user.trip) do %>
+        <i class="fas fa-plane"></i>
+        <br>
+        <span class="nav-text">Itineraries</span>
+      <% end %>
+    <% else %>
+      <%= link_to locations_path do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <br>
+        <span class="nav-text">Explore</span>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= link_to new_user_session_path do %>
+      <i class="fas fa-plane"></i>
+      <br>
+      <span class="nav-text">Itineraries</span>
+    <% end %>
+  <% end %>
+  <% if user_signed_in? %>
+    <%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
+      <i class="fa-solid fa-user"></i>
+      <br>
+      <span class="nav-text">User</span>
+    <% end %>
+  <% else %>
+    <%= link_to new_user_session_path do %>
+      <i class="fa-solid fa-user"></i>
+      <br>
+      <span class="nav-text">User</span>
+    <% end %>
+  <% end %>
+
 </div>
