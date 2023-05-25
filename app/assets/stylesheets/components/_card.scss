@@ -2,8 +2,9 @@
 
 .card-locations {
   display: grid;
-  grid-template-columns: 1fr 1fr ;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
+  justify-items: center;
 }
 
 .card-location {

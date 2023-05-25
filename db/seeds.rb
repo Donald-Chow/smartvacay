@@ -6,44 +6,44 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-require "open-uri"
-require "json"
+# require "open-uri"
+# require "json"
 
-type_of_places = ["tourist_attraction", "restaurant", "department_store"]
+# type_of_places = ["tourist_attraction", "restaurant", "department_store"]
 
-puts "Cleaning database..."
-Itinerary.destroy_all
-Location.destroy_all
+# puts "Cleaning database..."
+# Itinerary.destroy_all
+# Location.destroy_all
 
-puts "Creating Test Locations"
+# puts "Creating Test Locations"
 
-type_of_places.each do |place|
-  url = "https://maps.googleapis.com/maps/api/place/textsearch/json?type=#{place}&language=en&key=#{ENV['GOOGLE_API_SERVER_KEY']}"
-  response = URI.open(url).read
-  parsed_response = JSON.parse(response)
-  # puts parsed_response
-  parsed_response['results'].each do |result|
-    Location.create!(
-      name: result["name"],
-      place_id: result["place_id"],
-      address: result["formatted_address"],
-      phone: result["formatted_phone_number"],
-      website: result["website"],
-      rating: result["rating"],
-      # review:
-      # photo:
-      # opening_hours:
-      # price_level:
-      # amenities:
-      type_of_place: result["types"].join(", "),
-      geometry: "lat: #{result['geometry']['location']['lat']}, lng: #{result['geometry']['location']['lng']}",
-      latitude: result['geometry']['location']['lat'],
-      longitude: result['geometry']['location']['lng']
-      # duration:
-      # description:
-    )
-  end
-end
+# type_of_places.each do |place|
+#   url = "https://maps.googleapis.com/maps/api/place/textsearch/json?type=#{place}&language=en&key=#{ENV['GOOGLE_API_SERVER_KEY']}"
+#   response = URI.open(url).read
+#   parsed_response = JSON.parse(response)
+#   # puts parsed_response
+#   parsed_response['results'].each do |result|
+#     Location.create!(
+#       name: result["name"],
+#       place_id: result["place_id"],
+#       address: result["formatted_address"],
+#       phone: result["formatted_phone_number"],
+#       website: result["website"],
+#       rating: result["rating"],
+#       # review:
+#       # photo:
+#       # opening_hours:
+#       # price_level:
+#       # amenities:
+#       type_of_place: result["types"].join(", "),
+#       geometry: "lat: #{result['geometry']['location']['lat']}, lng: #{result['geometry']['location']['lng']}",
+#       latitude: result['geometry']['location']['lat'],
+#       longitude: result['geometry']['location']['lng']
+#       # duration:
+#       # description:
+#     )
+#   end
+# end
 
 # Location.create(
 #   name: "Tokyo Skytree 2",
