@@ -15,7 +15,6 @@ class GooglePlaces
     fields = ["name", "geometry", "formatted_address", "rating", "photos", "types", "place_id"].join("%2C")
 
     url = URI("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{query}&inputtype=textquery&fields=#{fields}&key=#{key}")
-
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
 
@@ -24,5 +23,6 @@ class GooglePlaces
     response = https.request(request)
 
     results = JSON.parse(response.read_body)["results"]
+    return results
   end
 end

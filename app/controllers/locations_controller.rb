@@ -11,9 +11,13 @@ class LocationsController < ApplicationController
           name: location["name"],
           address: location["formatted_address"],
           rating: location["rating"],
-          # photo: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{location['photos'][0]['photo_reference']}&key=#{ENV.fetch(
-          #   'GOOGLE_API_SERVER_KEY', nil
-          # )}",
+          photo: if location.include?("photos")
+                   "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{location['photos'][0]['photo_reference']}&key=#{ENV.fetch(
+                     'GOOGLE_API_SERVER_KEY', nil
+                   )}"
+                 else
+                   "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}"
+                 end,
           latitude: location['geometry']["location"]["lat"],
           longitude: location['geometry']["location"]["lng"]
         )
