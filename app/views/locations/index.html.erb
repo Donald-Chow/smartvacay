@@ -1,41 +1,40 @@
 <div class="container page-content">
-
-	<div class="container" data-controller="google-search">
-		<!--
+  <div class="container" data-controller="google-search">
+    <!--
     <div class="search-box">
 			<%= form_with data: { action: "submit->google-search#findPlaceFromQuery"}  do |form| %>
 				<%= form.text_field :query, placeholder: 'Enter your search query', data: {google_search_target: "input"} %>
 				<%= form.submit 'Search' %>
 			<% end %>
       -->
-		<%= form_with url: locations_path, method: :get, class: "d-flex" do %>
-			<%= text_field_tag :query,
+    <h1>Suggested locations</h1>
+    <div class="search-box-fixed-bottom">
+      <%= form_with url: locations_path, method: :get, class: "d-flex" do %>
+        <%= text_field_tag :query,
             params[:query],
             class: "form-control",
             placeholder: "Type a keyword"
         %>
-			<%= submit_tag "Search", name: "", class: "btn btn-primary" %>
-		<% end %>
-
-		<div id="map" >
-			<div id="results">
-				<div class="card-container">
-					<div id="card-locations"></div>
-					<% @results.each do |location| %>
-						<%= render "location_card", location: location%>
-					<% end %>
-					<!-- Results will be dynamically inserted here , if remove the search doesnt work-->
-				</div>
-			</div>
-		</div>
-
-		<h1>Suggested locations</h1>
-		<div id="card-container"></div>
-		<!-- this is where results are displaying from google_search_controller-->
-		<div class="card-locations">
-			<% @locations.each do |location| %>
-				<%= render "location_card", location: location%>
-			<% end %>
-		</div>
-	</div>
+        <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+    <div id="map" >
+      <div id="results">
+        <div class="card-container">
+          <div id="card-locations"></div>
+          <% @results.each do |location| %>
+            <%= render "location_card", location: location%>
+          <% end %>
+          <!-- Results will be dynamically inserted here , if remove the search doesnt work-->
+        </div>
+      </div>
+    </div>
+    <div id="card-container"></div>
+    <!-- this is where results are displaying from google_search_controller-->
+    <div class="card-locations">
+      <% @locations.each do |location| %>
+        <%= render "location_card", location: location%>
+      <% end %>
+    </div>
+  </div>
 </div>
