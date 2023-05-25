@@ -4,11 +4,11 @@
     <button type="button" class="btn btn-secondary">Generate itinerary</button>
     <div class="category-avatars">
       <% categories = [
-      { display: "All favorites", image: "sample_card_image.jpeg" },
-      { display: "Sightseeing", image: "sample_card_image.jpeg", query: "sightseeing" },
-      { display: "Restaurants", image: "sample_card_image.jpeg", query: "food" },
-      { display: "Shopping", image: "sample_card_image.jpeg", query: "shopping" },
-      { display: "Miscellaneous", image: "sample_card_image.jpeg", query: "miscellaneous" }
+      { display: "All", image: "favorites.jpeg" },
+      { display: "Sightseeing", image: "sightseeing.jpeg", query: "sightseeing" },
+      { display: "Food", image: "food.jpeg", query: "food" },
+      { display: "Shopping", image: "shopping.jpeg", query: "shopping" },
+      { display: "Misc", image: "misc.jpeg", query: "miscellaneous" }
       ] %>
       <% categories.each do |category| %>
         <%= link_to my_favorites_locations_path(category: category[:query]) do %>
@@ -29,10 +29,12 @@
             <% end %>
           <% end %>
         </div>
-        <%= link_to location_path(favoritable) do %>
-          <%= favoritable.photo.present? ? image_tag(favoritable.photo) : image_tag("sample_card_image.jpeg") %>
-          <%= favoritable.name %>
-        <% end %>
+        <div class="card-location">
+          <%= link_to location_path(favoritable) do %>
+            <%= favoritable.photo.present? ? image_tag(favoritable.photo) : image_tag("sample_card_image.jpeg") %>
+            <%= favoritable.name %>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>
