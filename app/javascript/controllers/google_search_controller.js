@@ -9,8 +9,10 @@ export default class extends Controller {
     console.log('Google Search Controller connected');
   }
 
-  findPlaceFromQuery(e) {
-    e.preventDefault();
+  findPlaceFromQuery(event) {
+    event.preventDefault();
+
+
     const query = this.inputTarget.value
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15

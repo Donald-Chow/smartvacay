@@ -1,6 +1,6 @@
 <div class="container page-content">
-	<div class="container" data-controller="google-search">
 
+	<div class="container" data-controller="google-search">
 		<div class="search-box">
 			<%= form_with data: { action: "submit->google-search#findPlaceFromQuery"}  do |form| %>
 				<%= form.text_field :query, placeholder: 'Enter your search query', data: {google_search_target: "input"} %>
