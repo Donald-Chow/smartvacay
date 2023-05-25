@@ -10,6 +10,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  // This will put the content in the center
+  margin-left: -5px;
 }
 
 .search-box-fixed-bottom {
@@ -20,4 +22,5 @@
   bottom: 0;
   width: 100%;
   margin-bottom: 80px;
+  z-index: 9999
 }
