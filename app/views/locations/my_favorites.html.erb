@@ -6,7 +6,7 @@
 		<button type="button" class="btn btn-secondary mt-2 mb-3">Generate itinerary</button>
 		<div class="category-avatars">
 			<% categories = [
-      { display: "All", image: "favorites.jpeg", query: ""},
+      { display: "All", image: "all.jpeg", query: ""},
       { display: "Sightseeing", image: "sightseeing.jpeg", query: "sightseeing" },
       { display: "Food", image: "food.jpeg", query: "food" },
       { display: "Shopping", image: "shopping.jpeg", query: "shopping" },
@@ -15,7 +15,7 @@
 			<% categories.each do |category| %>
 				<div class="category-avatar">
 					<%= link_to my_favorites_locations_path(category: category[:query]) do %>
-						<%#= image_tag category[:image], class: "avatar-location" %>
+						<%= image_tag category[:image], class: "avatar-location" %>
 						<p><%= category[:display] %></p>
 					<% end %>
 				</div>
