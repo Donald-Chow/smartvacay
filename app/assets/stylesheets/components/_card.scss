@@ -4,8 +4,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
-  // justify-items: center; // does this work? - Donald (Joyce: tried now.  Doesn't)
-  // added more spacing between cards and "top attractions"
+  justify-content: center;
   margin-top: 20px;
 }
 
