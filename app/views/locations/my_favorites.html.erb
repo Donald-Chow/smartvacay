@@ -15,7 +15,7 @@
 			<% categories.each do |category| %>
 				<div class="category-avatar">
 					<%= link_to my_favorites_locations_path(category: category[:query]) do %>
-						<%= image_tag category[:image], class: "avatar-location" %>
+						<%= image_tag "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}", class: "avatar-location" %>
 						<p><%= category[:display] %></p>
 					<% end %>
 				</div>
