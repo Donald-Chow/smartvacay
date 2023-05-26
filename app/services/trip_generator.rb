@@ -36,7 +36,7 @@ class TripGenerator
       data.push([location.latitude, location.longitude])
     end
     # k = 1
-    k = (trip.end_date - trip.start_date).to_i # Optimal K found using the elbow method
+    k = (trip.end_date - trip.start_date).to_i + 1 # Optimal K found using the elbow method
     groupings = KMeansClusterer.run k, data, labels:, runs: 100
 
     days = groupings.clusters
