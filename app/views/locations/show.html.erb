@@ -33,20 +33,38 @@
       <div class="card-body" id="location-details">
         <h5 class="card-title">Address</h5>
         <p class="card-text"><%= @location.address %></p>
-        <h5 class="card-title">Geometry</h5>
-        <p class="card-text"><%= @location.geometry %></p>
         <h5 class="card-title">Description</h5>
-        <p class="card-text"><%= @location.description %></p>
+        <%if @location.description.nil?%>
+          <p class="card-text">Not Available</p>
+        <% else %>
+          <p class="card-text"><%= @location.description %></p>
+        <% end %>
         <h5 class="card-title">Phone Number</h5>
-        <p class="card-text"><%= @location.phone %></p>
+        <%if @location.phone.nil?%>
+          <p class="card-text">Not Available</p>
+        <% else %>
+          <p class="card-text"><%= @location.phone %></p>
+        <%end%>
         <h5 class="card-title">Price Level</h5>
-        <p class="card-text"><%= @location.price_level %></p>
+        <%if @location.price_level.nil?%>
+          <p class="card-text">Not Available</p>
+        <% else %>
+          <p class="card-text"><%= @location.price_level %></p>
+        <% end %>
         <h5 class="card-title">Type of Place</h5>
         <p class="card-text"><%= @location.type_of_place %></p>
         <h5 class="card-title">Rating</h5>
-        <p class="card-text"><%= @location.rating %></p>
+        <%if @location.rating.nil?%>
+          <p class="card-text">Not Available</p>
+        <% else %>
+          <p class="card-text"><%= @location.rating %></p>
+        <% end %>
         <h5 class="card-title">Website</h5>
-        <p class="card-text"><%= @location.website %></p>
+        <%if @location.website.nil?%>
+          <p class="card-text">Not Available</p>
+        <% else %>
+          <p class="card-text"><%= @location.website %></p>
+        <% end %>
       </div>
     </div>
     <h5 class="card-title">Map</h5>
