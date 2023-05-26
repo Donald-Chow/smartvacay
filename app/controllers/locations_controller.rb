@@ -97,7 +97,11 @@ class LocationsController < ApplicationController
                    'GOOGLE_API_SERVER_KEY', nil
                  )}"
                end
-               photos = photos.join(",")
+               if photos.count < 5
+                 photos = photos.join(",")
+               else
+                 photos = photos[0..3].join(",")
+               end
                photos
              else
                "http://source.unsplash.com/featured/?#{location['name']}&#{rand(1000)}"
