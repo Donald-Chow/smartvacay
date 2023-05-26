@@ -14,7 +14,8 @@ body::-webkit-scrollbar{
 
 .page-content {
   margin-bottom: 80px; /* Adjust the margin as needed to avoid covering the navbar */
-  margin-top: 55px;
+  // Added more spacing between the top bar and the header (see my_favorites page)
+  margin-top: 70px;
   max-height: calc(100vh - 80px); /* Adjust the max-height as needed */
   // overflow-y: auto;
   // overflow-x: hidden;
@@ -33,7 +34,7 @@ h1 {
   display: inline-block;
   background-color: white;
   border-radius: 10px;
-  position:fixed;
+  position: fixed;
   top: 100px;
   right: 30px;
   z-index: 1;

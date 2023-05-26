@@ -4,8 +4,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
-
-  justify-items: center; // does this work? - Donald
+  // justify-items: center; // does this work? - Donald (Joyce: tried now.  Doesn't)
+  // added more spacing between cards and "top attractions"
+  margin-top: 20px;
 }
 
 .card-location {
@@ -16,8 +17,11 @@
   box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
   position: relative;
   border-radius: 11px;
-}
 
+  a {
+  text-decoration: none;
+  }
+}
 
 .card-location img {
   width: 100%;
@@ -30,21 +34,22 @@
 
 .card-location-info {
   padding: 8px;
+
   h4 {
     font-size: 14px;
-    margin:0px;
-    top:0;
+    margin: 0px;
+    top: 0;
   }
+
   p {
     font-size: 8px;
-    margin:0px;
-    bottom:0;
+    margin: 0px;
+    bottom: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
 }
-
 
 // .card-locations .bookmark {
 //   position: absolute;

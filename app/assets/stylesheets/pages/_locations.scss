@@ -24,3 +24,18 @@
   margin-bottom: 80px;
   z-index: 9999
 }
+
+.location-text {
+  margin-top: 60px;
+  text-shadow: 1px 1px 1px rgba(103, 103, 103, 0.5);
+  color: #497174;
+}
+
+.bookmark {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  a {
+    color: white;
+  }
+}
