@@ -8,7 +8,7 @@
 			<% end %>
       -->
     <div class="search-box-fixed-bottom">
-      <%= form_with url: locations_path, method: :get, class: "d-flex" do %>
+      <%= form_with url: locations_path, method: :get, class: "d-flex search-box-bg" do %>
         <%= text_field_tag :query,
             params[:query],
             class: "form-control",
