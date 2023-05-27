@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ActiveTabController from "./active_tab_controller"
+application.register("active-tab", ActiveTabController)
+
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
