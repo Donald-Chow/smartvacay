@@ -4,15 +4,15 @@
     <% if current_user.trip.nil? %>
       <div class="banner-form">
         <%= simple_form_for(@trip) do |f| %>
-          <%= f.input :destination, label: false, placeholder: "Where to? ie. Tokyo", class: "form-control"%>
+          <%= f.input :destination, label: false, placeholder: "Where to?  i.e. Tokyo", class: "form-control"%>
           <div class="d-flex">
-            <div class="col ml-1">
+            <div class="col m-1">
               <%= f.input :start_date, as: :string, placeholder: "Start Date", label: false,
                 wrapper_html: { class: "mb-4" },
                 label_html: { class: "form-label text-secondary fw-bold" },
                 input_html: { data: { controller: "flatpickr" } } %>
             </div>
-            <div class="col ml-1">
+            <div class="col m-1">
               <%= f.input :end_date, as: :string, placeholder: "End Date", label: false,
                 wrapper_html: { class: "mb-4" },
                 label_html: { class: "form-label text-secondary fw-bold" },
@@ -30,34 +30,34 @@
     <%= link_to "Sign in", new_user_session_path, class: 'btn btn-secondary' %>
   <% end %>
 </div>
-<div class="container page-content text-center">
-    <h2>Three Simple Steps to Planning Your Dream Vacation</h2>
+<div class="container page-content text-center px-3">
+  <h2>Three Simple Steps to Planning Your Dream Vacation</h2>
   <div class="d-flex justify-content-around my-3">
-
-      <div class="text-center">
-        <i class="fas fa-earth-asia fa-3x mb-3"></i>
-        <h3>Choose Your Destination</h3>
-        <p>Start by typing the perfect place for your next vacation and date planned</p>
-        <p>Consider your interests, budget, and travel style when making your decision.</p>
+    <div class="text-center">
+      <div class="row">
+        <div class="col-6">
+          <i class="fas fa-earth-asia fa-3x mb-3"></i>
+          <h3>Choose Your Destination</h3>
+          <p>Start by typing the perfect place for your next vacation and date planned</p>
+          <p>Consider your interests, budget, and travel style when making your decision.</p>
+        </div>
+        <div class="col-6">
+          <i class="fas fa-solid fa-map-location-dot fa-3x mb-3"></i>
+          <h3>Add Locations to Your Favorites</h3>
+          <p>Once you've chosen a destination, start adding locations to your favorites.</p>
+          <p>You can do this by searching for specific places or by browsing our curated lists.</p>
+        </div>
       </div>
-
-      <div class="text-center">
-        <i class="fas fa-solid fa-map-location-dot fa-3x mb-3"></i>
-        <h3>Add Locations to Your Favorites</h3>
-        <p>Once you've chosen a destination, start adding locations to your favorites.</p>
-        <p>You can do this by searching for specific places or by browsing our curated lists.</p>
-      </div>
-
-      <div class="text-center">
+      <div class="p-5 mb-5">
         <i class="fas fa-solid fa-route fa-3x mb-3"></i>
         <h3>We'll Create Your Custom Itinerary</h3>
         <p>Click Generate Itinerary and we will create a custom itinerary for you.</p>
         <p>Your custom itinerary will include everything you need to know about your trip, including transportation and activities.</p>
         <p>You can edit your itinerary to make it perfect for you</p>
+        <div class="text-center">
+          <a href="/" class="btn btn-primary my-3">Start Planning</a>
+        </div>
       </div>
-
-  </div>
-  <div class="text-center">
-    <a href="/" class="btn btn-primary my-3">Start Planning</a>
+    </div>
   </div>
 </div>
