@@ -66,6 +66,12 @@ class LocationsController < ApplicationController
                  else
                    @all_favorites
                  end
+
+    respond_to do |format|
+      format.html
+      # Render the filtered list as a separate JavaScript view template
+      format.text { render partial: "filtered_list", locals: { favorites: @favorites }, formats: [:html] }
+    end
   end
 
   private
@@ -120,28 +126,3 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
   end
 end
-
-# @all_favorites = current_user.all_favorites
-# authorize @all_favorites
-
-# @category = params[:category]
-# @locations = []
-
-# @all_favorites.each do |favorite|
-#   location = favorite.favoritable
-#   if location.type_of_place.include?("restaurant") || location.type_of_place.include?("meal_takeaway") || location.type_of_place.include?("food")
-#     location.category = "food"
-#   elsif location.type_of_place.include?("department_store")
-#     location.category = "shopping"
-#   elsif location.type_of_place.include?("tourist_attraction")
-#     location.category = "sightseeing"
-#   else
-#     location.category = "miscellaneous"
-#   end
-#   @locations << location
-# end
-
-# if @category.present?
-#   @locations_by_category = @locations.select { |location| location.category == @category }
-# end
-# end
