@@ -15,6 +15,7 @@ export default class extends Controller {
     console.log("TO DO FILTER THE LISTS");
     // event.preventDefault();
     const category = event.currentTarget.dataset.category
+    // How to adjust url to fit to Heroku or other domains?
     const url = `http://localhost:3000/locations/my_favorites?category=${category}`
     fetch(url, {
       headers: { "Accept": "text/plain" }
