@@ -4,7 +4,7 @@
     <%# Bookmark starts here %>
     <div class="bookmark">
       <% if current_user %>
-        <%= link_to favorite_location_path(favoritable), class: "#{"text-success" if current_user.favorited?(favoritable)}", data: { turbo_method: :post }, onclick: "this.classList.toggle('text-success')" do %>
+        <%= link_to favorite_location_path(favoritable), class: "#{"text-warning" if current_user.favorited?(favoritable)}", data: { turbo_method: :post }, onclick: "this.classList.toggle('text-warning')" do %>
           <i class="fa-solid fa-bookmark"></i>
         <% end %>
       <% end %>

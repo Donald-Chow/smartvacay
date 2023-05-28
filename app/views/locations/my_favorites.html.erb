@@ -18,7 +18,7 @@
               <%= image_tag "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}", class: (category[:query].empty? ? "avatar-location active" : "avatar-location"),
             data: {
               category_search_target: "avatar",
-              action: "click->category-search#showLists",
+              action: "touchstart->category-search#showLists",
               category: category[:query]}
             %>
             <% end %>
