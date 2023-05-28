@@ -1,21 +1,48 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <title>Smartvacay</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
-    <script src=<%= "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_BROWSER_KEY']}&libraries=places"%>></script>
-  </head>
-  <body>
-    <%= render "shared/header" %>
-    <%= yield %>
-    <%= render "shared/navbar" %>
-    <%= render "shared/flashes" %>
-  </body>
+	<head>
+		<title><%= meta_title %></title>
+		<meta name="description" content="<%= meta_description %>">
+
+		<!-- Facebook Open Graph data -->
+		<meta property="og:title" content="<%= meta_title %>">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="<%= request.original_url %>">
+		<meta property="og:image" content="<%= meta_image %>">
+		<meta property="og:description" content="<%= meta_description %>">
+		<meta property="og:site_name" content="<%= meta_title %>">
+
+		<!-- Twitter Card data -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="<%= DEFAULT_META["twitter_account"] %>">
+		<meta name="twitter:title" content="<%= meta_title %>">
+		<meta name="twitter:description" content="<%= meta_description %>">
+		<meta name="twitter:creator" content="<%= DEFAULT_META["twitter_account"] %>">
+		<meta name="twitter:image:src" content="<%= meta_image %>">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
+
+		<!-- PWA -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+
+		<link rel="manifest" href="<%= asset_path 'manifest.json' %>">
+
+		<%= render 'shared/ios_pwa_links' %>
+
+		<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+		<%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
+		<script src=<%= "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_BROWSER_KEY']}&libraries=places"%>></script>
+	</head>
+	<body>
+		<%= render "shared/header" %>
+		<%= yield %>
+		<%= render "shared/navbar" %>
+		<%= render "shared/flashes" %>
+	</body>
 
 </html>

@@ -1,9 +1,9 @@
-<div class="page-content">
-  <div class="container">
+<div class="container page-content">
+  <div class="container pb-3 mb-3">
     <h1 class="location-text">All my favorites</h1>
     <button type="button" class="btn btn-secondary mt-2 mb-3">Generate itinerary</button>
     <%# From here we have the category avatars %>
-    <div data-controller="category-search">
+    <div class="container-mx-2" data-controller="category-search">
       <div class="category-avatars">
         <% categories = [
       { display: "All", image: "all.jpeg", query: ""},
@@ -28,7 +28,7 @@
         <% end %>
       </div>
       <%# From here we have all the location cards %>
-      <div class="card-locations" data-category-search-target="list">
+      <div class="card-locations pb-5 mb-5" data-category-search-target="list">
         <%= render "filtered_list", favorites: @favorites %>
       </div>
     </div>
