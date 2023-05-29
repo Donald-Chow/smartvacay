@@ -58,7 +58,8 @@
           </p>
         <% end %>
         <h5 class="card-title">Type of Place</h5>
-        <p class="card-text"><%= @location.type_of_place %></p>
+        <% type_of_place = @location.type_of_place.gsub("_", " ").split.map { |each| each.capitalize }.join(" ") %>
+        <p class="card-text"><%= type_of_place %></p>
         <h5 class="card-title">Rating</h5>
         <%if @location.rating.nil?%>
           <p class="card-text">Not Available</p>

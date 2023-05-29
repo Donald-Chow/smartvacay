@@ -34,10 +34,10 @@
 }
 
 .location-text {
-  margin-top: 60px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   text-shadow: 1px 1px 1px rgba(103, 103, 103, 0.5);
   color: #497174;
-  padding-top: 12px;
 }
 
 .bookmark {
@@ -47,4 +47,17 @@
   a {
     color: white;
   }
+}
+
+.section-wrapper {
+  overflow-x: scroll;  /* Enable horizontall scroll */
+  overflow-y: hidden;  /* Disable vertical scroll within wrapper */
+}
+
+.section-wrapper::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.section-wrapper::-webkit-scrollbar-thumb {
+  background-color: transparent;
 }
