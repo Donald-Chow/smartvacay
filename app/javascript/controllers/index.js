@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ActiveTabController from "./active_tab_controller"
+application.register("active-tab", ActiveTabController)
+
 import CategorySearchController from "./category_search_controller"
 application.register("category-search", CategorySearchController)
 

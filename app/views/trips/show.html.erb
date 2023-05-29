@@ -1,18 +1,17 @@
 <div class="page-content">
-	<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
-url(<%= "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}" %>);">
-		<div class="container">
-			<h1><%= @trip.destination %> 2023</h1>
-			<p><%= @trip.start_date %></p>
-		</div>
-	</div>
-
-	<% if @trip.itineraries == [] %>
-		<div class="my-5 text-center">
-			<%= link_to "MAGIC BUTTON", generate_trip_path(@trip), class: "btn btn-secondary" %>
-		</div>
-	<% else %>
-		<%= render template:"itineraries/index", trip: @trip %>
-	<% end %>
-
+  <div id="trips-info">
+    <h1><%= @trip.destination %> 2023</h1>
+    <p><%= @trip.start_date %></p>
+  </div>
+  <div class="container">
+    <div class="schedule">
+      <% if @trip.itineraries == [] %>
+        <div class="my-5 text-center">
+          <%= link_to "MAGIC BUTTON", generate_trip_path(@trip), class: "btn btn-secondary" %>
+        </div>
+      <% else %>
+        <%= render template:"itineraries/index", trip: @trip %>
+      <% end %>
+    </div>
+  </div>
 </div>

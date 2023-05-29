@@ -27,6 +27,7 @@
 }
 
 /* Add a color to the active/current link */
+<<<<<<< HEAD
 .navbar .fas:active {
     font-weight: bold;
     opacity: 100%;
@@ -36,4 +37,17 @@
   font-weight: bold;
   opacity: 100%;
   color: $primary;
+=======
+// .navbar .fas:active {
+//     font-weight: bold;
+//     opacity: 100%;
+//     color: $primary;
+//     background-color: #000000;
+// }
+.navbar .active {
+  font-weight: bold;
+  opacity: 100%;
+  color: $primary;
+  //background-color: #000000;
+>>>>>>> master
 }

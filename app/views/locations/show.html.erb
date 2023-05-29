@@ -6,8 +6,10 @@
       </div>
       <p><%= @location.description  %></p>
     </div>
-    <div onclick= "history.back()" class= "back-btn">
-      <%= image_tag "buttons/back-btn.png", width:"45px" %>
+    <div>
+      <%= link_to :back, class: "back-btn" do%>
+        <%= image_tag "buttons/back-btn.png", width:"45px" %>
+      <% end %>
     </div>
     <div class="container" id="carousel-container">
       <%= render "shared/carousel" %>
@@ -49,7 +51,11 @@
         <%if @location.price_level.nil?%>
           <p class="card-text">Not Available</p>
         <% else %>
-          <p class="card-text"><%= @location.price_level %></p>
+          <p class="card-text">
+            <%= @location.price_level.times do%>
+              <i class='fa-solid fa-dollar-sign'></i>
+            <% end %>
+          </p>
         <% end %>
         <h5 class="card-title">Type of Place</h5>
         <p class="card-text"><%= @location.type_of_place %></p>

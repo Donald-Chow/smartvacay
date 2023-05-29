@@ -1,0 +1,8 @@
+#trips-info {
+  background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url("http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}");
+  display: block;
+  height: 300px;
+  padding: 85px;
+  text-shadow: 2px 1px 4px #0E0000;
+  background-size: cover;
+}

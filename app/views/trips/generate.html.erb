@@ -1,13 +1,13 @@
 <% Trip.find(2).itineraries.sort_by { |itin| itin.start_time }.each do |itinerary| %>
-	<div class="cards-itinerary">
-		<div class="card-itinerary">
-			<div class="card-itinerary-box">
-				<div class="card-itinerary-infos">
-					<h2><i class="fa-solid fa-location-dot"></i>  <%=itinerary.location.name %></h2>
-					<p> <%=itinerary.start_time %></p>
-				</div>
-				<img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
-			</div>
-		</div>
-
-	<% end %>
+  <div class="cards-itinerary">
+    <div class="card-itinerary">
+      <div class="card-itinerary-box">
+        <div class="card-itinerary-infos">
+          <h2><i class="fa-solid fa-location-dot"></i>  <%=itinerary.location.name %></h2>
+          <p> <%=itinerary.start_time %></p>
+        </div>
+        <img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
+      </div>
+    </div>
+  <% end %>
+</div>
