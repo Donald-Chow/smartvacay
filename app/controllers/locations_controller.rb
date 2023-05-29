@@ -42,29 +42,14 @@ class LocationsController < ApplicationController
   end
 
   def my_favorites
-    @all_favorites = current_user.all_favorites
+    @all_favorites = current_user.favorited_location
     authorize @all_favorites
-    @locations = []
-
-    @all_favorites.each do |favorite|
-      type_of_place = favorite.favoritable.type_of_place
-      location = favorite.favoritable
-      location.category = if type_of_place.include?("restaurant") || type_of_place.include?("meal_takeaway") || type_of_place.include?("food")
-                            "food"
-                          elsif type_of_place.include?("department_store") || type_of_place.include?("shopping_mall")
-                            "shopping"
-                          elsif type_of_place.include?("tourist_attraction")
-                            "sightseeing"
-                          else
-                            "miscellaneous"
-                          end
-      @locations << location
-    end
 
     @category = params[:category]
 
     @favorites = if @category.present?
-                   @locations.select { |location| location.category == @category }
+                   raise
+                   @all_favorites.select { |location| location.category == @category }
                  else
                    @all_favorites
                  end

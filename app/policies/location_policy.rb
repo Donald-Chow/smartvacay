@@ -14,4 +14,8 @@ class LocationPolicy < ApplicationPolicy
     # allow users to perform the bookmarking action
     true
   end
+
+  def my_favorites?
+    true
+  end
 end
