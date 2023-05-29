@@ -15,12 +15,13 @@ class LocationsController < ApplicationController
     end
 
     @top_attractions = GooglePlaces.new("Top #{current_user.trip.destination} Attractions").call.map do |location|
-      Location.find_by(place_id: location["place_id"]) || location_from_google(location_details(location["place_id"]))
+      Location.find_by(place_id: location["place_id"]) || Location.google_create(location_details(location["place_id"]))
     end
 
-    @top_restaurants = GooglePlaces.new("Top #{current_user.trip.destination} Restaurants").call.map do |location|
-      Location.find_by(place_id: location["place_id"]) || location_from_google(location_details(location["place_id"]))
-    end
+    @top_restaurants = location.all
+    # GooglePlaces.new("Top #{current_user.trip.destination} Restaurants").call.map do |location|
+    #   Location.find_by(place_id: location["place_id"]) || Location.google_create(location_details(location["place_id"]))
+    # end
   end
 
   def show
@@ -72,48 +73,6 @@ class LocationsController < ApplicationController
 
   def location_details(id)
     GooglePlaces.new(id).details
-  end
-
-  def location_from_google(location)
-    Location.create(
-      name: location["name"],
-      place_id: location["place_id"],
-      address: location["formatted_address"] || "",
-      phone: location['"formatted_phone_number"'],
-      website: location['website'],
-      rating: location["rating"],
-      review: location['reviews'],
-      # photo: if location.include?("photos")
-      #          "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{location['photos'][0]['photo_reference']}&key=#{ENV.fetch(
-      #            'GOOGLE_API_SERVER_KEY', nil
-      #          )}"
-      #        else
-      #          "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}"
-      #        end,
-      photo: if location.include?("photos")
-               photos = location['photos'].map { |photo| photo['photo_reference'] }
-               photos = photos.map do |photo|
-                 "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{photo}&key=#{ENV.fetch(
-                   'GOOGLE_API_SERVER_KEY', nil
-                 )}"
-               end
-               if photos.count < 5
-                 photos = photos.join(",")
-               else
-                 photos = photos[0..3].join(",")
-               end
-               photos
-             else
-               "http://source.unsplash.com/featured/?#{location['name']}&#{rand(1000)}"
-             end,
-      opening_hours: location['opening_hours'] ? location['opening_hours']['weekday_text'] : nil,
-      price_level: location['price_level'],
-      type_of_place: location['types'].join(", "),
-      geometry: location['geometry'],
-      description: location['editorial_summary'] ? location['editorial_summary']['overview'] : nil,
-      latitude: location['geometry']["location"]["lat"],
-      longitude: location['geometry']["location"]["lng"]
-    )
   end
 
   def set_location
