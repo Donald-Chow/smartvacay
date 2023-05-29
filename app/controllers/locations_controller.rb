@@ -14,11 +14,12 @@ class LocationsController < ApplicationController
       @results = []
     end
 
-    @top_attractions = GooglePlaces.new("Top #{current_user.trip.destination} Attractions").call.map do |location|
-      Location.find_by(place_id: location["place_id"]) || Location.google_create(location_details(location["place_id"]))
-    end
+    @top_attractions =
+      # GooglePlaces.new("Top #{current_user.trip.destination} Attractions").call.map do |location|
+      #   Location.find_by(place_id: location["place_id"]) || Location.google_create(location_details(location["place_id"]))
+      # end
 
-    @top_restaurants = location.all
+      @top_restaurants = location.all
     # GooglePlaces.new("Top #{current_user.trip.destination} Restaurants").call.map do |location|
     #   Location.find_by(place_id: location["place_id"]) || Location.google_create(location_details(location["place_id"]))
     # end
