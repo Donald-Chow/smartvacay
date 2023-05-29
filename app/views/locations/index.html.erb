@@ -8,7 +8,7 @@
 			<% end %>
       -->
     <div class="search-box-fixed-bottom">
-      <%= form_with url: locations_path, method: :get, class: "d-flex" do %>
+      <%= form_with url: locations_path, method: :get, class: "d-flex search-box-bg" do %>
         <%= text_field_tag :query,
             params[:query],
             class: "form-control",
@@ -32,15 +32,15 @@
     <div class="location-text">
       <h1>Top <%= current_user.trip.destination %> attractions</h1>
     </div>
-    <div class="card-locations">
+    <div class="card-locations mb-4">
       <% @top_attractions.each do |location| %>
         <%= render "location_card", location: location%>
       <% end %>
     </div>
   </div>
-  <div>
+  <div class="mb-5 pb-5">
     <h1>Top <%= current_user.trip.destination %> restaurants</h1>
-    <div class="card-locations">
+    <div class="card-locations mb-5 pb-5">
       <% @top_restaurants.each do |location| %>
         <%= render "location_card", location: location%>
       <% end %>

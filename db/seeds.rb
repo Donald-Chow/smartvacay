@@ -13,8 +13,13 @@
 
 puts "Cleaning database..."
 Itinerary.destroy_all
+puts "Itinerary deleted"
 Trip.destroy_all
+puts "Trip deleted"
 Location.destroy_all
+puts "Location deleted"
+User.destroy_all
+puts "User deleted"
 
 # puts "Creating Test Locations"
 

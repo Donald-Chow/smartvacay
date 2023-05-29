@@ -1,0 +1,5 @@
+meta_name: "Smart Vacay"
+meta_title: "Smart Vacay - tagline"
+meta_description: "Relevant description"
+meta_image: "cover.png" # should exist in `app/assets/images/`
+twitter_account: "@your_twitter_account" # required for Twitter Cards

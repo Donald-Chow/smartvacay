@@ -27,7 +27,13 @@
 }
 
 /* Add a color to the active/current link */
-.navbar a.active {
+.navbar .fas:active {
+    font-weight: bold;
+    opacity: 100%;
+    color: $primary;
+}
+.navbar .fa-solid:active {
   font-weight: bold;
   opacity: 100%;
+  color: $primary;
 }
