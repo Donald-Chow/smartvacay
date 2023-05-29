@@ -35,61 +35,76 @@
       <div class="card-body" id="location-details">
         <h5 class="card-title">Address</h5>
         <p class="card-text"><%= @location.address %></p>
-        <h5 class="card-title">Description</h5>
-        <%if @location.description.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
-          <p class="card-text"><%= @location.description %></p>
-        <% end %>
-        <h5 class="card-title">Phone Number</h5>
-        <%if @location.phone.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
-          <p class="card-text"><%= @location.phone %></p>
-        <%end%>
-        <h5 class="card-title">Price Level</h5>
-        <%if @location.price_level.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
+
+        <%if @location.rating%>
+          <h5 class="card-title">Rating </h5>
           <p class="card-text">
-            <%= @location.price_level.times do%>
+            <% @location.rating.times do%>
+              <i class="fa-solid fa-star"></i>
+            <% end %></p>
+        <% end %>
+
+        <%if @location.description%>
+          <h5 class="card-title">Description</h5>
+          <p class="card-text"><%= @location.phone %></p>
+        <% end %>
+
+        <%if @location.price_level%>
+          <h5 class="card-title">Price Level: </h5>
+          <p class="card-text">
+            <% @location.price_level.times do%>
               <i class='fa-solid fa-dollar-sign'></i>
-            <% end %>
-          </p>
+            <% end %></p>
         <% end %>
+
         <h5 class="card-title">Type of Place</h5>
-        <p class="card-text"><%= @location.type_of_place %></p>
-        <h5 class="card-title">Rating</h5>
-        <%if @location.rating.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
-          <p class="card-text"><%= @location.rating %></p>
-        <% end %>
-        <h5 class="card-title">Website</h5>
-        <%if @location.website.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
+        <% type_of_place = @location.type_of_place.gsub("_", " ").split.map { |each| each.capitalize }.join(" ") %>
+        <p class="card-text"><%= type_of_place %></p>
+
+        <%if @location.website%>
+          <h5 class="card-title">Website</h5>
           <p class="card-text"><%= @location.website %></p>
         <% end %>
-        <h5 class="card-title">User Reviews</h5>
-        <%if @location.user_reviews.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
+
+        <%if @location.phone%>
+          <h5 class="card-title">Phone Number</h5>
+          <p class="card-text"><%= @location.phone %></p>
+        <% end %>
+
+        <%if @location.review%>
+          <h5 class="card-title">User Reviews</h5>
           <ul class="list-group">
-            <% @location.user_reviews.each do |review| %>
+          <!-- This is the Google reviews: -->
+            <% @location.review.limit(3).each do |r| %>
+              <li class="list-group-item">
+              <b><%= r %></b>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <%if @location.user_reviews.present?%>
+          <h5 class="card-title">User Reviews</h5>
+          <ul class="list-group">
+          <!-- getting just the 3 latest user_reviews (from our users): -->
+            <% @location.user_reviews.order(created_at: :desc).limit(3).each do |review| %>
               <li class="list-group-item">
               <b><%= review.content %></b>
-              <p>created at: <%= review.created_at %></p>
+              <p>created: <%= review.created_at.strftime('%F') %></p>
               </li>
             <% end %>
           </ul>
         <% end %>
       </div>
     </div>
-    <div class= "btn">
-      <%= link_to "Create a review about this place", new_location_user_review_path(@location) %>
-    </div>
-    <h5 class="card-title">Map</h5>
+
+    <!-- New Review Form: -->
+    <%= simple_form_for [@location, @user_review] do |f| %>
+      <%= f.input :content, label: "Post your Review: ", placeholder: "What was your overall experience?" %>
+      <%= f.submit "Submit Review", class:"btn btn-primary mb-3" %>
+    <% end %>
+
+    <h5 class="card-title mb-3">Map</h5>
     <div class='card-for-map'>
       <div class="map-display" id="map-container">
         <!--this div done just for organization purpose, bottom is the map-->
