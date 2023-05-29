@@ -32,13 +32,13 @@
     <div class="location-text">
       <h1>Top <%= current_user.trip.destination %> attractions</h1>
     </div>
-    <div class="card-locations mb-4">
+    <div class="card-locations">
       <% @top_attractions.each do |location| %>
         <%= render "location_card", location: location%>
       <% end %>
     </div>
   </div>
-  <div class="mb-5 pb-5">
+  <div>
     <h1>Top <%= current_user.trip.destination %> restaurants</h1>
     <div class="card-locations mb-5 pb-5">
       <% @top_restaurants.each do |location| %>

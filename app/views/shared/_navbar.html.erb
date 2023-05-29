@@ -1,48 +1,48 @@
-<div class="navbar" id="bottom-navbar">
-  <%= link_to root_path do %>
+<div class="navbar" id="bottom-navbar" data-controller="active-tab">
+  <%= link_to root_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link" } do %>
     <i class="fas fa-home"></i>
     <br>
     <span class="nav-text">Home</span>
   <% end %>
-  <%= link_to locations_path do %>
+  <%= link_to locations_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
     <i class="fa-solid fa-magnifying-glass"></i>
     <br>
     <span class="nav-text">Explore</span>
   <% end %>
-  <%= link_to my_favorites_locations_path do %>
+  <%= link_to my_favorites_locations_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
     <i class="fa-solid fa-heart"></i>
     <br>
     <span class="nav-text">Fav. List</span>
   <% end %>
   <% if user_signed_in? %>
     <% if current_user.trip.present? %>
-      <%= link_to trip_path(current_user.trip) do %>
+      <%= link_to trip_path(current_user.trip), data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
         <i class="fas fa-plane"></i>
         <br>
         <span class="nav-text">Itineraries</span>
       <% end %>
     <% else %>
-      <%= link_to root_path do %>
+      <%= link_to root_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
         <i class="fas fa-plane"></i>
         <br>
         <span class="nav-text">Itineraries</span>
       <% end %>
     <% end %>
   <% else %>
-    <%= link_to new_user_session_path do %>
+    <%= link_to new_user_session_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
       <i class="fas fa-plane"></i>
       <br>
       <span class="nav-text">Itineraries</span>
     <% end %>
   <% end %>
   <% if user_signed_in? %>
-    <%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
+    <%= link_to destroy_user_session_path, data: {turbo_method: :delete, action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
       <i class="fa-solid fa-user"></i>
       <br>
       <span class="nav-text">User</span>
     <% end %>
   <% else %>
-    <%= link_to new_user_session_path do %>
+    <%= link_to new_user_session_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
       <i class="fa-solid fa-user"></i>
       <br>
       <span class="nav-text">User</span>
