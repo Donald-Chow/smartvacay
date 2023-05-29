@@ -3,9 +3,10 @@ class Location < ApplicationRecord
   has_many :trips, through: :itineraries
   has_many :users, through: :trips
   has_many :user_reviews, dependent: :destroy
+  has_many :searches
 
-  validates :place_id, precense: true, uniqueness: true
-  validates :name, precense: true
+  validates :place_id, presence: true, uniqueness: true
+  validates :name, presence: true
 
   acts_as_favoritable
 
@@ -48,11 +49,11 @@ class Location < ApplicationRecord
       description: location['editorial_summary'] ? location['editorial_summary']['overview'] : nil,
       latitude: location['geometry']["location"]["lat"],
       longitude: location['geometry']["location"]["lng"],
-      category: if type_of_place.include?("restaurant") || type_of_place.include?("meal_takeaway") || type_of_place.include?("food")
+      category: if location['types'].include?("restaurant") || location['types'].include?("meal_takeaway") || location['types'].include?("food")
                   "food"
-                elsif type_of_place.include?("department_store") || type_of_place.include?("shopping_mall")
+                elsif location['types'].include?("department_store") || location['types'].include?("shopping_mall")
                   "shopping"
-                elsif type_of_place.include?("tourist_attraction")
+                elsif location['types'].include?("tourist_attraction")
                   "sightseeing"
                 else
                   "miscellaneous"
