@@ -16,9 +16,10 @@ body::-webkit-scrollbar{
   margin-bottom: 80px; /* Adjust the margin as needed to avoid covering the navbar */
   // Added more spacing between the top bar and the header (see my_favorites page)
   margin-top: 60px;
-  max-height: calc(100vh - 80px); /* Adjust the max-height as needed */
+  // max-height: calc(100vh - 80px); /* Adjust the max-height as needed */
   // overflow-y: auto;
-  // overflow-x: hidden;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .btn {
