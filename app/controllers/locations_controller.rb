@@ -5,11 +5,7 @@ class LocationsController < ApplicationController
     @locations = policy_scope(Location)
     if params[:query].present?
       @results = GooglePlaces.new(params[:query]).call.map do |location|
-<<<<<<< HEAD
         Location.find_by(place_id: location["place_id"]) || Location.create(location_details(location["place_id"]))
-=======
-        Location.find_by(place_id: location["place_id"]) || location_from_google(location_details(location["place_id"]))
->>>>>>> master
       end
     end
 
