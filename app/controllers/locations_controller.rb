@@ -46,9 +46,7 @@ class LocationsController < ApplicationController
     authorize @all_favorites
 
     @category = params[:category]
-
     @favorites = if @category.present?
-                   raise
                    @all_favorites.select { |location| location.category == @category }
                  else
                    @all_favorites
