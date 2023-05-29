@@ -72,21 +72,17 @@
         <% end %>
 
         <%if @location.review%>
-          <h5 class="card-title">User Reviews</h5>
-          <ul class="list-group">
-          <!-- This is the Google reviews: -->
-            <% @location.review.limit(3).each do |r| %>
-              <li class="list-group-item">
-              <b><%= r %></b>
-              </li>
-            <% end %>
-          </ul>
+          <h5 class="card-title">Reviews form Google</h5>
+          <p class="card-text"><%= @location.review %></p>
         <% end %>
+
+
+
 
         <%if @location.user_reviews.present?%>
           <h5 class="card-title">User Reviews</h5>
           <ul class="list-group">
-          <!-- getting just the 3 latest user_reviews (from our users): -->
+          <!-- getting just the 3 latest user_reviews (from our user DB): -->
             <% @location.user_reviews.order(created_at: :desc).limit(3).each do |review| %>
               <li class="list-group-item">
               <b><%= review.content %></b>
