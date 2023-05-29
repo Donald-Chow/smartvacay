@@ -4,12 +4,12 @@
       <div>
         <h3 data-action="click->itin-collapse#toggle"><i data-itin-collapse-target='date' class="fa-solid fa-chevron-down"></i>  <%= date.strftime('%a, %d %b')  %></h3>
       </div>
-      <div class="cards-itinerary" data-itin-collapse-target='list'>
+      <div class="cards-itinerary" data-controller="sortable">
         <% itins.sort_by { |itin| itin.start_time }.each do |itin| %>
-          <div class="card-itinerary">
+          <div class="card-itinerary handle">
             <%= link_to "", location_path(itin.location) %>
             <div class="card-itinerary-box">
-              <div class="card-itinerary-infos">
+              <div class="card-itinerary-infos" >
                 <h2>
                   <% if itin.location.type_of_place.split(", ").include? "restaurant"%>
                     <i class="fa-solid fa-utensils"></i>
@@ -26,7 +26,14 @@
       </div>
     </div>
   <% end %>
-  <!--
+  <div class="share-itin text-center my-3">
+    <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!">
+      <input data-clipboard-target="input" type="text" value="https://smartvacay.herokuapp.com/trips/<%=@trip.id%>" readonly>
+      <button class="btn btn-primary btn-sm py-2" data-action="click->clipboard#copy">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+<!--
   <h2>########################</h2>
   <h2>BELOW IS HARD CODE DRAFT</h2>
 <p>
@@ -82,4 +89,3 @@
     </div>
   </div>
   -->
-</div>
