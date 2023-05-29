@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 <div class="page-content">
   <div class="container">
     <h1 class="location-text">All my favorites</h1>
     <button type="button" class="btn btn-secondary mt-2 mb-3">Generate itinerary</button>
     <%# From here we have the category avatars %>
     <div data-controller="category-search" data-category-search-baseurl-value="<%= request.base_url %>">
+=======
+<div class="container page-content">
+  <div class="container pb-3 mb-3">
+    <div class="location-text">
+      <h1>All my favorites</h1>
+    </div>
+    <button type="button" class="btn btn-secondary mt-2 mb-3">Generate itinerary</button>
+    <div class="container mx-2">
+>>>>>>> master
       <div class="category-avatars">
         <% categories = [
       { display: "All", image: "all.jpeg", query: ""},
@@ -15,6 +25,7 @@
         <% categories.each do |category| %>
           <div class="category-avatar">
             <%= link_to my_favorites_locations_path(category: category[:query]) do %>
+<<<<<<< HEAD
               <%= image_tag "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}", class: (category[:query].empty? ? "avatar-location active" : "avatar-location"),
             data: {
               category_search_target: "avatar",
@@ -31,6 +42,35 @@
       <div class="card-locations" data-category-search-target="list">
         <%= render "filtered_list", favorites: @favorites %>
       </div>
+=======
+              <%= image_tag "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}", class: "avatar-location" %>
+              <p><%= category[:display] %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="card-locations pb-5 mb-5">
+      <% @favorites.each do |favorite| %>
+        <% favoritable = @category.present? ? favorite : favorite.favoritable %>
+        <div class="bookmark">
+          <% if current_user %>
+            <%= link_to favorite_location_path(favoritable), class: "#{"text-success" if current_user.favorited?(favoritable)}", data: { turbo_method: :post }, onclick: "this.classList.toggle('text-success')" do %>
+              <i class="fa-solid fa-bookmark"></i>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="card-location">
+          <%= link_to location_path(favoritable) do %>
+            <%= favoritable.photo.present? ? image_tag(favoritable.photo.split(",")[0]) : image_tag("sample_card_image.jpeg") %>
+          <% end %>
+          <div class="card-location-info">
+            <h4><%= favoritable.name %></h4>
+            <p><%= favoritable.address %></p>
+          </div>
+        </div>
+      <% end %>
+>>>>>>> master
     </div>
   </div>
 </div>
