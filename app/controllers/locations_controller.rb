@@ -3,16 +3,19 @@ class LocationsController < ApplicationController
 
   def index
     @locations = policy_scope(Location)
-
     if params[:query].present?
       @results = GooglePlaces.new(params[:query]).call.map do |location|
         Location.find_by(place_id: location["place_id"]) || Location.create(location_details(location["place_id"]))
       end
     end
 
-    @top_attractions = Location.all
+    @top_attractions = @locations.select do |location|
+      location.searches.find_by_trip_id(current_user.trip.id).category == "top_attractions"
+    end
 
-    @top_restaurants = Location.all
+    @top_restaurants = @locations.select do |location|
+      location.searches.find_by_trip_id(current_user.trip.id).category == "top_restaurants"
+    end
   end
 
   def show

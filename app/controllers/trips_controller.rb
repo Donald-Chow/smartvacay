@@ -18,7 +18,7 @@ class TripsController < ApplicationController
       redirect_to locations_path
       # create Top Attractions
       create_top_attractions(@trip)
-
+      create_top_restaurants(@trip)
       # create Top Restaurants
 
     else
