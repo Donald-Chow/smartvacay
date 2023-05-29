@@ -3,7 +3,7 @@
     <h1 class="location-text">All my favorites</h1>
     <button type="button" class="btn btn-secondary mt-2 mb-3">Generate itinerary</button>
     <%# From here we have the category avatars %>
-    <div data-controller="category-search">
+    <div data-controller="category-search" data-category-search-baseurl-value="<%= request.base_url %>">
       <div class="category-avatars">
         <% categories = [
       { display: "All", image: "all.jpeg", query: ""},
@@ -18,7 +18,7 @@
               <%= image_tag "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}", class: (category[:query].empty? ? "avatar-location active" : "avatar-location"),
             data: {
               category_search_target: "avatar",
-              action: "touchstart->category-search#showLists",
+              action: "click->category-search#showLists",
               category: category[:query]}
             %>
             <% end %>

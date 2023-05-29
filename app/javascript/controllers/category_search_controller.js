@@ -3,12 +3,16 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="category-search"
 export default class extends Controller {
   static targets = ["avatar", "list"]
+  static values = {
+    baseurl: String
+  }
 
   connect() {
     console.log("Connected to category-search controller");
     // console.log(this.element);
     // console.log(this.avatarTargets);
     // console.log(this.listTargets);
+    // console.log(this.baseurlValue);
   }
 
   showLists (event) {
@@ -16,7 +20,9 @@ export default class extends Controller {
     // event.preventDefault();
     const category = event.currentTarget.dataset.category
     // How to adjust url to fit to Heroku or other domains?
-    const url = `http://localhost:3000/locations/my_favorites?category=${category}`
+    // console.log(event.currentTarget.dataset.action)
+    const baseurl = this.baseurlValue;
+    const url = `${baseurl}/locations/my_favorites?category=${category}`
     fetch(url, {
       headers: { "Accept": "text/plain" }
     })
@@ -35,6 +41,5 @@ export default class extends Controller {
         avatar.classList.add("active");
       }
     })
-}
-
+  }
 }
