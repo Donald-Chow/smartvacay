@@ -63,7 +63,11 @@
         <%if @location.rating.nil?%>
           <p class="card-text">Not Available</p>
         <% else %>
-          <p class="card-text"><%= @location.rating %></p>
+          <p class="card-text">
+            <% @location.rating.times do%>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+          </p>
         <% end %>
         <h5 class="card-title">Website</h5>
         <%if @location.website.nil?%>
