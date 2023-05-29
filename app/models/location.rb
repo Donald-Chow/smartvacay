@@ -46,7 +46,16 @@ class Location < ApplicationRecord
       geometry: location['geometry'],
       description: location['editorial_summary'] ? location['editorial_summary']['overview'] : nil,
       latitude: location['geometry']["location"]["lat"],
-      longitude: location['geometry']["location"]["lng"]
+      longitude: location['geometry']["location"]["lng"],
+      category: if type_of_place.include?("restaurant") || type_of_place.include?("meal_takeaway") || type_of_place.include?("food")
+                  "food"
+                elsif type_of_place.include?("department_store") || type_of_place.include?("shopping_mall")
+                  "shopping"
+                elsif type_of_place.include?("tourist_attraction")
+                  "sightseeing"
+                else
+                  "miscellaneous"
+                end
     )
   end
 end
