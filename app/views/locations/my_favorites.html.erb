@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+<div class="page-content">
+  <div class="container">
+    <h1 class="location-text">All my favorites</h1>
+    <button type="button" class="btn btn-secondary mt-2 mb-3">Generate itinerary</button>
+    <%# From here we have the category avatars %>
+    <div data-controller="category-search" data-category-search-baseurl-value="<%= request.base_url %>">
+=======
 <div class="container page-content">
   <div class="container pb-3 mb-3">
     <div class="location-text">
@@ -5,6 +13,7 @@
     </div>
     <button type="button" class="btn btn-secondary mt-2 mb-3">Generate itinerary</button>
     <div class="container mx-2">
+>>>>>>> master
       <div class="category-avatars">
         <% categories = [
       { display: "All", image: "all.jpeg", query: ""},
@@ -16,6 +25,24 @@
         <% categories.each do |category| %>
           <div class="category-avatar">
             <%= link_to my_favorites_locations_path(category: category[:query]) do %>
+<<<<<<< HEAD
+              <%= image_tag "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}", class: (category[:query].empty? ? "avatar-location active" : "avatar-location"),
+            data: {
+              category_search_target: "avatar",
+              action: "click->category-search#showLists",
+              category: category[:query]}
+            %>
+            <% end %>
+            <%# Disabling text as links %>
+            <p><%= category[:display] %></p>
+          </div>
+        <% end %>
+      </div>
+      <%# From here we have all the location cards %>
+      <div class="card-locations" data-category-search-target="list">
+        <%= render "filtered_list", favorites: @favorites %>
+      </div>
+=======
               <%= image_tag "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}", class: "avatar-location" %>
               <p><%= category[:display] %></p>
             <% end %>
@@ -43,6 +70,7 @@
           </div>
         </div>
       <% end %>
+>>>>>>> master
     </div>
   </div>
 </div>
