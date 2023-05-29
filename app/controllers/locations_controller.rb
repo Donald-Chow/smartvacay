@@ -8,10 +8,8 @@ class LocationsController < ApplicationController
 
     if params[:query].present?
       @results = GooglePlaces.new(params[:query]).call.map do |location|
-        Location.find_by(place_id: location["place_id"]) || location_from_google(location)
+        Location.find_by(place_id: location["place_id"]) || Location.google_create(location_details(location["place_id"]))
       end
-    else
-      @results = []
     end
 
     @top_attractions = location.all
