@@ -29,7 +29,7 @@ class Location < ApplicationRecord
       photo: if location.include?("photos")
                photos = location['photos'].map { |photo| photo['photo_reference'] }
                photos = photos.map do |photo|
-                 "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{photo}&key=#{ENV.fetch(
+                 "https://maps.googleapis.com/maps/api/place/photo?&photo_reference=#{photo}&key=#{ENV.fetch(
                    'GOOGLE_API_SERVER_KEY', nil
                  )}"
                end
