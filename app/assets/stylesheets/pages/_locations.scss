@@ -37,7 +37,7 @@
   margin-top: 15px;
   margin-bottom: 15px;
   text-shadow: 1px 1px 1px rgba(103, 103, 103, 0.5);
-  color: #497174;
+  color: $secondary;
 }
 
 .bookmark {
@@ -45,7 +45,7 @@
   top: 5px;
   right: 10px;
   a {
-    color: white;
+    color: $white;
   }
 }
 
