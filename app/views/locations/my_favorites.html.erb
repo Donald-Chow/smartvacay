@@ -1,35 +1,37 @@
-<div class="container page-content">
-  <div class="container pb-3 mb-3">
+<div class="page-content">
+  <div class="container">
     <h1 class="location-text">All my favorites</h1>
     <button type="button" class="btn btn-secondary mt-2 mb-3">Generate itinerary</button>
     <%# From here we have the category avatars %>
-    <div class="container-mx-2" data-controller="category-search">
-      <div class="category-avatars">
-        <% categories = [
+    <div data-controller="category-search" data-category-search-baseurl-value="<%= request.base_url %>">
+      <div class="container" style="width:80%;">
+        <div class="category-avatars">
+          <% categories = [
       { display: "All", image: "all.jpeg", query: ""},
       { display: "Sightseeing", image: "sightseeing.jpeg", query: "sightseeing" },
       { display: "Food", image: "food.jpeg", query: "food" },
       { display: "Shopping", image: "shopping.jpeg", query: "shopping" },
       { display: "Misc", image: "misc.jpeg", query: "miscellaneous" }
       ] %>
-        <% categories.each do |category| %>
-          <div class="category-avatar">
-            <%= link_to my_favorites_locations_path(category: category[:query]) do %>
-              <%= image_tag "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}", class: (category[:query].empty? ? "avatar-location active" : "avatar-location"),
+          <% categories.each do |category| %>
+            <div class="category-avatar">
+              <%= link_to my_favorites_locations_path(category: category[:query]) do %>
+                <%= image_tag "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}", class: (category[:query].empty? ? "avatar-location active" : "avatar-location"),
             data: {
               category_search_target: "avatar",
-              action: "touchstart->category-search#showLists",
+              action: "click->category-search#showLists",
               category: category[:query]}
             %>
-            <% end %>
-            <%# Disabling text as links %>
-            <p><%= category[:display] %></p>
-          </div>
-        <% end %>
-      </div>
-      <%# From here we have all the location cards %>
-      <div class="card-locations pb-5 mb-5" data-category-search-target="list">
-        <%= render "filtered_list", favorites: @favorites %>
+              <% end %>
+              <%# Disabling text as links %>
+              <p><%= category[:display] %></p>
+            </div>
+          <% end %>
+        </div>
+        <%# From here we have all the location cards %>
+        <div class="card-locations" data-category-search-target="list">
+          <%= render "filtered_list", favorites: @favorites %>
+        </div>
       </div>
     </div>
   </div>
