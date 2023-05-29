@@ -65,7 +65,23 @@
         <% else %>
           <p class="card-text"><%= @location.website %></p>
         <% end %>
+        <h5 class="card-title">User Reviews</h5>
+        <%if @location.user_reviews.nil?%>
+          <p class="card-text">Not Available</p>
+        <% else %>
+          <ul class="list-group">
+            <% @location.user_reviews.each do |review| %>
+              <li class="list-group-item">
+              <b><%= review.content %></b>
+              <p>created at: <%= review.created_at %></p>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
       </div>
+    </div>
+    <div class= "btn">
+      <%= link_to "Create a review about this place", new_location_user_review_path(@location) %>
     </div>
     <h5 class="card-title">Map</h5>
     <div class='card-for-map'>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'user_reviews/new'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
     member do
       post 'favorite'
     end
+    resources :user_reviews, only: [:new, :create]
   end
 
   resources :trips, only: [:index, :show, :create] do
