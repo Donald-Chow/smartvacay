@@ -73,16 +73,20 @@
             <% @location.user_reviews.each do |review| %>
               <li class="list-group-item">
               <b><%= review.content %></b>
-              <p>created at: <%= review.created_at %></p>
+              <p>created at: <%= review.created_at.strftime('%F') %></p>
               </li>
             <% end %>
           </ul>
         <% end %>
       </div>
     </div>
-    <div class= "btn">
-      <%= link_to "Create a review about this place", new_location_user_review_path(@location) %>
-    </div>
+
+    <!-- New Review Form: -->
+    <%= simple_form_for [@location, @user_review] do |f| %>
+      <%= f.input :content, label: "Post your Review: ", placeholder: "What was your overall experience?" %>
+      <%= f.submit "Submit Review", class:"btn btn-primary" %>
+    <% end %>
+
     <h5 class="card-title">Map</h5>
     <div class='card-for-map'>
       <div class="map-display" id="map-container">

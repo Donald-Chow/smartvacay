@@ -28,6 +28,9 @@ class LocationsController < ApplicationController
   def show
     authorize @location
 
+    # User Review:
+    @user_review = UserReview.new
+
     @marker = [{ lat: @location.latitude, lng: @location.longitude }]
     "marker: #{@marker}"
   end
