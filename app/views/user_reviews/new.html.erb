@@ -1,0 +1,13 @@
+
+<div class = "page-content">
+  <h1>New Review</h1>
+  <%= simple_form_for [@location, @user_review] do |f| %>
+    <%= f.input :content %>
+    <%= f.submit "Submit Review", class:"btn btn-primary" %>
+  <% end %>
+
+
+
+
+
+</div>
