@@ -6,8 +6,8 @@
       </div>
       <div class="cards-itinerary" data-controller="sortable">
         <% itins.sort_by { |itin| itin.start_time }.each do |itin| %>
-          <div class="card-itinerary itin-item handle">
-            <%= link_to "", location_path(itin.location) %>
+          <div class="card-itinerary  handle">
+            <%= link_to "", location_path(itin.location), class: "itin-item" %>
             <div class="card-itinerary-box">
               <div class="card-itinerary-infos" >
                 <h2>
