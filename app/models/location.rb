@@ -19,7 +19,7 @@ class Location < ApplicationRecord
       website: location['website'],
       rating: location["rating"],
       # REVIEW: may be unuseable due to not properly parsed
-      review: location['reviews'],
+      review: location['reviews'][0]['text'],
       # photo: if location.include?("photos")
       #          "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{location['photos'][0]['photo_reference']}&key=#{ENV.fetch(
       #            'GOOGLE_API_SERVER_KEY', nil
