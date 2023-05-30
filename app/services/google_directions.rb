@@ -27,12 +27,17 @@ class GoogleDirections
     request = Net::HTTP::Get.new(url)
 
     response = https.request(request)
-    # puts response.read_body
-    routes = JSON.parse(response.read_body)["routes"][0]['legs'][0]
-    # p routes
-    # puts "distance is #{routes['distance']}"
-    # puts "duration is #{routes['duration']}"
 
+    # puts response.read_body
+    if JSON.parse(response.read_body)["routes"].present?
+      routes = JSON.parse(response.read_body)["routes"][0]['legs'][0]
+    else
+      routes = GoogleDirections.new(origin: @origin, destination: @destination, dep_time: @dep_time,
+                                    mode: "walking").call
+      # p routes
+      # puts "distance is #{routes['distance']}"
+      # puts "duration is #{routes['duration']}"
+    end
     return routes
   end
 end
