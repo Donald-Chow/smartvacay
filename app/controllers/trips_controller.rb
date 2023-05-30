@@ -1,7 +1,7 @@
 require 'icalendar'
 
 class TripsController < ApplicationController
-  before_action :set_trip, only: %i[show generate generate_icalendar]
+  before_action :set_trip, only: %i[show generate update generate_icalendar]
 
   def index
     @trips = policy_scope(Trip)
@@ -15,6 +15,9 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
+    geocode = GooglePlaces.new(trip: @trip).geocode
+    @trip.lat = geocode["lat"]
+    @trip.lng = geocode['lng']
     authorize @trip
     if @trip.save
       # create Top Attractions
@@ -25,6 +28,16 @@ class TripsController < ApplicationController
 
     else
       render "pages/home", status: :unprocessable_entity
+    end
+  end
+
+  def update
+    authorize @trip
+    if @trip.update(trip_params)
+      redirect_to trip_path(@trip)
+    else
+      render "show", status: :unprocessable_entity
+      flash[:alert] = "Update failed. Contact Doug"
     end
   end
 
@@ -72,12 +85,12 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:destination, :start_date, :end_date)
+    params.require(:trip).permit(:destination, :start_date, :end_date, :driving)
   end
 
   def create_top_attractions(trip)
     query = "Top #{trip.destination} Attractions"
-    GooglePlaces.new(query).call.map do |place|
+    GooglePlaces.new(query:, trip: @trip).call.map do |place|
       # if location exists, create search "bookmark"
       location = Location.find_by(place_id: place["place_id"]) ||
                  # if location does not exists, create the location, and create search "bookmark"
@@ -88,11 +101,11 @@ class TripsController < ApplicationController
 
   def create_top_restaurants(trip)
     query = "Top #{trip.destination} Restaurants"
-    GooglePlaces.new(query).call.map do |place|
+    GooglePlaces.new(query:, trip: @trip).call.map do |place|
       # if location exists, create search "bookmark"
       location = Location.find_by(place_id: place["place_id"]) ||
                  # if location does not exists, create the location, and create search "bookmark"
-                 Location.google_create(GooglePlaces.new(place["place_id"]).details)
+                 Location.google_create(GooglePlaces.new(query: place["place_id"]).details)
       save_search(trip, location, "top_restaurants", query)
     end
   end

@@ -28,8 +28,9 @@ class GoogleDirections
 
     response = https.request(request)
 
-    # puts response.read_body
-    routes = JSON.parse(response.read_body)["routes"][0]['legs'][0]
-    return routes
+    puts response.read_body
+    return nil if JSON.parse(response.read_body)["routes"][0].nil?
+
+    return JSON.parse(response.read_body)["routes"][0]['legs'][0]
   end
 end

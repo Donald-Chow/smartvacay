@@ -1,18 +1,27 @@
 <div class="page-content">
-  <div id="trips-info">
-    <h1><%= @trip.destination %> 2023</h1>
-    <p><%= @trip.start_date %></p>
-  </div>
-  <div class="container">
-    <%= link_to 'Download itinerary', generate_icalendar_trip_path(@trip), class: "btn btn-secondary mt-3 mb-3" %>
-    <div class="schedule">
-      <% if @trip.itineraries == [] %>
-        <div class="my-5 text-center">
-          <%= link_to "MAGIC BUTTON", generate_trip_path(@trip), class: "btn btn-secondary" %>
-        </div>
-      <% else %>
-        <%= render template:"itineraries/index", trip: @trip %>
-      <% end %>
-    </div>
-  </div>
+	<div id="trips-info">
+		<h1><%= @trip.destination %> 2023</h1>
+		<p><%= @trip.start_date %></p>
+	</div>
+	<div class="container">
+		<%= link_to 'Download itinerary', generate_icalendar_trip_path(@trip), class: "btn btn-secondary mt-3 mb-3" %>
+		<%= simple_form_for(@trip) do |f| %>
+			<% if @trip.driving == false %>
+				<%= f.input :driving, as: :hidden, input_html: { value: '1' } %>
+				<%= f.button :submit, "Switch to Driving", class: "btn btn-primary" %>
+			<% else %>
+				<%= f.input :driving, as: :hidden, input_html: { value: '0' } %>
+				<%= f.button :submit, "Switch to Walking", class: "btn btn-primary" %>
+			<% end %>
+		<% end %>
+		<div class="schedule">
+			<% if @trip.itineraries == [] %>
+				<div class="my-5 text-center">
+					<%= link_to "Generate my itinerary", generate_trip_path(@trip), class: "btn btn-secondary" %>
+				</div>
+			<% else %>
+				<%= render template:"itineraries/index", trip: @trip %>
+			<% end %>
+		</div>
+	</div>
 </div>
