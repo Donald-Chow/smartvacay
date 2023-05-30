@@ -11,7 +11,8 @@ export default class extends Controller {
       group: "sortable",
       handle: ".handle",
       onEnd: (event) => {
-        alert(`${event.from} moved to ${event.to}`)
+        console.log(event)
+        //alert(`${event.from} moved to ${event.to}`)
       }
     })
   }
