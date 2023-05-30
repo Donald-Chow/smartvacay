@@ -10,6 +10,13 @@ class ItinerariesController < ApplicationController
     # Do what you want with todo_params.
   end
 
+  def destroy
+    @itinerary = Itinerary.find(params[:id])
+    authorize @itinerary
+    @itinerary.destroy
+    redirect_to trip_path(@itinerary.trip), status: :see_other
+  end
+
   private
 
   def todo_params

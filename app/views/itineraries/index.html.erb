@@ -4,10 +4,10 @@
       <div>
         <h3 data-action="click->itin-collapse#toggle"><i data-itin-collapse-target='date' class="fa-solid fa-chevron-down"></i>  <%= date.strftime('%a, %d %b')  %></h3>
       </div>
-      <div class="cards-itinerary" data-controller="sortable">
-        <% itins.sort_by { |itin| itin.start_time }.each do |itin| %>
+      <% itins.sort_by { |itin| itin.start_time }.each do |itin| %>
+        <div class="cards-itinerary" data-controller="sortable">
           <div class="card-itinerary handle">
-            <%= link_to "", location_path(itin.location) %>
+            <%= link_to "", location_path(itin.location), class: "itin-item" %>
             <div class="card-itinerary-box">
               <div class="card-itinerary-infos" >
                 <h2>
@@ -18,12 +18,13 @@
                   <% end %>  <%= itin.location.name %></h2>
                 <!--<p><%= itin.start_time.strftime('%a %d %b %Y') %></p>-->
                 <p><%= itin.start_time.strftime('%I:%M %p') %></p>
+                <%= link_to "Remove", itinerary_path(itin), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary remove-btn"%>
               </div>
               <img src="<%= itin.location.photo.split(",")[0] %>" alt="<%"#{itin.location.name}-photo"%>">
             </div>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   <% end %>
   <div class="share-itin text-center my-3">
