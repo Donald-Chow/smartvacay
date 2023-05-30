@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member do
       post 'favorite'
     end
+    resources :user_reviews, only: [:new, :create]
   end
 
   resources :trips, only: [:index, :show, :create] do

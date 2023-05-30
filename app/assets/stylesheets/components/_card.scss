@@ -1,17 +1,21 @@
 // Location card
 
-.card-locations {
+.card-my-fav-locations {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
   justify-content: center;
-  margin-top: 20px;
-  padding-bottom: 30px;
+  // margin-top: 20px;
+}
+
+.card-locations {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .card-location {
-  margin: 0 16px 10px; /* Adding 16px between and 10px  bottom */;
-
+  // margin: 0 16px 10px; /* Adding 16px between and 10px  bottom */;
+  margin: 5px; /*Smaller space between so a little of the 3rd card can be shown to indicate scrolling available*/
   width: 160px;
   height: 200px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);

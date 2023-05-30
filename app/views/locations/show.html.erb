@@ -35,49 +35,64 @@
       <div class="card-body" id="location-details">
         <h5 class="card-title">Address</h5>
         <p class="card-text"><%= @location.address %></p>
-        <h5 class="card-title">Description</h5>
-        <%if @location.description.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
-          <p class="card-text"><%= @location.description %></p>
-        <% end %>
-        <h5 class="card-title">Phone Number</h5>
-        <%if @location.phone.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
-          <p class="card-text"><%= @location.phone %></p>
-        <%end%>
-        <h5 class="card-title">Price Level</h5>
-        <%if @location.price_level.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
-          <p class="card-text">
-            <%= @location.price_level.times do%>
-              <i class='fa-solid fa-dollar-sign'></i>
-            <% end %>
-          </p>
-        <% end %>
-        <h5 class="card-title">Type of Place</h5>
-        <p class="card-text"><%= @location.type_of_place %></p>
-        <h5 class="card-title">Rating</h5>
-        <%if @location.rating.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
+        <%if @location.rating%>
+          <h5 class="card-title">Rating </h5>
           <p class="card-text">
             <% @location.rating.times do%>
               <i class="fa-solid fa-star"></i>
-            <% end %>
-          </p>
+            <% end %></p>
         <% end %>
-        <h5 class="card-title">Website</h5>
-        <%if @location.website.nil?%>
-          <p class="card-text">Not Available</p>
-        <% else %>
+        <%if @location.description%>
+          <h5 class="card-title">Description</h5>
+          <p class="card-text"><%= @location.phone %></p>
+        <% end %>
+        <%if @location.price_level%>
+          <h5 class="card-title">Price Level: </h5>
+          <p class="card-text">
+            <% @location.price_level.times do%>
+              <i class='fa-solid fa-dollar-sign'></i>
+            <% end %></p>
+        <% end %>
+        <h5 class="card-title">Type of Place</h5>
+        <% type_of_place = @location.type_of_place.gsub("_", " ").split.map { |each| each.capitalize }.join(" ") %>
+        <p class="card-text"><%= type_of_place %></p>
+        <%if @location.website%>
+          <h5 class="card-title">Website</h5>
           <p class="card-text"><%= @location.website %></p>
+        <% end %>
+        <%if @location.phone%>
+          <h5 class="card-title">Phone Number</h5>
+          <p class="card-text"><%= @location.phone %></p>
+        <% end %>
+        <!-- Google Review: -->
+        <%if @location.review%>
+          <h5 class="card-title">Reviews form Google</h5>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <p class="card-text"><%= @location.review %></p>
+            </li>
+          </ul>
+        <% end %>
+        <%if @location.user_reviews.present?%>
+          <h5 class="card-title mt-3">User Reviews</h5>
+          <ul class="list-group">
+            <!-- getting just the 3 latest user_reviews -from our user DB: -->
+            <% @location.user_reviews.order(created_at: :desc).limit(3).each do |review| %>
+              <li class="list-group-item">
+                <%= review.content %>
+                <p class="text-muted"><%= review.created_at.strftime('%F') %></p>
+              </li>
+            <% end %>
+          </ul>
         <% end %>
       </div>
     </div>
-    <h5 class="card-title">Map</h5>
+    <!-- New Review Form: -->
+    <%= simple_form_for [@location, @user_review] do |f| %>
+      <%= f.input :content, label: "Post your Review: ", placeholder: "What was your overall experience?" %>
+      <%= f.submit "Submit Review", class:"btn btn-primary mb-3" %>
+    <% end %>
+    <h5 class="card-title mb-3">Map</h5>
     <div class='card-for-map'>
       <div class="map-display" id="map-container">
         <!--this div done just for organization purpose, bottom is the map-->
