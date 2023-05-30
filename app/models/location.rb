@@ -19,7 +19,7 @@ class Location < ApplicationRecord
       website: location['website'],
       rating: location["rating"],
       # REVIEW: may be unuseable due to not properly parsed
-      review: location['reviews'][0]['text'],
+      review: location["reviews"] ? location["reviews"][0]['text'] : nil,
       # photo: if location.include?("photos")
       #          "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{location['photos'][0]['photo_reference']}&key=#{ENV.fetch(
       #            'GOOGLE_API_SERVER_KEY', nil
@@ -30,8 +30,8 @@ class Location < ApplicationRecord
       photo: if location.include?("photos")
                photos = location['photos'].map { |photo| photo['photo_reference'] }
                photos = photos.map do |photo|
-                 "https://maps.googleapis.com/maps/api/place/photo?&photo_reference=#{photo}&key=#{ENV.fetch(
-                   'GOOGLE_API_BROWSER_KEY', nil
+                 "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{photo}&key=#{ENV.fetch(
+                   'GOOGLE_API_SERVER_KEY', nil
                  )}"
                end
                if photos.count < 5
