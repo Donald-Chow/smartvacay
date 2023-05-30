@@ -37,8 +37,8 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # Don't care if the mailer can't send. I set it to true
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -68,4 +68,16 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  ActionMailer::Base.smtp_settings = {
+    address:        'smtp-mail.outlook.com', # default: localhost
+    port:           '587',                  # default: 25
+    user_name:      'smartvacay@outlook.com',
+    password:       'dVEuuc6EFHJxf9',
+    authentication: :login,                 # :plain, :login or :cram_md5
+    enable_starttls_auto: true
+  }
 end

@@ -1,6 +1,5 @@
-class ApplicationMailer < ActionMailer::Base
-  default from: "smartvacay@outlook.com"
-  layout 'mailer'
+class UserMailer < ApplicationMailer
+  default from: 'smartvacay@outlook.com'
 
   def welcome(recipient)
     @recipient = recipient
