@@ -5,7 +5,15 @@
 	</div>
 	<div class="container">
 		<%= link_to 'Download itinerary', generate_icalendar_trip_path(@trip), class: "btn btn-secondary mt-3 mb-3" %>
-		<%= link_to 'Default: Walking', root_path, class: "btn btn-secondary mt-3 mb-3" %>
+		<%= simple_form_for(@trip) do |f| %>
+			<% if @trip.driving == false %>
+				<%= f.input :driving, as: :hidden, input_html: { value: '1' } %>
+				<%= f.button :submit, "Switch to Driving", class: "btn btn-primary" %>
+			<% else %>
+				<%= f.input :driving, as: :hidden, input_html: { value: '0' } %>
+				<%= f.button :submit, "Switch to Walking", class: "btn btn-primary" %>
+			<% end %>
+		<% end %>
 		<div class="schedule">
 			<% if @trip.itineraries == [] %>
 				<div class="my-5 text-center">

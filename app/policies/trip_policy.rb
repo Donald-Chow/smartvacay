@@ -14,6 +14,10 @@ class TripPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    record.user == user
+  end
+
   def generate?
     true
   end

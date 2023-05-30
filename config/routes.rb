@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :user_reviews, only: [:new, :create]
   end
 
-  resources :trips, only: [:index, :show, :create] do
+  resources :trips, only: [:index, :show, :create, :update] do
     resources :itineraries, only: [:create]
     member do
       get 'generate_icalendar'

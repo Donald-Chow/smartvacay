@@ -1,7 +1,7 @@
 require 'icalendar'
 
 class TripsController < ApplicationController
-  before_action :set_trip, only: %i[show generate generate_icalendar]
+  before_action :set_trip, only: %i[show generate update generate_icalendar]
 
   def index
     @trips = policy_scope(Trip)
@@ -28,6 +28,16 @@ class TripsController < ApplicationController
 
     else
       render "pages/home", status: :unprocessable_entity
+    end
+  end
+
+  def update
+    authorize @trip
+    if @trip.update(trip_params)
+      redirect_to trip_path(@trip)
+    else
+      render "show", status: :unprocessable_entity
+      flash[:alert] = "Update failed. Contact Doug"
     end
   end
 
@@ -75,7 +85,7 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:destination, :start_date, :end_date)
+    params.require(:trip).permit(:destination, :start_date, :end_date, :driving)
   end
 
   def create_top_attractions(trip)
