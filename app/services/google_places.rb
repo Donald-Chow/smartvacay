@@ -44,4 +44,21 @@ class GooglePlaces
     # puts result
     return result
   end
+
+  def geocode
+    key = ENV.fetch('GOOGLE_API_SERVER_KEY', nil)
+
+    url = URI("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{query}&inputtype=textquery&fields=geometry&key=#{key}")
+
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+
+    request = Net::HTTP::Get.new(url)
+
+    response = https.request(request)
+
+    puts response.read_body
+
+    JSON.parse(response.read_body)['candidates'][0]['geometry']['location']
+  end
 end

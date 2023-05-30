@@ -22,12 +22,23 @@
 							<img src="<%= itin.location.photo.split(",")[0] %>" alt="<%"#{itin.location.name}-photo"%>">
 						</div>
 					</div>
-					<div class="card-direction">
-						<% if itins.sort_by { |itin| itin.start_time }[i+1].present?%>
+					<% if itins.sort_by { |itin| itin.start_time }[i+1].present?%>
+						<div class="card-direction">
 							<% destination = itins.sort_by { |itin| itin.start_time }[i+1] %>
 							<% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, dep_time: itin.start_time + 2).call %>
-							<h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-chevron-down"></i></h2>
-							<p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
+							<% if routes.present? %>
+								<h2><i class="fa-solid fa-bus"></i>  Public Transport  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+								<p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
+							<% else %>
+								<% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "walking", dep_time: itin.start_time + 2).call %>
+								<% if routes.present? %>
+									<h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+									<p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
+								<% else %>
+									<h2><i class="fa-solid fa-question"></i>  Not Available  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+									<p>Try other travel methods</p>
+								<% end %>
+							<% end %>
 						<% end %>
 					</div>
 				<% end %>

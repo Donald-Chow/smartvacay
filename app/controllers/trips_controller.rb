@@ -15,6 +15,9 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
+    geocode = GooglePlaces.new(@trip.destination).geocode
+    @trip.lat = geocode["lat"]
+    @trip.lng = geocode['lng']
     authorize @trip
     if @trip.save
       # create Top Attractions
