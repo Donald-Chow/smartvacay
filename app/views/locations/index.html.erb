@@ -21,10 +21,12 @@
       <div class="location-text">
         <h1>Search Results</h1>
       </div>
-      <div class="card-locations">
-        <% @results.each do |location| %>
-          <%= render "location_card", location: location%>
-        <% end %>
+      <div class="section-wrapper">
+        <div class="card-locations">
+          <% @results.each do |location| %>
+            <%= render "location_card", location: location%>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>
