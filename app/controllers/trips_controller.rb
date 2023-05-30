@@ -1,5 +1,7 @@
+require 'icalendar'
+
 class TripsController < ApplicationController
-  before_action :set_trip, only: %i[show generate]
+  before_action :set_trip, only: %i[show generate generate_icalendar]
 
   def index
     @trips = policy_scope(Trip)
@@ -30,6 +32,37 @@ class TripsController < ApplicationController
     authorize @trip
     TripGenerator.new(current_user.favorited_location, @trip).call
     redirect_to trip_path(@trip)
+  end
+
+  def generate_icalendar
+    authorize @trip
+
+    cal = Icalendar::Calendar.new
+
+    @trip.itineraries.each do |itinerary|
+      event = Icalendar::Event.new
+      event.dtstart = itinerary.start_time
+      event.summary = itinerary.location.name
+      event.location = itinerary.location.address
+      # event.dtend = itinerary.end_time
+      event.description = itinerary.location.description
+
+      cal.add_event(event)
+    end
+
+    cal.publish
+
+    ical_data = cal.to_ical
+
+    filename = 'itinerary.ics'
+
+    # Set the response headers for automatic download and import into Google Calendar
+    headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
+    headers['Content-Type'] = 'text/calendar'
+    headers['X-WR-CALNAME'] = 'Trip' # Set your desired calendar name here
+
+    # Send the iCalendar data as the response
+    render plain: ical_data
   end
 
   private
