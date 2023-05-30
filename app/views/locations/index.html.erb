@@ -1,57 +1,57 @@
 <div class="container page-content">
-  <div class="container" data-controller="google-search">
-    <!--
+	<div class="container" data-controller="google-search">
+		<!--
     <div class="search-box">
 			<%= form_with data: { action: "submit->google-search#findPlaceFromQuery"}  do |form| %>
 				<%= form.text_field :query, placeholder: 'Enter your search query', data: {google_search_target: "input"} %>
 				<%= form.submit 'Search' %>
 			<% end %>
       -->
-    <div class="search-box-fixed-bottom">
-      <%= form_with url: locations_path, method: :get, class: "d-flex search-box-bg" do %>
-        <%= text_field_tag :query,
+		<div class="search-box-fixed-bottom">
+			<%= form_with url: locations_path, method: :get, class: "d-flex search-box-bg" do %>
+				<%= text_field_tag :query,
             params[:query],
             class: "form-control",
             placeholder: "Type a keyword"
         %>
-        <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
-      <% end %>
-    </div>
-    <% if @results.present? %>
-      <div class="location-text">
-        <h1>Search Results</h1>
-      </div>
-      <div class="section-wrapper">
-        <div class="card-locations">
-          <% @results.each do |location| %>
-            <%= render "location_card", location: location%>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="text-and-card">
-    <div class="location-text">
-      <h1>Top <%= current_user.trip.destination %> attractions</h1>
-    </div>
-    <div class="section-wrapper">
-      <div class="card-locations">
-        <% @top_attractions.each do |location| %>
-          <%= render "location_card", location: location%>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="text-and-card">
-    <div class="location-text">
-      <h1>Top <%= current_user.trip.destination %> restaurants</h1>
-    </div>
-    <div class="section-wrapper">
-      <div class="card-locations">
-        <% @top_restaurants.each do |location| %>
-          <%= render "location_card", location: location%>
-        <% end %>
-      </div>
-    </div>
-  </div>
+				<%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+			<% end %>
+		</div>
+		<% if @results.present? %>
+			<div class="location-text">
+				<h1>Search Results</h1>
+			</div>
+			<div class="section-wrapper">
+				<div class="card-locations">
+					<% @results.each do |location| %>
+						<%= render "location_card", location: location%>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<div class="text-and-card">
+		<div class="location-text">
+			<h1>Top <%= current_user.trip.destination %> attractions</h1>
+		</div>
+		<div class="section-wrapper">
+			<div class="card-locations">
+				<% @top_attractions.each do |location| %>
+					<%= render "location_card", location: location%>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="text-and-card">
+		<div class="location-text">
+			<h1>Top <%= current_user.trip.destination %> restaurants</h1>
+		</div>
+		<div class="section-wrapper">
+			<div class="card-locations">
+				<% @top_restaurants.each do |location| %>
+					<%= render "location_card", location: location%>
+				<% end %>
+			</div>
+		</div>
+	</div>
 </div>
