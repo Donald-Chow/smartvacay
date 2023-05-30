@@ -5,4 +5,8 @@ class ItineraryPolicy < ApplicationPolicy
     #   scope.all
     # end
   end
+
+  def destroy?
+    user == record.trip.user
+  end
 end

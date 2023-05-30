@@ -3,10 +3,8 @@
   display: block;
   height: 300px;
   padding: 85px;
-  text-shadow: 2px 1px 4px #0E0000;
+  text-shadow: 3px 3px 6px #0E0000;
   background-size: cover;
-
-  h1, p {
-    color: $white;
-  }
+  margin-top: 50px;
+  color: $primary;
 }

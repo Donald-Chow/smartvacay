@@ -1,5 +1,4 @@
 class ItinerariesController < ApplicationController
-
   def index
   end
 
@@ -8,6 +7,19 @@ class ItinerariesController < ApplicationController
   end
 
   def update
+    # Do what you want with todo_params.
   end
 
+  def destroy
+    @itinerary = Itinerary.find(params[:id])
+    authorize @itinerary
+    @itinerary.destroy
+    redirect_to trip_path(@itinerary.trip)
+  end
+
+  private
+
+  def todo_params
+    params.require(:todo).permit(:position)
+  end
 end
