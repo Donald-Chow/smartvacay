@@ -17,4 +17,8 @@ class TripPolicy < ApplicationPolicy
   def generate?
     true
   end
+
+  def generate_icalendar?
+    true
+  end
 end
