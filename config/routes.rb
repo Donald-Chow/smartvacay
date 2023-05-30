@@ -17,6 +17,9 @@ Rails.application.routes.draw do
 
   resources :trips, only: [:index, :show, :create] do
     resources :itineraries, only: [:create]
+    member do
+      get 'generate_icalendar'
+    end
   end
 
   get '/trips/:id/generate', to: 'trips#generate', as: 'generate_trip'

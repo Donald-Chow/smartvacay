@@ -4,6 +4,7 @@
     <p><%= @trip.start_date %></p>
   </div>
   <div class="container">
+    <%= link_to 'Download itinerary', generate_icalendar_trip_path(@trip), class: "btn btn-secondary mt-3 mb-3" %>
     <div class="schedule">
       <% if @trip.itineraries == [] %>
         <div class="my-5 text-center">
