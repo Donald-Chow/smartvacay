@@ -31,7 +31,7 @@ class Location < ApplicationRecord
                photos = location['photos'].map { |photo| photo['photo_reference'] }
                photos = photos.map do |photo|
                  "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{photo}&key=#{ENV.fetch(
-                   'GOOGLE_API_SERVER_KEY', nil
+                   'GOOGLE_API_BROWSER_KEY', nil
                  )}"
                end
                if photos.count < 5
