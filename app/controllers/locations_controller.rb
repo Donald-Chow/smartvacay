@@ -8,7 +8,7 @@ class LocationsController < ApplicationController
 
     if params[:query].present?
       @results = GooglePlaces.new(params[:query]).call.map do |location|
-        Location.find_by(place_id: location["place_id"]) || location_from_google(location)
+        Location.find_by(place_id: location["place_id"]) || location_from_google(location_details(location["place_id"]))
       end
     else
       @results = []
@@ -93,7 +93,7 @@ class LocationsController < ApplicationController
       phone: location['"formatted_phone_number"'],
       website: location['website'],
       rating: location["rating"],
-      review: location['reviews'],
+      review: location['reviews'][0]['text'],
       # photo: if location.include?("photos")
       #          "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{location['photos'][0]['photo_reference']}&key=#{ENV.fetch(
       #            'GOOGLE_API_SERVER_KEY', nil
