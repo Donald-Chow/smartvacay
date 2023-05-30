@@ -106,17 +106,13 @@
   margin-top: 16px;
 }
 
-// .card-itinerary a {
+// .card-itinerary {
 //   position:absolute;
 //   height: 100%;
 //   width: 100%;
 //   top: 0px;
 //   left: 0;
 // }
-
-.card-itinerary .card-itinerary-infos {
-  padding: 16px;
-}
 
 .card-itinerary .itin-item {
   position:absolute;
@@ -126,9 +122,12 @@
   left: 0;
 }
 
-.remove-btn{
+.remove-btn {
   position: relative;
-  z-index: 4;
+}
+
+.card-itinerary .card-itinerary-infos {
+  padding: 16px;
 }
 
 // direction card

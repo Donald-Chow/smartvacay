@@ -14,7 +14,7 @@ class ItinerariesController < ApplicationController
     @itinerary = Itinerary.find(params[:id])
     authorize @itinerary
     @itinerary.destroy
-    redirect_to trip_path(@itinerary.trip), status: :see_other
+    redirect_to trip_path(@itinerary.trip)
   end
 
   private
