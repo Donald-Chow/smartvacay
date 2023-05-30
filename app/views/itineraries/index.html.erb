@@ -19,18 +19,18 @@
                   <% else %>
                     <i class="fa-solid fa-location-dot"></i>
                   <% end %>  <%= itin.location.name %></h2>
+                <%= link_to "Remove", itinerary_path(itin), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary btn-sm remove-btn" %>
                 <!--<p><%= itin.start_time.strftime('%a %d %b %Y') %></p>-->
-                <%= link_to "remove", itinerary_path(itin), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary remove-btn" %>
               </div>
               <img src="<%= itin.location.photo.split(",")[0] %>" alt="<%"#{itin.location.name}-photo"%>">
             </div>
           </div>
-          <div class="card-direction">
-            <% if itins.sort_by { |itin| itin.start_time }[i+1].present?%>
-              <% destination = itins.sort_by { |itin| itin.start_time }[i+1] %>
-              <% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, dep_time: itin.start_time + 2).call %>
+          <% if itins.sort_by { |itin| itin.start_time }[i+1].present?%>
+            <div class="card-direction">
+              <% #destination = itins.sort_by { |itin| itin.start_time }[i+1] %>
+              <%# routes = GoogleDirections.new(origin: itin.location, destination: destination.location, dep_time: itin.start_time + 2).call %>
               <h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-chevron-down"></i></h2>
-              <p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
+              <p>About 15m<%#= routes['duration']['text'] %> (200m<%#= routes['distance']['text'] %>)</p>
             <% end %>
           </div>
         <% end %>

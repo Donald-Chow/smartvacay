@@ -63,7 +63,7 @@
 
 .card-day h3 {
   padding: 16px;
-  background: $white;
+  background: #b6c4cb;
   height: 60px;
   margin:0px;
 }
@@ -97,9 +97,10 @@
 }
 
 .card-itinerary h2 {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
   margin: 0;
+  padding: 5px;
 }
 
 .card-itinerary p {
@@ -127,11 +128,27 @@
 }
 
 .card-itinerary .remove-btn {
-  position: relative;
+  // position: absolute;
+  // top: 80px;
+  font-size: 10px;
+  font-style: italic;
 }
 
-.card-itinerary .card-itinerary-infos {
+// .card-itinerary .card-itinerary-infos {
+//   height: 100%;
+//   padding: 16px;
+//   display: flex;
+//   flex-direction: column;
+//   align-content: space-around;
+// }
+
+.card-itinerary-infos {
+  height: 150px;
   padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 // direction card
