@@ -10,6 +10,9 @@ application.register("active-tab", ActiveTabController)
 import CategorySearchController from "./category_search_controller"
 application.register("category-search", CategorySearchController)
 
+import ClipboardController from "./clipboard_controller"
+application.register("clipboard", ClipboardController)
+
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
@@ -24,3 +27,6 @@ application.register("hello", HelloController)
 
 import ItinCollapseController from "./itin_collapse_controller"
 application.register("itin-collapse", ItinCollapseController)
+
+import SortableController from "./sortable_controller"
+application.register("sortable", SortableController)
