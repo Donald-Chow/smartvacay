@@ -15,7 +15,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
-    geocode = GooglePlaces.new(@trip.destination).geocode
+    geocode = GooglePlaces.new(trip: @trip).geocode
     @trip.lat = geocode["lat"]
     @trip.lng = geocode['lng']
     authorize @trip
@@ -80,7 +80,7 @@ class TripsController < ApplicationController
 
   def create_top_attractions(trip)
     query = "Top #{trip.destination} Attractions"
-    GooglePlaces.new(query).call.map do |place|
+    GooglePlaces.new(query:, trip: @trip).call.map do |place|
       # if location exists, create search "bookmark"
       location = Location.find_by(place_id: place["place_id"]) ||
                  # if location does not exists, create the location, and create search "bookmark"
@@ -91,11 +91,11 @@ class TripsController < ApplicationController
 
   def create_top_restaurants(trip)
     query = "Top #{trip.destination} Restaurants"
-    GooglePlaces.new(query).call.map do |place|
+    GooglePlaces.new(query:, trip: @trip).call.map do |place|
       # if location exists, create search "bookmark"
       location = Location.find_by(place_id: place["place_id"]) ||
                  # if location does not exists, create the location, and create search "bookmark"
-                 Location.google_create(GooglePlaces.new(place["place_id"]).details)
+                 Location.google_create(GooglePlaces.new(query: place["place_id"]).details)
       save_search(trip, location, "top_restaurants", query)
     end
   end
