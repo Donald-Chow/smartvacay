@@ -71,13 +71,4 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
-  ActionMailer::Base.smtp_settings = {
-    address:        'smtp-mail.outlook.com', # default: localhost
-    port:           '587',                  # default: 25
-    user_name:      'smartvacay@outlook.com',
-    password:       'dVEuuc6EFHJxf9',
-    authentication: :login,                 # :plain, :login or :cram_md5
-    enable_starttls_auto: true
-  }
 end
