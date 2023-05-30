@@ -15,11 +15,11 @@ class TripsController < ApplicationController
     @trip.user = current_user
     authorize @trip
     if @trip.save
-      redirect_to locations_path
       # create Top Attractions
       create_top_attractions(@trip)
-      create_top_restaurants(@trip)
       # create Top Restaurants
+      create_top_restaurants(@trip)
+      redirect_to locations_path
 
     else
       render "pages/home", status: :unprocessable_entity

@@ -39,9 +39,9 @@ class GooglePlaces
     request = Net::HTTP::Get.new(url)
 
     response = https.request(request)
-    puts response.read_body
+    # puts response.read_body
     result = JSON.parse(response.read_body)["result"]
-    puts result
+    # puts result
     return result
   end
 end
