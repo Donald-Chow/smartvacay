@@ -1,3 +1,4 @@
+
 <div class="page-content">
 	<div id="trips-info">
 		<h1><%= @trip.destination %> 2023</h1>
@@ -5,13 +6,14 @@
 	</div>
 	<div class="container">
 		<%= link_to 'Download itinerary', generate_icalendar_trip_path(@trip), class: "btn btn-secondary mt-3 mb-3" %>
+    <button onclick="window.print()" class="btn btn-secondary mt-3 mb-3" >Share as PDF </button>
 		<%= simple_form_for(@trip) do |f| %>
 			<% if @trip.driving == false %>
 				<%= f.input :driving, as: :hidden, input_html: { value: '1' } %>
-				<%= f.button :submit, "Switch to Driving", class: "btn btn-primary" %>
+				<%= f.button :submit, "Switch to Driving", class: "btn btn-primary mb-3" %>
 			<% else %>
 				<%= f.input :driving, as: :hidden, input_html: { value: '0' } %>
-				<%= f.button :submit, "Switch to Walking", class: "btn btn-primary" %>
+				<%= f.button :submit, "Switch to Walking", class: "btn btn-primary mb-3" %>
 			<% end %>
 		<% end %>
 		<div class="schedule">
@@ -24,4 +26,5 @@
 			<% end %>
 		</div>
 	</div>
+
 </div>
