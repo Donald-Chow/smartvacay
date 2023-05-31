@@ -2,12 +2,12 @@
   <div class="container">
     <h1 class="location-text">Saved locations</h1>
     <div class="d-flex justify-content-center">
-      <% if Trip.last.itineraries.present? %>
-        <%= link_to generate_trip_path(Trip.last), data: {turbo_method: :get, turbo_confirm: "Do you want to regenerate?"} do %>
+      <% if current_user.trip.itineraries.present? %>
+        <%= link_to generate_trip_path(current_user.trip), data: {turbo_method: :get, turbo_confirm: "Do you want to regenerate?"} do %>
           <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Regenerate itinerary</button>
         <% end %>
       <% else %>
-        <%= link_to generate_trip_path(Trip.last) do %>
+        <%= link_to generate_trip_path(current_user.trip) do %>
           <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Generate itinerary</button>
         <% end %>
       <% end %>
