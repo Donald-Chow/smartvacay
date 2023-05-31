@@ -94,7 +94,7 @@ class TripsController < ApplicationController
       # if location exists, create search "bookmark"
       location = Location.find_by(place_id: place["place_id"]) ||
                  # if location does not exists, create the location, and create search "bookmark"
-                 Location.google_create(GooglePlaces.new(place["place_id"]).details)
+                 Location.google_create(GooglePlaces.new(query: place["place_id"]).details)
       save_search(trip, location, "top_attractions", query)
     end
   end
