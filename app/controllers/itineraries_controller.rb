@@ -7,7 +7,11 @@ class ItinerariesController < ApplicationController
   end
 
   def update
-    # Do what you want with todo_params.
+
+  end
+
+  def update_all
+    raise
   end
 
   def destroy
@@ -20,6 +24,6 @@ class ItinerariesController < ApplicationController
   private
 
   def todo_params
-    params.require(:todo).permit(:position)
+    params.require(:todo).permit(:start_time)
   end
 end

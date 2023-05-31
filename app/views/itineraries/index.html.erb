@@ -1,132 +1,75 @@
 <div>
-	<% @grouped_itins.each do |date, itins| %>
-		<div class="card-day" data-controller="itin-collapse">
-			<div>
-				<h3 data-action="click->itin-collapse#toggle"><i data-itin-collapse-target='date' class="fa-solid fa-chevron-down"></i>  <%= date.strftime('%a, %d %b') %></h3>
-			</div>
-			<div class="cards-itinerary" data-itin-collapse-target='list' data-controller="sortable">
-				<% itins.sort_by { |itin| itin.start_time }.each_with_index do |itin, i| %>
-					<div class="card-itinerary handle">
-						<div class="time-slot">
-							<p><%= itin.start_time.strftime('%I:%M %p') %></p>
-						</div>
-						<%= link_to "", location_path(itin.location), class: "itin-item" %>
-						<div class="card-itinerary-box" data-controller="sortable">
-							<div class="card-itinerary-infos" >
-								<h2>
-									<% if itin.location.type_of_place.split(", ").include? "restaurant"%>
-										<i class="fa-solid fa-utensils"></i>
-									<% else %>
-										<i class="fa-solid fa-location-dot"></i>
-									<% end %>  <%= itin.location.name %></h2>
-								<%= link_to "Remove", itinerary_path(itin), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary btn-sm remove-btn" %>
-								<!--<p><%= itin.start_time.strftime('%a %d %b %Y') %></p>-->
-							</div>
-							<img src="<%= itin.location.photo.split(",")[0] %>" alt="<%"#{itin.location.name}-photo"%>">
-						</div>
-					</div>
-					<% if itins.sort_by { |itin| itin.start_time }[i+1].present?%>
-						<div class="card-direction">
-							<% if @trip.driving == true %>
-								<%# this is the travel method = driving display  %>
-								<% destination = itins.sort_by { |itin| itin.start_time }[i+1] %>
-								<% drive_routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "driving", dep_time: itin.start_time + 2).call %>
-								<% walk_routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "walking", dep_time: itin.start_time + 2).call %>
-								<% if drive_routes.nil? || walk_routes.nil? %>
-									<h2><i class="fa-solid fa-question"></i>  Not Available  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
-									<p>Try other travel methods</p>
-								<% elsif drive_routes['duration']['value'] >= 300 && walk_routes['duration']['value'] >= 300 %>
-									<h2><i class="fa-solid fa-car"></i>  Drive  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
-									<p>About <%= drive_routes['duration']['text'] %> (<%= drive_routes['distance']['text'] %>)</p>
-								<% else %>
-									<h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
-									<p>About <%= walk_routes['duration']['text'] %> (<%= walk_routes['distance']['text'] %>)</p>
-								<% end %>
-							<% else %>
-								<%# this is the travel method = default display %>
-								<% destination = itins.sort_by { |itin| itin.start_time }[i+1] %>
-								<% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, dep_time: itin.start_time + 2).call %>
-								<% if routes.present? %>
-									<h2><i class="fa-solid fa-bus"></i>  Public Transport  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
-									<p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
-								<% else %>
-									<% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "walking", dep_time: itin.start_time + 2).call %>
-									<% if routes.present? %>
-										<h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
-										<p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
-									<% else %>
-										<h2><i class="fa-solid fa-question"></i>  Not Available  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
-										<p>Try other travel methods</p>
-									<% end %>
-								<% end %>
-							<% end %>
-						<% end %>
-					</div>
-				<% end %>
-			</div>
-		</div>
-	<% end %>
-	<div class="share-itin text-center my-3">
-		<div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!">
-			<input data-clipboard-target="input" type="text" value="https://smartvacay.herokuapp.com/trips/<%=@trip.id%>" readonly>
-			<button class="btn btn-primary btn-sm py-2" data-action="click->clipboard#copy">Copy to Clipboard</button>
-		</div>
-	</div>
-</div>
-<!--
->>>>>>> master
-  <h2>########################</h2>
-  <h2>BELOW IS HARD CODE DRAFT</h2>
-<p>
-	<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample"
-  role="button" aria-expanded="false" aria-controls="collapseExample">
-		Link with href
-	</a>
-	<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-  data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-		Button with data-bs-target
-	</button>
-</p>
-<div class="collapse" id="collapseExample">
-	<div class="card card-body">
-		Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-	</div>
-</div>
-
-  <h1>INTINERARIES INDEX</h1>
-  <div class="card-day">
-    <div>
-      <h3>
-        <i class="fa-solid fa-chevron-down"></i>  Mon, 5 June</h3>
+  <% @grouped_itins.each do |date, itins| %>
+    <div class="card-day" data-controller="itin-collapse">
+      <div>
+        <h3 data-action="click->itin-collapse#toggle"><i data-itin-collapse-target='date' class="fa-solid fa-chevron-down"></i>  <%= date.strftime('%a, %d %b') %></h3>
+      </div>
+      <div class="cards-itinerary" data-itin-collapse-target='list' data-controller="sortable" >
+        <% itins.sort_by { |itin| itin.start_time }.each_with_index do |itin, i| %>
+          <div class="card-itinerary handle">
+            <%= link_to "", location_path(itin.location), class: "itin-item" %>
+            <div class="card-itinerary-box" id="<%= itin.id%>"  data-sortable-target="spot" data-sortable-id-value="<%= i %>">
+              <div class="time-slot">
+                <p><%= itin.start_time.strftime('%I:%M %p') %></p>
+              </div>
+              <div class="card-itinerary-infos" >
+                <h2>
+                  <% if itin.location.type_of_place.split(", ").include? "restaurant"%>
+                    <i class="fa-solid fa-utensils"></i>
+                  <% else %>
+                    <i class="fa-solid fa-location-dot"></i>
+                  <% end %>  <%= itin.location.name %></h2>
+                <%= link_to "Remove", itinerary_path(itin), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary btn-sm remove-btn" %>
+                <!--<p><%= itin.start_time.strftime('%a %d %b %Y') %></p>-->
+              </div>
+              <img src="<%= itin.location.photo.split(",")[0] %>" alt="<%"#{itin.location.name}-photo"%>">
+            </div>
+          </div>
+          <% if itins.sort_by { |itin| itin.start_time }[i+1].present?%>
+            <div class="card-direction">
+              <% if @trip.driving == true %>
+                <%# this is the travel method = driving display  %>
+                <% destination = itins.sort_by { |itin| itin.start_time }[i+1] %>
+                <% drive_routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "driving", dep_time: itin.start_time + 2).call %>
+                <% walk_routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "walking", dep_time: itin.start_time + 2).call %>
+                <% if drive_routes.nil? || walk_routes.nil? %>
+                  <h2><i class="fa-solid fa-question"></i>  Not Available  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+                  <p>Try other travel methods</p>
+                <% elsif drive_routes['duration']['value'] >= 300 && walk_routes['duration']['value'] >= 300 %>
+                  <h2><i class="fa-solid fa-car"></i>  Drive  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+                  <p>About <%= drive_routes['duration']['text'] %> (<%= drive_routes['distance']['text'] %>)</p>
+                <% else %>
+                  <h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+                  <p>About <%= walk_routes['duration']['text'] %> (<%= walk_routes['distance']['text'] %>)</p>
+                <% end %>
+              <% else %>
+                <%# this is the travel method = default display %>
+                <% destination = itins.sort_by { |itin| itin.start_time }[i+1] %>
+                <% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, dep_time: itin.start_time + 2).call %>
+                <% if routes.present? %>
+                  <h2><i class="fa-solid fa-bus"></i>  Public Transport  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+                  <p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
+                <% else %>
+                  <% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "walking", dep_time: itin.start_time + 2).call %>
+                  <% if routes.present? %>
+                    <h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+                    <p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
+                  <% else %>
+                    <h2><i class="fa-solid fa-question"></i>  Not Available  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+                    <p>Try other travel methods</p>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="cards-itinerary">
-      <div class="card-itinerary">
-        <div class="card-itinerary-box">
-          <div class="card-itinerary-infos">
-            <h2><i class="fa-solid fa-location-dot"></i>  Tokyo Tower</h2>
-            <p>9:00 am</p>
-          </div>
-          <img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
-        </div>
-      </div>
-      <div class="card-direction">
-        <h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-chevron-down"></i></h2>
-        <p>About 10m (700m)</p>
-      </div>
-      <div class="card-itinerary">
-        <div class="card-itinerary-box">
-          <div class="card-itinerary-infos">
-            <h2><i class="fa-solid fa-burger-soda"></i>  Tokyo Tower</h2>
-            <p>9:00 am</p>
-          </div>
-          <img src="<%= "http://source.unsplash.com/featured/?TokyoTower&#{rand(1000)}" %>" alt="Tokyo Tower">
-        </div>
-      </div>
+  <% end %>
+  <div class="share-itin text-center my-3">
+    <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!">
+      <input data-clipboard-target="input" type="text" value="https://smartvacay.herokuapp.com/trips/<%=@trip.id%>" readonly>
+      <button class="btn btn-primary btn-sm py-2" data-action="click->clipboard#copy">Copy to Clipboard</button>
     </div>
   </div>
-  <div class="card-day">
-    <div>
-      <h3><i class="fa-solid fa-chevron-right"></i>  Tues, 6 June</h3>
-    </div>
-  </div>
-  -->
+</div>
