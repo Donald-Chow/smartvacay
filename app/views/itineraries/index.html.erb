@@ -45,7 +45,7 @@
 							<% else %>
 								<%# this is the travel method = default display %>
 								<% destination = itins.sort_by { |itin| itin.start_time }[i+1] %>
-								<% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, dep_time: itin.start_time + 2).call %>
+								<% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "trainsit", dep_time: itin.start_time + 2).call %>
 								<% if routes.present? %>
 									<h2><i class="fa-solid fa-bus"></i>  Public Transport  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
 									<p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
