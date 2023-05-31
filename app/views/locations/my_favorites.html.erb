@@ -1,15 +1,17 @@
 <div class="page-content">
   <div class="container">
     <h1 class="location-text">Saved locations</h1>
-    <% if Trip.last.itineraries.present? %>
-      <%= link_to generate_trip_path(Trip.last), data: {turbo_method: :get, turbo_confirm: "Do you want to regenerate?"} do %>
-        <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Regenerate itinerary</button>
+    <div class="d-flex justify-content-center">
+      <% if Trip.last.itineraries.present? %>
+        <%= link_to generate_trip_path(Trip.last), data: {turbo_method: :get, turbo_confirm: "Do you want to regenerate?"} do %>
+          <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Regenerate itinerary</button>
+        <% end %>
+      <% else %>
+        <%= link_to generate_trip_path(Trip.last) do %>
+          <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Generate itinerary</button>
+        <% end %>
       <% end %>
-    <% else %>
-      <%= link_to generate_trip_path(Trip.last) do %>
-        <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Generate itinerary</button>
-      <% end %>
-    <% end %>
+    </div>
     <%# From here we have the category avatars %>
     <div data-controller="category-search" data-category-search-baseurl-value="<%= request.base_url %>">
       <div class="container">
