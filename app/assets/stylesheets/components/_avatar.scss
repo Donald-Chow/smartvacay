@@ -20,16 +20,16 @@
 }
 
 .avatar-location {
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   object-fit: cover;
   opacity: 0.8;
 }
 
 .avatar-location.active {
-  width: 70px;
-  height: 70px;
+  width: 65px;
+  height: 65px;
   border: double 4px transparent;
   border-radius: 50%;
   background-image: linear-gradient(white, white), radial-gradient(circle at top left, $primary 70%, $secondary 30%);
