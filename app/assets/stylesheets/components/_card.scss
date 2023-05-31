@@ -1,5 +1,20 @@
 // Location card
 
+/* Improve styling of the three "how it works" sections on homepage */
+.card-home {
+  background-color: $bg-color;
+  margin: 10px 10px 20px 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  // border: 4px solid $white;
+
+  h3, p {
+    color: $secondary;
+  }
+
+}
+
 .card-my-fav-locations {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -72,7 +87,7 @@
 
 .card-itinerary {
   overflow: hidden;
-  height: 160px;
+  height: 130px;
   background: $white;
   box-shadow: 0 0 1px rgba(0,0,0,0.2);
   display: flex;
@@ -89,8 +104,8 @@
 }
 
 .card-itinerary img {
-  height: 120px;
-  width: 120px;
+  height: 90px;
+  width: 90px;
   object-fit: fill;
   border-radius: 10px;
   margin: 12px;
@@ -132,19 +147,12 @@
   // top: 80px;
   font-size: 10px;
   font-style: italic;
-  z-index: 4;
+  z-index: 0;
 }
 
-// .card-itinerary .card-itinerary-infos {
-//   height: 100%;
-//   padding: 16px;
-//   display: flex;
-//   flex-direction: column;
-//   align-content: space-around;
-// }
-
 .card-itinerary-infos {
-  height: 150px;
+  width: 100%;
+  height: 100px;
   padding: 16px;
   display: flex;
   justify-content: space-between;

@@ -1,5 +1,5 @@
 <div class="banner" id="hero">
-  <img class="bg-img" src="https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1492&q=80">
+  <img class="bg-img" src="https://images.unsplash.com/photo-1554797589-7241bb691973?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80">
   <% if user_signed_in? %>
     <% if current_user.trip.nil? %>
       <div class="banner-form">
@@ -34,21 +34,19 @@
   <h2>Three Simple Steps to Planning Your Dream Vacation</h2>
   <div class="d-flex justify-content-around my-3 homepage">
     <div class="text-center">
-      <div class="row">
-        <div class="col-6">
-          <i class="fas fa-earth-asia fa-3x mb-3"></i>
-          <h3>Choose Your Destination</h3>
-          <p>Start by typing the perfect place for your next vacation and date planned</p>
-          <p>Consider your interests, budget, and travel style when making your decision.</p>
-        </div>
-        <div class="col-6">
-          <i class="fas fa-solid fa-map-location-dot fa-3x mb-3"></i>
-          <h3>Add Locations to Your Favorites</h3>
-          <p>Once you've chosen a destination, start adding locations to your favorites.</p>
-          <p>You can do this by searching for specific places or by browsing our curated lists.</p>
-        </div>
+      <div class="card-home mb-4">
+        <i class="fas fa-earth-asia fa-3x mb-3"></i>
+        <h3>Choose Your Destination</h3>
+        <p>Start by typing the perfect place for your next vacation and date planned</p>
+        <p>Consider your interests, budget, and travel style when making your decision.</p>
       </div>
-      <div class="px-5">
+      <div class="card-home mb-4">
+        <i class="fas fa-solid fa-map-location-dot fa-3x mb-3"></i>
+        <h3>Add Locations to Your Favorites</h3>
+        <p>Once you've chosen a destination, start adding locations to your favorites.</p>
+        <p>You can do this by searching for specific places or by browsing our curated lists.</p>
+      </div>
+      <div class="card-home mb-4">
         <i class="fas fa-solid fa-route fa-3x mb-3"></i>
         <h3>We'll Create Your Custom Itinerary</h3>
         <p>Click Generate Itinerary and we will create a custom itinerary for you.</p>

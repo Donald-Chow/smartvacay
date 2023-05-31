@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
+  patch 'itineraries/', to: 'itineraries#update_all', as: 'update_all'
   get '/trips/:id/generate', to: 'trips#generate', as: 'generate_trip'
 
   resources :itineraries, only: [:index, :update, :destroy]

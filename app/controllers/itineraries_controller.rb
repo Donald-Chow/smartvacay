@@ -1,4 +1,6 @@
 class ItinerariesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
   end
 
@@ -7,8 +9,25 @@ class ItinerariesController < ApplicationController
   end
 
   def update
-    # Do what you want with todo_params.
+    params["array"].each_with_index do |item, index|
+      date_id = item.split("|")
+      itinerary = Itinerary.find(date_id[1])
+      itinerary.date = date_id[0].to_date
+      itinerary.order = index
+      itinerary.save
+      authorize itinerary
+    end
+    render json: { status: "ok" }
   end
+
+  # def update_all
+  #   puts params["array"]
+  #   debugger
+
+  #   @Itinerary = Itinerary.all
+  #   authorize @itinerary
+
+  # end
 
   def destroy
     @itinerary = Itinerary.find(params[:id])
@@ -20,6 +39,6 @@ class ItinerariesController < ApplicationController
   private
 
   def todo_params
-    params.require(:todo).permit(:position)
+    params.require(:todo).permit(:start_time)
   end
 end
