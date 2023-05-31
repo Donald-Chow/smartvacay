@@ -1,22 +1,32 @@
 <div class="page-content">
   <div class="container">
-    <h1 class="location-text">All my favorites</h1>
-    <button type="button" class="btn btn-secondary mt-2 mb-3">Generate itinerary</button>
+    <h1 class="location-text">Saved locations</h1>
+    <div class="d-flex justify-content-center">
+      <% if current_user.trip.itineraries.present? %>
+        <%= link_to generate_trip_path(current_user.trip), data: {turbo_method: :get, turbo_confirm: "Do you want to regenerate?"} do %>
+          <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Regenerate itinerary</button>
+        <% end %>
+      <% else %>
+        <%= link_to generate_trip_path(current_user.trip) do %>
+          <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Generate itinerary</button>
+        <% end %>
+      <% end %>
+    </div>
     <%# From here we have the category avatars %>
     <div data-controller="category-search" data-category-search-baseurl-value="<%= request.base_url %>">
       <div class="container">
         <div class="category-avatars">
           <% categories = [
-      { display: "All", image: "all.jpeg", query: ""},
-      { display: "Sightseeing", image: "sightseeing.jpeg", query: "sightseeing" },
-      { display: "Food", image: "food.jpeg", query: "food" },
-      { display: "Shopping", image: "shopping.jpeg", query: "shopping" },
-      { display: "Misc", image: "misc.jpeg", query: "miscellaneous" }
+      { display: "All", image: "https://images.unsplash.com/photo-1493780474015-ba834fd0ce2f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dHJhdmVsJTIwamFwYW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60", query: ""},
+      { display: "Sightseeing", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGphcGFufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60", query: "sightseeing" },
+      { display: "Food", image: "https://images.unsplash.com/photo-1514190051997-0f6f39ca5cde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80", query: "food" },
+      { display: "Shopping", image: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60", query: "shopping" },
+      { display: "Misc", image: "https://images.unsplash.com/photo-1502246170363-97cb63f36c81?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ4fHxqYXBhbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60", query: "miscellaneous" }
       ] %>
           <% categories.each do |category| %>
             <div class="category-avatar">
               <%= link_to my_favorites_locations_path(category: category[:query]) do %>
-                <%= image_tag "http://source.unsplash.com/featured/?Tokyo&#{rand(1000)}", class: (category[:query].empty? ? "avatar-location active" : "avatar-location"),
+                <%= image_tag category[:image], class: (category[:query].empty? ? "avatar-location active" : "avatar-location"),
             data: {
               category_search_target: "avatar",
               action: "click->category-search#showLists",
