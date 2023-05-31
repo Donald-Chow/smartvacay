@@ -9,5 +9,4 @@ class User < ApplicationRecord
   has_many :location, through: :itineraries
 
   acts_as_favoritor
-
 end

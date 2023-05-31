@@ -6,27 +6,11 @@ class TripGenerator
   def initialize(locations, trip)
     @locations = locations
     @trip = trip
+    @items = []
   end
 
   def call
     trip.itineraries.destroy_all
-    # fl = user.favorited_location
-    # sl = fl.sort_by do |location|
-    #   Geocoder::Calculations.distance_between(user_location, location.coordinates)
-    # end
-
-    # # Use K-means clustering to group the locations based on proximity
-    # kmeans = KMeansClusterer.run(favorited_locations, clusters: 3, runs: 10) # Adjust the number of clusters and runs as per your needs
-
-    # # Sort the locations within each cluster based on proximity
-    # sorted_locations = []
-    # kmeans.clusters.each do |cluster|
-    #   sorted_cluster_locations = cluster.points.sort_by do |location|
-    #     Geocoder::Calculations.distance_between(cluster.centroid, location.coordinates)
-    #   end
-    #   sorted_locations += sorted_cluster_locations
-    # end
-    # sorted_locations += sorted_cluster_locations
 
     data = []
     labels = []
@@ -49,66 +33,87 @@ class TripGenerator
       end
       create_day(day_locations, date)
     end
-
-    # kmeans.clusters.map do |cluster|
-
-    #   cluster.points.each do |element|
-
-    #   # p cluster.points
-    #   # puts "Cluster #{cluster.id}"
-    #   # puts "Center of Cluster: #{cluster.centroid}"
-    #   # cluster.points.map { |c| Location.find(c.label.to_i) }
-
-    #   # puts "Cities in Cluster: " + cluster.points.join(",")
-    # end
-    # return kmeans.clusters
   end
 
   # day_locations should be an array of location instance
   # HOW TO PARSE THIS!
 
   def create_day(day_locations, date)
-    set_restaurants(day_locations, date)
-    set_attractions(day_locations, date)
+    # items is an array of the location to be created as itineraries
+    set_attractions(day_locations)
+    set_restaurants(day_locations)
+    # use items to create itin
+    create_itin(@items, date)
   end
 
-  def set_restaurants(day_locations, date)
+  def set_restaurants(day_locations)
     # select if location category is restaruant
     restaurants = day_locations.select do |location|
       location.type_of_place.split(", ").include? "restaurant"
     end
     # lunch
     restaurant = restaurants.sample
-    create_itin(restaurant, date, 12)
+    @items.insert((@items.length / 2), restaurant) if restaurant.present?
     # Dinner
     restaurants.delete(restaurant)
     restaurant = restaurants.sample
-    create_itin(restaurant, date, 19)
+    @items << restaurant if restaurant.present?
   end
 
-  def set_attractions(day_locations, date)
+  def set_attractions(day_locations)
     # select if location category not restaurant
     attractions = day_locations.reject do |location|
       location.type_of_place.split(", ").include? "restaurant"
     end
-    # morning
-    attraction = attractions.sample
-    create_itin(attraction, date, 9)
-    # afternoon
-    attractions.delete(attraction)
-    attraction = attractions.sample
-    create_itin(attraction, date, 15)
+    # add 4 locations to an array
+    @items = attractions.sample(4)
   end
 
-  def create_itin(type, date, hour)
-    item = Itinerary.new(
-      location: type,
-      trip:,
-      start_time: DateTime.new(date.year, date.mon, date.mday, hour, 0, 0)
-    )
-    item.save
+  # this need to change
+  def create_itin(items, date)
+    items.each_with_index do |item, index|
+      itin = Itinerary.new(
+        date:,
+        order: index
+        # start_time: DateTime.new(date.year, date.mon, date.mday, hour, 0, 0)
+      )
+      itin.location = item
+      itin.trip = @trip
+      itin.save
+    end
   end
 end
+
+# kmeans.clusters.map do |cluster|
+
+#   cluster.points.each do |element|
+
+#   # p cluster.points
+#   # puts "Cluster #{cluster.id}"
+#   # puts "Center of Cluster: #{cluster.centroid}"
+#   # cluster.points.map { |c| Location.find(c.label.to_i) }
+
+#   # puts "Cities in Cluster: " + cluster.points.join(",")
+# end
+# return kmeans.clusters
+
+# fl = user.favorited_location
+# sl = fl.sort_by do |location|
+#   Geocoder::Calculations.distance_between(user_location, location.coordinates)
+# end
+
+# # Use K-means clustering to group the locations based on proximity
+# kmeans = KMeansClusterer.run(favorited_locations, clusters: 3, runs: 10) # Adjust the number of clusters and runs as per your needs
+
+# # Sort the locations within each cluster based on proximity
+# sorted_locations = []
+# kmeans.clusters.each do |cluster|
+#   sorted_cluster_locations = cluster.points.sort_by do |location|
+#     Geocoder::Calculations.distance_between(cluster.centroid, location.coordinates)
+#   end
+#   sorted_locations += sorted_cluster_locations
+# end
+# sorted_locations += sorted_cluster_locations
 
 # Itinerary.new(
 #   location: Location.find(day.points[0].label),

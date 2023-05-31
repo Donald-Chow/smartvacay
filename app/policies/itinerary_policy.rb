@@ -6,6 +6,10 @@ class ItineraryPolicy < ApplicationPolicy
     # end
   end
 
+  def update?
+    true
+  end
+
   def destroy?
     user == record.trip.user
   end
