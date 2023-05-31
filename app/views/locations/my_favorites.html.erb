@@ -1,7 +1,11 @@
 <div class="page-content">
   <div class="container">
     <h1 class="location-text">All my favorites</h1>
-    <button type="button" class="btn btn-secondary mt-2 mb-3">Generate itinerary</button>
+    <% if Trip.all.present? %>
+      <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Regenerate itinerary</button>
+    <% else %>
+      <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Generate itinerary</button>
+    <% end %>
     <%# From here we have the category avatars %>
     <div data-controller="category-search" data-category-search-baseurl-value="<%= request.base_url %>">
       <div class="container" style="width:80%;">
