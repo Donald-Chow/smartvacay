@@ -43,7 +43,7 @@ class TripGenerator
     set_attractions(day_locations)
     set_restaurants(day_locations)
     # use items to create itin
-    create_itin(items, date)
+    create_itin(@items, date)
   end
 
   def set_restaurants(day_locations)
@@ -53,11 +53,11 @@ class TripGenerator
     end
     # lunch
     restaurant = restaurants.sample
-    @items.insert((items.length / 2), restaurant)
+    @items.insert((@items.length / 2), restaurant) if restaurant.present?
     # Dinner
-    restaurants.remove(restaurant)
+    restaurants.delete(restaurant)
     restaurant = restaurants.sample
-    @item << restaurant
+    @items << restaurant if restaurant.present?
   end
 
   def set_attractions(day_locations)
@@ -66,19 +66,19 @@ class TripGenerator
       location.type_of_place.split(", ").include? "restaurant"
     end
     # add 4 locations to an array
-    @items.concat(attractions.sample(4))
+    @items = attractions.sample(4)
   end
 
   # this need to change
   def create_itin(items, date)
     items.each_with_index do |item, index|
       itin = Itinerary.new(
-        location: item,
-        trip: @trip,
         date:,
         order: index
         # start_time: DateTime.new(date.year, date.mon, date.mday, hour, 0, 0)
       )
+      itin.location = item
+      itin.trip = @trip
       itin.save
     end
   end

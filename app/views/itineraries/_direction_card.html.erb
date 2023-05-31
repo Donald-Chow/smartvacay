@@ -1,0 +1,38 @@
+<% if date.sort_by(order)[i+1].present?%>
+	<div class="card-direction">
+		<% if @trip.driving == true %>
+			<% this is the travel method = driving display  %>
+			<% destination = date.sort_by(order)[i+1] %>
+			<% drive_routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "driving", dep_time: itin.start_time + 2).call %>
+			<% walk_routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "walking", dep_time: itin.start_time + 2).call %>
+			<% if drive_routes.nil? || walk_routes.nil? %>
+				<h2><i class="fa-solid fa-question"></i>  Not Available  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+				<p>Try other travel methods</p>
+			<% elsif drive_routes['duration']['value'] >= 300 && walk_routes['duration']['value'] >= 300 %>
+				<h2><i class="fa-solid fa-car"></i>  Drive  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+				<p>About <%= drive_routes['duration']['text'] %> (<%= drive_routes['distance']['text'] %>)</p>
+			<% else %>
+				<h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+				<p>About <%= walk_routes['duration']['text'] %> (<%= walk_routes['distance']['text'] %>)</p>
+			<% end %>
+		<% else %>
+			<% this is the travel method = default display %>
+			<% destination = itins.sort_by { |itin| itin.start_time }[i+1] %>
+			<% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, dep_time: itin.start_time + 2).call %>
+			<% if routes.present? %>
+				<h2><i class="fa-solid fa-bus"></i>  Public Transport  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+				<p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
+			<% else %>
+				<% routes = GoogleDirections.new(origin: itin.location, destination: destination.location, mode: "walking", dep_time: itin.start_time + 2).call %>
+				<% if routes.present? %>
+					<h2><i class="fa-solid fa-person-walking"></i>  Walk  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+					<p>About <%= routes['duration']['text'] %> (<%= routes['distance']['text'] %>)</p>
+				<% else %>
+					<h2><i class="fa-solid fa-question"></i>  Not Available  <i class="fa-solid fa-ellipsis-vertical"></i></h2>
+					<p>Try other travel methods</p>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>
+<% end %>
