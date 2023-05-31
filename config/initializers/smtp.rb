@@ -7,5 +7,5 @@ ActionMailer::Base.smtp_settings = {
   user_name:      ENV['OUTLOOK_ADDRESS'],
   password:       ENV['OUTLOOK_APP_PASSWORD'],
   authentication: :login,                 # :plain, :login or :cram_md5
-  enable_starttls_auto: true
+  enable_starttls_auto: true,
 }
