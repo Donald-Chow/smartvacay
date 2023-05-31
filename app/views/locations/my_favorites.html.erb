@@ -2,7 +2,9 @@
   <div class="container">
     <h1 class="location-text">All my favorites</h1>
     <% if Trip.all.present? %>
-      <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Regenerate itinerary</button>
+      <%= link_to my_favorites_locations_path, data: {turbo_method: :get, turbo_confirm: "Do you want to regenerate?"} do %>
+        <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Regenerate itinerary</button>
+      <% end %>
     <% else %>
       <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Generate itinerary</button>
     <% end %>
