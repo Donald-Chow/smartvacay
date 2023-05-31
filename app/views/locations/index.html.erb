@@ -30,6 +30,7 @@
 			</div>
 		<% end %>
 	</div>
+	<!-- Top Attractions -->
 	<div class="text-and-card">
 		<div class="location-text">
 			<h1>Top <%= current_user.trip.destination %> attractions</h1>
@@ -42,6 +43,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Top Restaurants -->
 	<div class="text-and-card">
 		<div class="location-text">
 			<h1>Top <%= current_user.trip.destination %> restaurants</h1>
@@ -49,6 +51,19 @@
 		<div class="section-wrapper">
 			<div class="card-locations">
 				<% @top_restaurants.each do |location| %>
+					<%= render "location_card", location: location%>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<!-- Top Shopping -->
+	<div class="text-and-card">
+		<div class="location-text">
+			<h1>Top <%= current_user.trip.destination %> shopping</h1>
+		</div>
+		<div class="section-wrapper">
+			<div class="card-locations">
+				<% @top_shoppings.each do |location| %>
 					<%= render "location_card", location: location%>
 				<% end %>
 			</div>

@@ -3,7 +3,7 @@ require "net/http"
 require "json"
 
 class GooglePlaces
-  attr_reader :query
+  attr_reader :query, :trip
 
   def initialize(attributes = {})
     @query = attributes[:query]
