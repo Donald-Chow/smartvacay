@@ -32,6 +32,15 @@
   transition: 0.4s;
 }
 
+#titlebar-signout {
+  position: absolute;
+  right: 0;
+
+  a {
+    font-size: smaller;
+  }
+}
+
 /* Add responsiveness - on screens less than 580px wide, display the navbar vertically instead of horizontally */
 @media screen and (max-width: 580px) {
   #titlebar {
