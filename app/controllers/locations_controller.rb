@@ -16,6 +16,10 @@ class LocationsController < ApplicationController
     @top_restaurants = @locations.select do |location|
       location.searches.find_by_trip_id(current_user.trip.id).category == "top_restaurants"
     end
+
+    @top_shoppings = @locations.select do |location|
+      location.searches.find_by_trip_id(current_user.trip.id).category == "top_shoppings"
+    end
   end
 
   def show
