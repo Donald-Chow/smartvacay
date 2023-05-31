@@ -1,15 +1,16 @@
 <div>
+
 	<% @grouped_itins.each do |date, itins| %>
 		<div class="card-day" data-controller="itin-collapse">
 			<div>
 				<h3 data-action="click->itin-collapse#toggle"><i data-itin-collapse-target='date' class="fa-solid fa-chevron-down"></i>  <%= date %></h3>
 			</div>
 			<%# date.sort_by(order).each_with_index do |itin,i|%>
-				<div class="cards-itinerary" data-itin-collapse-target='list' data-controller="sortable" >
+				<div id="<%= date %>" class="cards-itinerary"  data-itin-collapse-target='list' data-controller="sortable" >
 					<% itins.sort_by{ |itin| itin.order }.each_with_index do |itin, i| %>
-						<div class="card-itinerary handle">
+						<div class="card-itinerary handle" id="<%= itin.id %>">
 							<%= link_to "", location_path(itin.location), class: "itin-item" %>
-							<div class="card-itinerary-box" id="<%= itin.id %>"  data-sortable-target="spot" data-sortable-id-value="<%= i %>">
+							<div class="card-itinerary-box" id="<%= itin.id %>" data-order="<%= itin.order %>" data-sortable-target="itinerary">
 								<div class="time-slot">
 									<p><%= itin.order %></p>
 									<!--<p><%#= itin.start_time.strftime('%I:%M %p') %></p> -->
