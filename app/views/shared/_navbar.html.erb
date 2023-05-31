@@ -44,20 +44,3 @@
       <span class="nav-text">Itineraries</span>
     <% end %>
   <% end %>
-  <div class="arrow">
-    <i class="fa-solid fa-angle-right"></i>
-  </div>
-  <% if user_signed_in? %>
-    <%= link_to destroy_user_session_path, data: {turbo_method: :delete, action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
-      <i class="fa-solid fa-user"></i>
-      <br>
-      <span class="nav-text">User</span>
-    <% end %>
-  <% else %>
-    <%= link_to new_user_session_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
-      <i class="fa-solid fa-user"></i>
-      <br>
-      <span class="nav-text">User</span>
-    <% end %>
-  <% end %>
-</div>
