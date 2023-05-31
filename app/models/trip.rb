@@ -7,4 +7,12 @@ class Trip < ApplicationRecord
 
   validates :destination, presence: true
   validates :start_date, presence: true
+
+  after_create :send_trip_email
+
+  private
+
+  def send_trip_email
+    UserMailer.with(user: self.user).trip.deliver_later
+  end
 end

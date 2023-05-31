@@ -1,5 +1,12 @@
 <div id="titlebar">
-  <%= image_tag "new_logo2.png", alt: "logo", height: "35" %>
+  <%= image_tag "capitalize_logo.png", alt: "logo", height: "35" %>
+  <div id="titlebar-signout">
+    <% if user_signed_in? %>
+      <%= link_to destroy_user_session_path, data: {turbo_method: :delete, turbo_confirm: "Do you want to sign out?", action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
+        <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i>
+      <% end %>
+    <% end %>
+  </div>
   <%# <a href="#default" id="title">Smart Vacay</a> %>
 </div>
 <%# <script>
