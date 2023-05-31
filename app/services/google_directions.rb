@@ -15,11 +15,12 @@ class GoogleDirections
   def call
     key = ENV.fetch('GOOGLE_API_SERVER_KEY', nil)
     # p key
-    time = @dep_time.strftime('%s').to_i
+    # time = @dep_time.strftime('%s').to_i
+    # &departure_time=#{time}
     origin = "place_id:#{@origin.place_id}"
     destination = "place_id:#{@destination.place_id}"
 
-    url = URI("https://maps.googleapis.com/maps/api/directions/json?origin=#{origin}&destination=#{destination}&mode=#{@mode}&departure_time=#{time}&key=#{key}")
+    url = URI("https://maps.googleapis.com/maps/api/directions/json?origin=#{origin}&destination=#{destination}&mode=#{@mode}&key=#{key}")
     # p url
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
