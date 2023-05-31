@@ -24,6 +24,8 @@ class TripsController < ApplicationController
       create_top_attractions(@trip)
       # create Top Restaurants
       create_top_restaurants(@trip)
+      # create Top Shopping
+      create_top_shopping(@trip)
       redirect_to locations_path
 
     else
@@ -107,6 +109,17 @@ class TripsController < ApplicationController
                  # if location does not exists, create the location, and create search "bookmark"
                  Location.google_create(GooglePlaces.new(query: place["place_id"]).details)
       save_search(trip, location, "top_restaurants", query)
+    end
+  end
+
+  def create_top_shopping(trip)
+    query = "Top #{trip.destination} Shopping"
+    GooglePlaces.new(query:, trip: @trip).call.map do |place|
+      # if location exists, create search "bookmark"
+      location = Location.find_by(place_id: place["place_id"]) ||
+                 # if location does not exists, create the location, and create search "bookmark"
+                 Location.google_create(GooglePlaces.new(query: place["place_id"]).details)
+      save_search(trip, location, "top_shoppings", query)
     end
   end
 
