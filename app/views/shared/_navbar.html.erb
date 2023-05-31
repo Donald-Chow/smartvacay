@@ -4,16 +4,25 @@
     <br>
     <span class="nav-text">Home</span>
   <% end %>
+  <div class="arrow">
+    <i class="fa-solid fa-angle-right"></i>
+  </div>
   <%= link_to locations_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
     <i class="fa-solid fa-magnifying-glass"></i>
     <br>
     <span class="nav-text">Explore</span>
   <% end %>
+  <div class="arrow">
+    <i class="fa-solid fa-angle-right"></i>
+  </div>
   <%= link_to my_favorites_locations_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
     <i class="fa-solid fa-heart"></i>
     <br>
-    <span class="nav-text">Fav. List</span>
+    <span class="nav-text">Saved</span>
   <% end %>
+  <div class="arrow">
+    <i class="fa-solid fa-angle-right"></i>
+  </div>
   <% if user_signed_in? %>
     <% if current_user.trip.present? %>
       <%= link_to trip_path(current_user.trip), data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
@@ -35,17 +44,3 @@
       <span class="nav-text">Itineraries</span>
     <% end %>
   <% end %>
-  <% if user_signed_in? %>
-    <%= link_to destroy_user_session_path, data: {turbo_method: :delete, action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
-      <i class="fa-solid fa-user"></i>
-      <br>
-      <span class="nav-text">User</span>
-    <% end %>
-  <% else %>
-    <%= link_to new_user_session_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
-      <i class="fa-solid fa-user"></i>
-      <br>
-      <span class="nav-text">User</span>
-    <% end %>
-  <% end %>
-</div>
