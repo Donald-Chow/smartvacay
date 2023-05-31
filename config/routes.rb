@@ -16,12 +16,13 @@ Rails.application.routes.draw do
   end
 
   resources :trips, only: [:index, :show, :create, :update] do
-    resources :itineraries, only: [:create, :update_all]
+    resources :itineraries, only: [:create]
     member do
       get 'generate_icalendar'
     end
   end
 
+  patch 'itineraries/', to: 'itineraries#update_all', as: 'update_all'
   get '/trips/:id/generate', to: 'trips#generate', as: 'generate_trip'
 
   resources :itineraries, only: [:index, :update, :destroy]
