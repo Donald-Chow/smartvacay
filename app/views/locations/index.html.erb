@@ -18,18 +18,40 @@
 			<% end %>
 		</div>
 		<% if @results.present? %>
-			<div class="location-text">
-				<h1>Search Results</h1>
+			<div class="text-and-card">
+				<div class="location-text">
+					<h1>Search Results</h1>
+				</div>
+				<div class="section-wrapper">
+					<div class="card-locations">
+						<% @results.each do |location| %>
+							<%= render "location_card", location: location%>
+						<% end %>
+					</div>
+				</div>
 			</div>
+		<% end %>
+	</div>
+	<!-- Reccomendation -->
+	<div class="text-and-card">
+		<div class="location-text">
+			<h1>Recommended for you</h1>
+		</div>
+		<% if current_user.favorited_location.count == 0 %>
+			<%= image_tag 'SmartVacay_Members.png', alt: "smartvacay monkeys", style: "width: 160px; border-radius: 5px;" %>
+			<p>Add some locations to your favorites so our monkeys can recommend places for you </p>
+		<% else %>
+			<p>It seems like you like <%= @query %></p>
 			<div class="section-wrapper">
 				<div class="card-locations">
-					<% @results.each do |location| %>
+					<% @recommendations.each do |location| %>
 						<%= render "location_card", location: location%>
 					<% end %>
 				</div>
 			</div>
 		<% end %>
 	</div>
+
 	<!-- Top Attractions -->
 	<div class="text-and-card">
 		<div class="location-text">
