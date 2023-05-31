@@ -17,7 +17,16 @@ class ItinerariesController < ApplicationController
       itinerary.save
       authorize itinerary
     end
-    render json: { status: "ok" }
+    # render json: { status: "ok" }\
+    itins = params["array"].map do |item|
+      date_id = item.split("|")
+      Itinerary.find(date_id[1])
+    end
+    date = Itinerary.find(params["array"][0].split("|")[1]).date
+    render json: {
+      day_list_html: render_to_string(partial: "itineraries/day_list", formats: :html,
+                                      locals: { itins:, date: })
+    }.to_json
   end
 
   # def update_all

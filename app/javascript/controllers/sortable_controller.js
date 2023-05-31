@@ -37,6 +37,9 @@ export default class extends Controller {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        console.log(this.element);
+        // console.log(this.element.HTML);
+        this.element.innerHTML = data.day_list_html
       });
   }
 }
