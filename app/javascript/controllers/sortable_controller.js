@@ -11,36 +11,38 @@ export default class extends Controller {
       group: "sortable",
       handle: ".handle",
       animation: 150,
-      onSort: (event) => {
-        // Sends an AJAX request to update the spot_places for each spot
-        // console.log(event.from.id)
-        console.log(event.to.id)
-        console.log(this.itineraryTargets.map((itin)=>itin.id))
-        // this.updateTrip(Array.from(event.to.querySelectorAll(".card-itinerary")).map((itin)=> console.log(itin)))
-        this.updateTrip(Array.from(event.to.querySelectorAll(".card-itinerary")).map((itin)=>`${event.to.id}|${itin.id}`))
-        this.updateTrip(Array.from(event.from.querySelectorAll(".card-itinerary")).map((itin)=>`${event.from.id}|${itin.id}`))
-        // this.updateTrip(this.itineraryTargets.map((itin)=>`${event.to.id}|${itin.id}`))
-      },
+      onAdd: this.swapCard.bind(this), onUpdate: this.swapCard.bind(this)
     });
   }
 
-  updateTrip(array) {
+  async updateTrip(array, list) {
+
     const url = "/itineraries/update_all";
-    console.log(url);
+    // console.log(url);
     console.log(JSON.stringify({array}))
-    fetch(url, {
+    const response = await fetch(url, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({array}),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        console.log(this.element);
-        // console.log(this.element.HTML);
+    const data = await response.json()
+    console.log(data);
+    // console.log(this.element);
+    // console.log(this.element.HTML);
+    list.innerHTML = data.day_list_html
+    // if (callback) {callback()}
+  }
 
-          this.element.innerHTML = data.day_list_html
-
-      });
+    async swapCard(event) {
+    // Sends an AJAX request to update the spot_places for each spot
+    // console.log(event.from.id)
+    // console.log(event.to.id)
+    console.log(event);
+    console.log(this);
+    console.log(this.itineraryTargets.map((itin)=>itin.id))
+    // this.updateTrip(Array.from(event.to.querySelectorAll(".card-itinerary")).map((itin)=> console.log(itin)))
+    await this.updateTrip(Array.from(event.to.querySelectorAll(".card-itinerary")).map((itin)=>`${event.to.id}|${itin.id}`), event.to)
+    await this.updateTrip(Array.from(event.from.querySelectorAll(".card-itinerary")).map((itin)=>`${event.from.id}|${itin.id}`), event.from)
+    // this.updateTrip(this.itineraryTargets.map((itin)=>`${event.to.id}|${itin.id}`))
   }
 }

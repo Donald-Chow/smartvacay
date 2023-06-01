@@ -9,7 +9,7 @@ class TripsController < ApplicationController
 
   def show
     authorize @trip
-    @grouped_itins = @trip.itineraries.group_by { |itin| itin[:date].to_date }.sort
+    @grouped_itins = @trip.itineraries.group_by { |itin| itin.date }.sort
   end
 
   def create
