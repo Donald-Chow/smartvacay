@@ -25,7 +25,6 @@ export default class extends Controller {
   }
 
   updateTrip(array) {
-
     const url = "/itineraries/update_all";
     console.log(url);
     console.log(JSON.stringify({array}))
@@ -39,7 +38,9 @@ export default class extends Controller {
         console.log(data);
         console.log(this.element);
         // console.log(this.element.HTML);
-        this.element.innerHTML = data.day_list_html
+
+          this.element.innerHTML = data.day_list_html
+
       });
   }
 }
