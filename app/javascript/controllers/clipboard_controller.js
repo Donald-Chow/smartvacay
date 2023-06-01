@@ -11,5 +11,7 @@ export default class extends Controller {
     document.execCommand('copy');
     event.currentTarget.disabled = true;
     event.currentTarget.innerText = this.feedbackTextValue;
+    const myTimeout = setTimeout(copy, 5000);
+
   }
 }
