@@ -1,7 +1,7 @@
 <div class="card-location">
   <div class="bookmark">
     <% if user_signed_in? %>
-      <%= link_to favorite_location_path(location), class: "#{"text-warning" if current_user.favorited?(location)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-warning')" do %>
+      <%= link_to favorite_location_path(location), class: "bookmark-icon #{"text-warning" if current_user.favorited?(location)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-warning')" do %>
         <i class="fa-solid fa-bookmark"></i>
       <% end %>
     <% end %>
