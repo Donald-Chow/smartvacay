@@ -24,6 +24,21 @@
   width: 100%;
   margin-bottom: 80px;
   z-index: 9999;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.search-box-fixed-bottom.active {
+  opacity: 1;
+}
+// .btn-search {
+//   opacity:0;
+// }
+
+// .btn-search.active {
+//   opacity:1;
+// }
+.btn-collapse {
+  transform: translateY(-50%) rotate(360deg);
 }
 
 .search-box-bg {
