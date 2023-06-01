@@ -5,7 +5,7 @@
       <div class="banner-form">
 
         <%= simple_form_for(@trip, data: { controller: "flatpickr", controller: "spinner", action: "submit->spinner#insert" } )  do |f| %>
-          <%= f.input :destination, label: false, placeholder: "Where to?  i.e. Tokyo", class: "form-control"%>
+          <%= f.input :destination, label: false, placeholder: "Where is your next destination?", class: "form-control"%>
           <div class="d-flex">
             <div class="col m-1">
               <%= f.input :start_date, as: :string, placeholder: "Start Date", label: false,
