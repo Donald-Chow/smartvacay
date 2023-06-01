@@ -30,3 +30,6 @@ application.register("itin-collapse", ItinCollapseController)
 
 import SortableController from "./sortable_controller"
 application.register("sortable", SortableController)
+
+import SpinnerController from "./spinner_controller"
+application.register("spinner", SpinnerController)

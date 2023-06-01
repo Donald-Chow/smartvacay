@@ -1,55 +1,59 @@
 <div class="navbar" id="bottom-navbar" data-controller="active-tab">
-	<%= link_to root_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link" } do %>
-		<i class="fas fa-home"></i>
-		<br>
-		<span class="nav-text">Home</span>
-	<% end %>
-	<div class="arrow">
-		<i class="fa-solid fa-angle-right"></i>
-	</div>
-
-	<% if user_signed_in? && current_user.trip.present? %>
-		<%= link_to locations_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
-			<i class="fa-solid fa-magnifying-glass"></i>
-			<br>
-			<span class="nav-text">Explore</span>
-		<% end %>
-	<% else %>
-		<%= link_to root_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
-			<i class="fa-solid fa-magnifying-glass"></i>
-			<br>
-			<span class="nav-text">Explore</span>
-		<% end %>
-	<% end %>
-	<div class="arrow">
-		<i class="fa-solid fa-angle-right"></i>
-	</div>
-	<%= link_to my_favorites_locations_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
-		<i class="fa-solid fa-heart"></i>
-		<br>
-		<span class="nav-text">Saved</span>
-	<% end %>
-	<div class="arrow">
-		<i class="fa-solid fa-angle-right"></i>
-	</div>
-	<% if user_signed_in? %>
-		<% if current_user.trip.present? %>
-			<%= link_to trip_path(current_user.trip), data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
-				<i class="fas fa-plane"></i>
-				<br>
-				<span class="nav-text">Itineraries</span>
-			<% end %>
-		<% else %>
-			<%= link_to root_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
-				<i class="fas fa-plane"></i>
-				<br>
-				<span class="nav-text">Itineraries</span>
-			<% end %>
-		<% end %>
-	<% else %>
-		<%= link_to new_user_session_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
-			<i class="fas fa-plane"></i>
-			<br>
-			<span class="nav-text">Itineraries</span>
-		<% end %>
-	<% end %>
+  <%= link_to root_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link" } do %>
+    <i class="fas fa-home"></i>
+    <br>
+    <span class="nav-text">Home</span>
+  <% end %>
+  <div class="arrow">
+    <i class="fa-solid fa-angle-right"></i>
+  </div>
+  <% if user_signed_in? && current_user.trip.present? %>
+    <div data-controller="active-tab spinner" data-action="click->spinner#insert" data-spinner-target="link">
+      <%= link_to locations_path, data: { action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <br>
+        <span class="nav-text">Explore</span>
+      <% end %>
+    </div>
+  <% else %>
+    <div data-controller="active-tab">
+      <%= link_to root_path, data: { action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <br>
+        <span class="nav-text">Explore</span>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="arrow">
+    <i class="fa-solid fa-angle-right"></i>
+  </div>
+  <%= link_to my_favorites_locations_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
+    <i class="fa-solid fa-heart"></i>
+    <br>
+    <span class="nav-text">Saved</span>
+  <% end %>
+  <div class="arrow">
+    <i class="fa-solid fa-angle-right"></i>
+  </div>
+  <% if user_signed_in? %>
+    <% if current_user.trip.present? %>
+      <%= link_to trip_path(current_user.trip), data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
+        <i class="fas fa-plane"></i>
+        <br>
+        <span class="nav-text">Itineraries</span>
+      <% end %>
+    <% else %>
+      <%= link_to root_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
+        <i class="fas fa-plane"></i>
+        <br>
+        <span class="nav-text">Itineraries</span>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= link_to new_user_session_path, data: {action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
+      <i class="fas fa-plane"></i>
+      <br>
+      <span class="nav-text">Itineraries</span>
+    <% end %>
+  <% end %>
+</div>
