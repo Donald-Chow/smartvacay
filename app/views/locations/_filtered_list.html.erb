@@ -17,39 +17,30 @@
       <% end %>
       <%# description starts here %>
       <div class="card-location-info">
-        <h4><%= favorite.name %></h4>
-        <p><%= favorite.address %></p>
+        <h4 class='mb-1'><%= favorite.name %></h4>
+        <%if favorite.rating%>
+          <p><% favorite.rating.times do%>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+            <% (5 - favorite.rating).times do %>
+              <i class="fa-regular fa-star"></i>
+            <% end %>
+          <% end %></p>
+        <%if favorite.price_level%>
+          <p><% favorite.price_level.times do%>
+              <i class='fa-solid fa-dollar-sign'></i>
+            <% end %>
+          <% end %></p>
+        <div class='mt-1'>
+          <%if favorite.type_of_place%>
+            <% favorite_type = favorite.type_of_place.gsub("_", " ").split.map { |each| each.capitalize }.join(" ") %>
+            <% if favorite_type == "Point Of Interest" || favorite_type == "Estabilishment" %>
+              <% favorite_type = "" %>
+            <% end %>
+          <% end %>
+        </div>
+        <p><i class="fa-solid fa-circle fa-xs"></i> <%= favorite_type %></p>
       </div>
     </div>
-    <%# image starts here %>
-    <%= link_to location_path(favorite) do %>
-      <%= favorite.photo.present? ? image_tag(favorite.photo.split(",")[0]) : image_tag("sample_card_image.jpeg") %>
-    <% end %>
-    <%# description starts here %>
-    <div class="card-location-info">
-      <h4 class='mb-1'><%= favorite.name %></h4>
-      <%if favorite.rating%>
-        <p><% favorite.rating.times do%>
-          <i class="fa-solid fa-star"></i>
-        <% end %>
-        <% (5 - favorite.rating).times do %>
-          <i class="fa-regular fa-star"></i>
-          <% end %>
-      <% end %></p>
-      <%if favorite.price_level%>
-        <p><% favorite.price_level.times do%>
-          <i class='fa-solid fa-dollar-sign'></i>
-        <% end %>
-      <% end %></p>
-      <div class='mt-1'>
-        <%if favorite.type_of_place%>
-          <% favorite_type = favorite.type_of_place.gsub("_", " ").split.map { |each| each.capitalize }.join(" ") %>
-          <% if favorite_type == "Point Of Interest" || favorite_type == "Estabilishment" %>
-            <% favorite_type = "" %>
-          <% end %>
-        <% end %>
-      </div>
-      <p><i class="fa-solid fa-circle fa-xs"></i> <%= favorite_type %></p>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
