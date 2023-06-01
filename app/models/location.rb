@@ -17,7 +17,7 @@ class Location < ApplicationRecord
       address: location["formatted_address"] || "",
       phone: location['formatted_phone_number'],
       website: location['website'],
-      rating: location["rating"],
+      rating: location["rating"] || 0,
       # REVIEW: may be unuseable due to not properly parsed
       review: location["reviews"] ? location["reviews"][0]['text'] : nil,
       # photo: if location.include?("photos")

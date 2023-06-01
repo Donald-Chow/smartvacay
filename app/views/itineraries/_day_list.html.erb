@@ -1,25 +1,27 @@
 <div id="<%= date %>" class="cards-itinerary"  data-itin-collapse-target='list' data-controller="sortable" >
-	<% itins.sort_by{ |itin| itin.order }.each_with_index do |itin, i| %>
-		<div class="card-itinerary handle" id="<%= itin.id %>">
-			<%= link_to "", location_path(itin.location), class: "itin-item" %>
-			<div class="card-itinerary-box" id="<%= itin.id %>" data-order="<%= itin.order %>" data-sortable-target="itinerary">
-				<div class="time-slot">
-					<p><%= itin.order %></p>
-					<!--<p><%#= itin.start_time.strftime('%I:%M %p') %></p> -->
-				</div>
-				<div class="card-itinerary-infos" >
-					<h2>
-						<% if itin.location.type_of_place.split(", ").include? "restaurant"%>
-							<i class="fa-solid fa-utensils"></i>
-						<% else %>
-							<i class="fa-solid fa-location-dot"></i>
-						<% end %>  <%= itin.location.name %></h2>
-					<%= link_to "Remove", itinerary_path(itin), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary btn-sm remove-btn" %>
-					<!--<p><%#= itin.start_time.strftime('%a %d %b %Y') %></p>-->
-				</div>
-				<img src="<%= itin.location.photo.split(",")[0] %>" alt="<%"#{itin.location.name}-photo"%>">
-			</div>
-		</div>
-		<%= render "itineraries/direction_card", itins: itins, itin: itin, i: i%>
-	<% end %>
+  <% itins.sort_by{ |itin| itin.order }.each_with_index do |itin, i| %>
+    <div class="card-itinerary" id="<%= itin.id %>">
+      <%= link_to "", location_path(itin.location), class: "itin-item" %>
+      <div class="card-itinerary-box" id="<%= itin.id %>" data-order="<%= itin.order %>" data-sortable-target="itinerary">
+        <div class="time-slot handle d-flex justify-content-center align-items-center">
+          <i class="fa-solid fa-grip"></i>
+          <!--<p><%#= itin.start_time.strftime('%I:%M %p') %></p> -->
+        </div>
+        <div class="card-itinerary-infos" >
+          <h2>
+            <% if itin.location.type_of_place.split(", ").include? "restaurant"%>
+              <i class="fa-solid fa-utensils"></i>
+            <% else %>
+              <i class="fa-solid fa-location-dot"></i>
+            <% end %>  <%= itin.location.name %></h2>
+          <!--<p><%#= itin.start_time.strftime('%a %d %b %Y') %></p>-->
+        </div>
+        <%= link_to itinerary_path(itin), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-sm remove-btn" do%>
+          <i class="fa-regular fa-trash-can"></i>
+        <% end %>
+        <img src="<%= itin.location.photo.split(",")[0] %>" alt="<%"#{itin.location.name}-photo"%>">
+      </div>
+    </div>
+    <%= render "itineraries/direction_card", itins: itins, itin: itin, i: i%>
+  <% end %>
 </div>
