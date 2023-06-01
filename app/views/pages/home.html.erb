@@ -4,7 +4,7 @@
     <% if current_user.trip.nil? %>
       <div class="banner-form">
         <%= simple_form_for(@trip) do |f| %>
-          <%= f.input :destination, label: false, placeholder: "Where to?  i.e. Tokyo", class: "form-control"%>
+          <%= f.input :destination, label: false, placeholder: "Where is your next destination?", class: "form-control"%>
           <div class="d-flex">
             <div class="col m-1">
               <%= f.input :start_date, as: :string, placeholder: "Start Date", label: false,
