@@ -14,7 +14,7 @@ export default class extends Controller {
       onSort: (event) => {
         // Sends an AJAX request to update the spot_places for each spot
         // console.log(event.from.id)
-        console.log(event.to.id)
+        // console.log(event.to.id)
         console.log(this.itineraryTargets.map((itin)=>itin.id))
         // this.updateTrip(Array.from(event.to.querySelectorAll(".card-itinerary")).map((itin)=> console.log(itin)))
         this.updateTrip(Array.from(event.to.querySelectorAll(".card-itinerary")).map((itin)=>`${event.to.id}|${itin.id}`))
@@ -27,7 +27,7 @@ export default class extends Controller {
   updateTrip(array) {
 
     const url = "/itineraries/update_all";
-    console.log(url);
+    // console.log(url);
     console.log(JSON.stringify({array}))
     fetch(url, {
       method: "PATCH",
