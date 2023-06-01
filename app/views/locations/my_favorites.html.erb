@@ -1,4 +1,5 @@
 <div class="page-content">
+
 	<div class="container">
 		<h1 class="location-text">Saved locations</h1>
 		<div class="d-flex justify-content-center">
@@ -25,26 +26,26 @@
       { display: "Shopping", image: "https://res.cloudinary.com/da2dzfqsn/image/upload/v1685617515/shopping_k1zjei.svg", query: "shopping" },
       { display: "Misc", image: "https://res.cloudinary.com/da2dzfqsn/image/upload/v1685617516/misc_-_map-pin-solid_s9c5ha.svg", query: "miscellaneous" }
       ] %>
-					<% categories.each do |category| %>
-						<div class="category-avatar">
-							<%= link_to my_favorites_locations_path(category: category[:query]) do %>
-								<%= image_tag category[:image], class: (category[:query].empty? ? "avatar-location active" : "avatar-location"),
+          <% categories.each do |category| %>
+            <div class="category-avatar">
+              <%= link_to my_favorites_locations_path(category: category[:query]) do %>
+                <%= image_tag category[:image], class: (category[:query].empty? ? "avatar-location active" : "avatar-location"),
             data: {
               category_search_target: "avatar",
               action: "click->category-search#showLists",
               category: category[:query]}
             %>
-							<% end %>
-							<%# Disabling text as links %>
-							<p><%= category[:display] %></p>
-						</div>
-					<% end %>
-				</div>
-				<%# From here we have all the location cards %>
-				<div class="card-my-fav-locations" data-category-search-target="list">
-					<%= render "filtered_list", favorites: @favorites %>
-				</div>
-			</div>
-		</div>
-	</div>
+              <% end %>
+              <%# Disabling text as links %>
+              <p><%= category[:display] %></p>
+            </div>
+          <% end %>
+        </div>
+        <%# From here we have all the location cards %>
+        <div data-category-search-target="list">
+          <%= render "filtered_list", favorites: @favorites %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

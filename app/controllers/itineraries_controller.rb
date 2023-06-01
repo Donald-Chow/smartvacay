@@ -19,7 +19,7 @@ class ItinerariesController < ApplicationController
     end
     # render json: { status: "ok" }\
     itins = params["array"].map do |item|
-      date_id = item.split("|")
+    date_id = item.split("|")
       Itinerary.find(date_id[1])
     end
     date = Itinerary.find(params["array"][0].split("|")[1]).date

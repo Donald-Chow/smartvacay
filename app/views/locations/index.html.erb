@@ -1,94 +1,93 @@
 <div class="container page-content">
-	<div class="container" data-controller="google-search">
-		<!--
+  <div class="container" data-controller="google-search">
+    <!--
     <div class="search-box">
 			<%= form_with data: { action: "submit->google-search#findPlaceFromQuery"}  do |form| %>
 				<%= form.text_field :query, placeholder: 'Enter your search query', data: {google_search_target: "input"} %>
 				<%= form.submit 'Search' %>
 			<% end %>
       -->
-		<div class="search-box-fixed-bottom">
-			<%= form_with url: locations_path, method: :get, class: "d-flex search-box-bg" do %>
-				<%= text_field_tag :query,
+    <div class="search-box-fixed-bottom" data-controller="spinner">
+      <%= form_with url: locations_path, method: :get, class: "d-flex search-box-bg" do %>
+        <%= text_field_tag :query,
             params[:query],
             class: "form-control",
             placeholder: "Type a keyword"
         %>
-				<%= submit_tag "Search", name: "", class: "btn btn-primary" %>
-			<% end %>
-		</div>
-		<% if @results.present? %>
-			<div class="text-and-card">
-				<div class="location-text">
-					<h1>Search Results</h1>
-				</div>
-				<div class="section-wrapper">
-					<div class="card-locations">
-						<% @results.each do |location| %>
-							<%= render "location_card", location: location%>
-						<% end %>
-					</div>
-				</div>
-			</div>
-		<% end %>
-	</div>
-	<!-- Reccomendation -->
-	<div class="text-and-card">
-		<div class="location-text">
-			<h1>Recommended for you</h1>
-		</div>
-		<% if current_user.favorited_location.count == 0 %>
-			<%= image_tag 'SmartVacay_Members.png', alt: "smartvacay monkeys", style: "width: 160px; border-radius: 5px;" %>
-			<p>Add some locations to your favorites so our monkeys can recommend places for you </p>
-		<% else %>
-			<p>It seems like you like <%= @query %></p>
-			<div class="section-wrapper">
-				<div class="card-locations">
-					<% @recommendations.each do |location| %>
-						<%= render "location_card", location: location%>
-					<% end %>
-				</div>
-			</div>
-		<% end %>
-	</div>
-
-	<!-- Top Attractions -->
-	<div class="text-and-card">
-		<div class="location-text">
-			<h1>Top <%= current_user.trip.destination %> attractions</h1>
-		</div>
-		<div class="section-wrapper">
-			<div class="card-locations">
-				<% @top_attractions.each do |location| %>
-					<%= render "location_card", location: location%>
-				<% end %>
-			</div>
-		</div>
-	</div>
-	<!-- Top Restaurants -->
-	<div class="text-and-card">
-		<div class="location-text">
-			<h1>Top <%= current_user.trip.destination %> restaurants</h1>
-		</div>
-		<div class="section-wrapper">
-			<div class="card-locations">
-				<% @top_restaurants.each do |location| %>
-					<%= render "location_card", location: location%>
-				<% end %>
-			</div>
-		</div>
-	</div>
-	<!-- Top Shopping -->
-	<div class="text-and-card">
-		<div class="location-text">
-			<h1>Top <%= current_user.trip.destination %> shopping</h1>
-		</div>
-		<div class="section-wrapper">
-			<div class="card-locations">
-				<% @top_shoppings.each do |location| %>
-					<%= render "location_card", location: location%>
-				<% end %>
-			</div>
-		</div>
-	</div>
+        <%= submit_tag "Search", name: "", class: "btn btn-primary", data: { action: "click->spinner#insert"} %>
+      <% end %>
+    </div>
+    <% if @results.present? %>
+      <div class="text-and-card">
+        <div class="location-text">
+          <h1>Search Results</h1>
+        </div>
+        <div class="section-wrapper">
+          <div class="card-locations">
+            <% @results.each do |location| %>
+              <%= render "location_card", location: location%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <!-- Reccomendation -->
+  <div class="text-and-card">
+    <div class="location-text">
+      <h1>Recommended for you</h1>
+    </div>
+    <% if current_user.favorited_location.count == 0 %>
+      <%= image_tag 'SmartVacay_Members.png', alt: "smartvacay monkeys", style: "width: 160px; border-radius: 5px;" %>
+      <p>Add some locations to your favorites so our monkeys can recommend places for you </p>
+    <% else %>
+      <p>It seems like you like <%= @query %></p>
+      <div class="section-wrapper">
+        <div class="card-locations">
+          <% @recommendations.each do |location| %>
+            <%= render "location_card", location: location%>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <!-- Top Attractions -->
+  <div class="text-and-card">
+    <div class="location-text">
+      <h1>Top <%= current_user.trip.destination %> attractions</h1>
+    </div>
+    <div class="section-wrapper">
+      <div class="card-locations">
+        <% @top_attractions.each do |location| %>
+          <%= render "location_card", location: location%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- Top Restaurants -->
+  <div class="text-and-card">
+    <div class="location-text">
+      <h1>Top <%= current_user.trip.destination %> restaurants</h1>
+    </div>
+    <div class="section-wrapper">
+      <div class="card-locations">
+        <% @top_restaurants.each do |location| %>
+          <%= render "location_card", location: location%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- Top Shopping -->
+  <div class="text-and-card pb-5 mb-5">
+    <div class="location-text">
+      <h1>Top <%= current_user.trip.destination %> shopping</h1>
+    </div>
+    <div class="section-wrapper">
+      <div class="card-locations">
+        <% @top_shoppings.each do |location| %>
+          <%= render "location_card", location: location%>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

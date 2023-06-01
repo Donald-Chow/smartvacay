@@ -98,7 +98,7 @@
 
 .card-itinerary-box {
   display: flex;
-  align-items: start;
+  align-items: inherit;
   justify-content: space-between;
   width: 100%;
 }
@@ -110,6 +110,7 @@
   border-radius: 10px;
   margin: 12px;
 }
+
 
 .card-itinerary h2 {
   font-size: 17px;
@@ -126,14 +127,6 @@
   margin-top: 16px;
 }
 
-// .card-itinerary a {
-//   position:absolute;
-//   height: 100%;
-//   width: 100%;
-//   top: 0px;
-//   left: 0;
-// }
-
 .card-itinerary .itin-item {
   position:absolute;
   height: 100%;
@@ -143,28 +136,29 @@
 }
 
 .card-itinerary .remove-btn {
-  // position: absolute;
-  // top: 80px;
+  position: relative;
+  top: 34px;
   font-size: 10px;
   font-style: italic;
   z-index: 0;
+  border: 1px solid $primary;
+  color: black;
 }
 
 .card-itinerary-infos {
   width: 100%;
-  height: 100px;
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  align-items: flex-start;
+  padding-left: 10px;
+  // display: flex;
+  // justify-content: space-between;
+  // flex-direction: column;
+  // align-items: flex-start;
 }
 
 // direction card
 .card-direction {
   overflow: hidden;
   height: 80px;
-  background: $white;
+  background: $bg-color;
   box-shadow: 0 0 1px rgba(0,0,0,0.2);
   display: flex;
   padding: 8px;
@@ -174,13 +168,13 @@
 }
 
 .card-direction h2 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   text-align: center;
 }
 
 .card-direction p {
-  font-size: 16px;
+  font-size: 13px;
   line-height: 1.4;
   opacity: .7;
   margin-bottom: 0;

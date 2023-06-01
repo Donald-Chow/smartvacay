@@ -1,14 +1,25 @@
-<%= "Your list is currently empty.  Try bookmarking more locations!" if @favorites.empty? %>
-<% @favorites.each do |favorite| %>
-  <%# favoritable = @category.present? ? favorite : favorite.favoritable %>
-  <div class="card-location">
-    <%# Bookmark starts here %>
-    <div class="bookmark">
-      <% if current_user %>
-        <%= link_to favorite_location_path(favorite), class: "#{"text-warning" if current_user.favorited?(favorite)}", data: { turbo_method: :post }, onclick: "this.classList.toggle('text-warning')" do %>
-          <i class="fa-solid fa-bookmark"></i>
+<h6 class="mt-2"><%= "This category is currently empty.  Try bookmarking more locations!" if @favorites.empty? %></h6>
+<div class="card-my-fav-locations" >
+  <% @favorites.each do |favorite| %>
+    <%# favoritable = @category.present? ? favorite : favorite.favoritable %>
+    <div class="card-location">
+      <%# Bookmark starts here %>
+      <div class="bookmark">
+        <% if current_user %>
+          <%= link_to favorite_location_path(favorite), class: "#{"text-warning" if current_user.favorited?(favorite)}", data: { turbo_method: :post }, onclick: "this.classList.toggle('text-warning')" do %>
+            <i class="fa-solid fa-bookmark"></i>
+          <% end %>
         <% end %>
+      </div>
+      <%# image starts here %>
+      <%= link_to location_path(favorite) do %>
+        <%= favorite.photo.present? ? image_tag(favorite.photo.split(",")[0]) : image_tag("sample_card_image.jpeg") %>
       <% end %>
+      <%# description starts here %>
+      <div class="card-location-info">
+        <h4><%= favorite.name %></h4>
+        <p><%= favorite.address %></p>
+      </div>
     </div>
     <%# image starts here %>
     <%= link_to location_path(favorite) do %>

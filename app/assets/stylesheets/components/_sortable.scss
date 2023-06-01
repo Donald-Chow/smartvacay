@@ -1,0 +1,12 @@
+.handle {
+  z-index: 0;
+  cursor: grab;
+  height: 100px;
+  &:active{
+    cursor: grabbing;
+  }
+}
+
+.transport-btn {
+  font-size: 12px;
+}
