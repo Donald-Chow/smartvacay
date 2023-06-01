@@ -1,4 +1,4 @@
-<%= "Your list is currently empty.  Try bookmarking more locations!" if @favorites.empty? %>
+<h5 class="mt-2"><%= "This category is currently empty.  Try bookmarking more locations!" if @favorites.empty? %></h5>
 <div class="card-my-fav-locations" >
   <% @favorites.each do |favorite| %>
     <%# favoritable = @category.present? ? favorite : favorite.favoritable %>
