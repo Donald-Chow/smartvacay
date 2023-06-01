@@ -48,20 +48,20 @@
       </div>
       <div class="card-body" id="location-details">
         <%if @location.description %>
-          <h5 class="card-title"><i class="fa-solid fa-book"></i> <span class="location-details-text">Description</span></h5>
+          <h5 class="card-title"><i class="fa-solid fa-book"></i>  <span class="location-details-text">Description</span></h5>
           <p class="card-text"><%= @location.description %></p>
         <% end %>
-        <h5 class="card-title"><i class="fa-solid fa-flag"></i> <span class="location-details-text">Type of place</span></h5>
+        <h5 class="card-title"><i class="fa-solid fa-flag"></i>  <span class="location-details-text">Type of place</span></h5>
         <% type_of_place = @location.type_of_place.gsub("_", " ").split.map { |each| each.capitalize }.join(" ") %>
         <p class="card-text"><%= type_of_place %></p>
-        <h5 class="card-title"><i class="fa-solid fa-map-location-dot"></i> <span class="location-details-text">Address</span></h5>
+        <h5 class="card-title"><i class="fa-solid fa-map-location-dot"></i>  <span class="location-details-text">Address</span></h5>
         <p class="card-text"><%= @location.address %></p>
         <%if @location.website%>
-          <h5 class="card-title"><i class="fa-solid fa-earth-americas"></i> <span class="location-details-text">Website</span></h5>
+          <h5 class="card-title"><i class="fa-solid fa-earth-americas"></i>  <span class="location-details-text">Website</span></h5>
           <p class="card-text"><%= @location.website %></p>
         <% end %>
         <%if @location.phone%>
-          <h5 class="card-title"><i class="fa-solid fa-phone"></i> <span class="location-details-text">Phone Number</span></h5>
+          <h5 class="card-title"><i class="fa-solid fa-phone"></i>  <span class="location-details-text">Phone</span></h5>
           <p class="card-text"><%= @location.phone %></p>
         <% end %>
       </div>
