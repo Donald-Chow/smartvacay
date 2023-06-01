@@ -3,7 +3,7 @@
   <% if user_signed_in? %>
     <% if current_user.trip.nil? %>
       <div class="banner-form">
-        <%= simple_form_for(@trip) do |f| %>
+        <%= simple_form_for(@trip, data: { controller: "spinner", action: "submit->spinner#insert" }) do |f| %>
           <%= f.input :destination, label: false, placeholder: "Where to?  i.e. Tokyo", class: "form-control"%>
           <div class="d-flex">
             <div class="col m-1">
@@ -19,7 +19,7 @@
                 input_html: { data: { controller: "flatpickr" } } %>
             </div>
           </div>
-          <%= f.submit class: "btn btn-primary" %>
+          <%= f.submit "Start exploring", class: "btn btn-primary" %>
         <% end %>
       </div>
     <% else %>
