@@ -33,18 +33,11 @@
         <% end %>
       </div>
       <div class="card-body" id="location-details">
-        <h5 class="card-title">Address</h5>
+        <h5 class="card-title"><i class="fa-solid fa-map-location-dot"></i></h5>
         <p class="card-text"><%= @location.address %></p>
-        <%if @location.rating%>
-          <h5 class="card-title">Rating </h5>
-          <p class="card-text">
-            <% @location.rating.times do%>
-              <i class="fa-solid fa-star"></i>
-            <% end %></p>
-        <% end %>
-        <%if @location.description%>
-          <h5 class="card-title">Description</h5>
-          <p class="card-text"><%= @location.phone %></p>
+        <%if @location.description %>
+          <h5 class="card-title"><i class="fa-solid fa-book"></i></h5>
+          <p class="card-text"><%= @location.description %></p>
         <% end %>
         <%if @location.price_level%>
           <h5 class="card-title">Price Level: </h5>
@@ -53,16 +46,27 @@
               <i class='fa-solid fa-dollar-sign'></i>
             <% end %></p>
         <% end %>
-        <h5 class="card-title">Type of Place</h5>
+        <h5 class="card-title"><i class="fa-solid fa-flag"></i></h5>
         <% type_of_place = @location.type_of_place.gsub("_", " ").split.map { |each| each.capitalize }.join(" ") %>
         <p class="card-text"><%= type_of_place %></p>
         <%if @location.website%>
-          <h5 class="card-title">Website</h5>
+          <h5 class="card-title"><i class="fa-solid fa-earth-americas"></i></h5>
           <p class="card-text"><%= @location.website %></p>
         <% end %>
         <%if @location.phone%>
           <h5 class="card-title">Phone Number</h5>
           <p class="card-text"><%= @location.phone %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body" id="location-details">
+        <%if @location.rating%>
+          <h5 class="card-title">Rating </h5>
+          <p class="card-text">
+            <% @location.rating.times do%>
+              <i class="fa-solid fa-star"></i>
+            <% end %></p>
         <% end %>
         <!-- Google Review: -->
         <%if @location.review%>
