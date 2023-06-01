@@ -1,5 +1,5 @@
-meta_name: "Smart Vacay"
-meta_title: "Smart Vacay - tagline"
-meta_description: "Relevant description"
+meta_name: "SmartVacay"
+meta_title: "SmartVacay - Smart Itinerary in 3 easy steps"
+meta_description: "Effortlessly create your itinerary for your dream vacation in just three simple steps with our travel app."
 meta_image: "cover.png" # should exist in `app/assets/images/`
 twitter_account: "@your_twitter_account" # required for Twitter Cards
