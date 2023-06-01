@@ -20,8 +20,13 @@
 font-size: 30px;
 }
 
-#location-details {
+.location-details {
 background-color: rgba(217, 217, 217, 0.3)
+}
+
+.location-details-text {
+  font-size: 15px;
+  //color: black;
 }
 
 #map-container {
@@ -39,4 +44,17 @@ width: 99%;
 
 .card-for-map{
   height: 450px;
+}
+
+.card-title {
+  color: #595959;
+}
+
+.card-text {
+  font-size: 13px;
+  color: $secondary;
+}
+
+.user-reviews {
+  border-bottom: 1px solid #595959;
 }

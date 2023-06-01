@@ -1,30 +1,46 @@
-
 <div class="page-content">
-	<div id="trips-info">
-		<h1><%= @trip.destination %> 2023</h1>
-		<p><%= @trip.start_date %></p>
-	</div>
-	<div class="container">
-		<%= link_to 'Download itinerary', generate_icalendar_trip_path(@trip), class: "btn btn-secondary mt-3 mb-3" %>
-    <button onclick="window.print()" class="btn btn-secondary mt-3 mb-3" >Share as PDF </button>
-		<%= simple_form_for(@trip) do |f| %>
-			<% if @trip.driving == false %>
-				<%= f.input :driving, as: :hidden, input_html: { value: '1' } %>
-				<%= f.button :submit, "Switch to Driving", class: "btn btn-primary mb-3" %>
-			<% else %>
-				<%= f.input :driving, as: :hidden, input_html: { value: '0' } %>
-				<%= f.button :submit, "Switch to Walking", class: "btn btn-primary mb-3" %>
-			<% end %>
-		<% end %>
-		<div class="schedule">
-			<% if @trip.itineraries == [] %>
-				<div class="my-5 text-center">
-					<%= link_to "Generate my itinerary", generate_trip_path(@trip), class: "btn btn-secondary" %>
-				</div>
-			<% else %>
-				<%= render template:"itineraries/index", trip: @trip %>
-			<% end %>
-		</div>
-	</div>
-
+  <div id="trips-info">
+    <h1><%= @trip.destination %> 2023</h1>
+    <p><%= @trip.start_date %></p>
+  </div>
+  <div class="container">
+    <% if @trip.itineraries != [] %>
+      <%= simple_form_for(@trip) do |f| %>
+        <% if @trip.driving == false %>
+          <%= f.input :driving, as: :hidden, input_html: { value: '1' } %>
+          <%= button_tag :submit, class: "btn btn-primary mb-3" do %>
+            <i class="fa-solid fa-car"></i> <span class="transport-btn">Switch to Driving</span>
+          <% end %>
+        <% else %>
+          <%= f.input :driving, as: :hidden, input_html: { value: '0' } %>
+          <%= button_tag :submit, class: "btn btn-primary mb-3" do %>
+            <i class="fa-solid fa-bus-simple"></i> <span class="transport-btn">Switch to Public Transport</span>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <div class="schedule">
+      <% if @trip.itineraries == [] %>
+        <div class="my-5 text-center">
+          <%= link_to "Generate my itinerary", generate_trip_path(@trip), class: "btn btn-secondary" %>
+        </div>
+      <% else %>
+        <%= render template:"itineraries/index", trip: @trip %>
+      <% end %>
+    </div>
+    <% if @trip.itineraries != [] %>
+      <div class="share text-center">
+        <%= link_to generate_icalendar_trip_path(@trip), class: "btn btn-secondary mt-3 mb-3 transport-btn" do%>
+          <i class="fa-regular fa-calendar-days"></i> Export as ics
+        <% end %>
+        <button onclick="window.print()" class="btn btn-secondary mt-3 mb-3 transport-btn" ><i class="fa-solid fa-arrow-up-right-from-square"></i> Save as PDF </button>
+      </div>
+      <div class="share-itin text-center my-3">
+        <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!">
+          <input data-clipboard-target="input" type="text" value="https://smartvacay.herokuapp.com/trips/<%=@trip.id%>" readonly>
+          <button class="btn btn-secondary py-2" id="clipboard-btn" data-action="click->clipboard#copy">Copy to Clipboard</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -1,17 +1,10 @@
 <div>
-
-	<% @grouped_itins.each do |date, itins| %>
-		<div class="card-day" data-controller="itin-collapse">
-			<div>
-				<h3 data-action="click->itin-collapse#toggle"><i data-itin-collapse-target='date' class="fa-solid fa-chevron-down"></i>  <%= date.strftime('%a %d %b %Y') %></h3>
-			</div>
-			<%= render "itineraries/day_list", itins: itins, date: date %>
-		</div>
-	<% end %>
-	<div class="share-itin text-center my-3">
-		<div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!">
-			<input data-clipboard-target="input" type="text" value="https://smartvacay.herokuapp.com/trips/<%=@trip.id%>" readonly>
-			<button class="btn btn-primary btn-sm py-2" data-action="click->clipboard#copy">Copy to Clipboard</button>
-		</div>
-	</div>
+  <% @grouped_itins.each do |date, itins| %>
+    <div class="card-day" data-controller="itin-collapse">
+      <div>
+        <h3 data-action="click->itin-collapse#toggle"><i data-itin-collapse-target='date' class="fa-solid fa-chevron-down"></i>  <%= date.strftime('%a %d %b %Y') %></h3>
+      </div>
+      <%= render "itineraries/day_list", itins: itins, date: date %>
+    </div>
+  <% end %>
 </div>
