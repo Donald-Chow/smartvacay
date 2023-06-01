@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_053051) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_091532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_053051) do
     t.string "address"
     t.string "phone"
     t.string "website"
-    t.integer "rating"
+    t.integer "rating", default: 0
     t.text "review"
     t.string "photo"
     t.string "opening_hours"

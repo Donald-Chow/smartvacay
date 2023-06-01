@@ -3,8 +3,8 @@
     <div class="location-header">
       <div class="location-text">
         <h2><%= @location.name %></h2>
-        <%if @location.rating%>
-          <p class="card-text">
+        <p class="card-text">
+          <% if @location.rating%>
             <% @location.rating.times do%>
               <i class="fa-solid fa-star"></i>
             <% end %>
@@ -12,7 +12,7 @@
               <i class="fa-regular fa-star"></i>
             <% end %>
           </p>
-        <% end %>
+        <%end%>
         <p>        <%if @location.price_level%>
             <% @location.price_level.times do%>
               <i class='fa-solid fa-dollar-sign'></i>
