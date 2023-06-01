@@ -4,18 +4,22 @@
     <p><%= @trip.start_date %></p>
   </div>
   <div class="container">
-    <%= link_to 'Download itinerary', generate_icalendar_trip_path(@trip), class: "btn btn-secondary mt-3 mb-3" %>
-    <button onclick="window.print()" class="btn btn-secondary mt-3 mb-3" >Share as PDF </button>
+    <div class="share text-center">
+      <%= link_to generate_icalendar_trip_path(@trip), class: "btn btn-secondary mt-3 mb-3 transport-btn" do%>
+        <i class="fa-solid fa-calendar-days"></i> Export as ics
+      <% end %>
+      <button onclick="window.print()" class="btn btn-secondary mt-3 mb-3 transport-btn" ><i class="fa-solid fa-arrow-up-right-from-square"></i> Share as PDF </button>
+    </div>
     <%= simple_form_for(@trip) do |f| %>
       <% if @trip.driving == false %>
         <%= f.input :driving, as: :hidden, input_html: { value: '1' } %>
         <%= button_tag :submit, class: "btn btn-primary mb-3" do %>
-          <span class="transport-btn">Switch to Driving</span> <i class="fa-solid fa-car"></i>
+          <i class="fa-solid fa-car"></i> <span class="transport-btn">Switch to Driving</span>
         <% end %>
       <% else %>
         <%= f.input :driving, as: :hidden, input_html: { value: '0' } %>
         <%= button_tag :submit, class: "btn btn-primary mb-3" do %>
-          <span class="transport-btn">Switch to Public Transport</span> <i class="fa-solid fa-bus-simple"></i>
+          <i class="fa-solid fa-bus-simple"></i> <span class="transport-btn">Switch to Public Transport</span>
         <% end %>
       <% end %>
     <% end %>
