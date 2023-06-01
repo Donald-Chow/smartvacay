@@ -15,7 +15,7 @@ class Location < ApplicationRecord
       name: location["name"],
       place_id: location["place_id"],
       address: location["formatted_address"] || "",
-      phone: location['"formatted_phone_number"'],
+      phone: location['formatted_phone_number'],
       website: location['website'],
       rating: location["rating"],
       # REVIEW: may be unuseable due to not properly parsed
