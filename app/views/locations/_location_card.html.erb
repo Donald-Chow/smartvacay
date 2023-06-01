@@ -13,6 +13,27 @@
   </div>
   <div class="card-location-info">
     <h4><%= location.name %></h4>
-    <p><%= location.address %></p>
+    <%if location.rating%>
+      <p><% location.rating.times do%>
+        <i class="fa-solid fa-star"></i>
+      <% end %>
+      <% (5 - location.rating).times do %>
+        <i class="fa-regular fa-star"></i>
+        <% end %>
+    <% end %></p>
+    <%if location.price_level%>
+      <p><% location.price_level.times do%>
+        <i class='fa-solid fa-dollar-sign'></i>
+      <% end %>
+    <% end %></p>
+    <div class='mt-1'>
+      <%if location.type_of_place%>
+        <% location_type = location.type_of_place.gsub("_", " ").split.map { |each| each.capitalize }.join(" ") %>
+        <% if location_type == "Point Of Interest" || location_type == "Estabilishment" %>
+          <% location_type = "" %>
+        <% end %>
+      <% end %>
+    </div>
+    <p><i class="fa-solid fa-circle fa-xs"></i> <%= location_type %></p>
   </div>
 </div>
