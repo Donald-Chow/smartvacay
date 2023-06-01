@@ -3,20 +3,20 @@
   <% if user_signed_in? %>
     <% if current_user.trip.nil? %>
       <div class="banner-form">
-        <%= simple_form_for(@trip) do |f| %>
+        <%= simple_form_for(@trip, data: { controller: "flatpickr" } )  do |f| %>
           <%= f.input :destination, label: false, placeholder: "Where to?  i.e. Tokyo", class: "form-control"%>
           <div class="d-flex">
             <div class="col m-1">
               <%= f.input :start_date, as: :string, placeholder: "Start Date", label: false,
                 wrapper_html: { class: "mb-4" },
                 label_html: { class: "form-label text-secondary fw-bold" },
-                input_html: { data: { controller: "flatpickr" } } %>
+                input_html: { data: { flatpickr_target: "startTime"  } } %>
             </div>
             <div class="col m-1">
               <%= f.input :end_date, as: :string, placeholder: "End Date", label: false,
                 wrapper_html: { class: "mb-4" },
                 label_html: { class: "form-label text-secondary fw-bold" },
-                input_html: { data: { controller: "flatpickr" } } %>
+                input_html: { data: { flatpickr_target: "endTime" }, id:"end_time" } %>
             </div>
           </div>
           <%= f.submit class: "btn btn-primary" %>
