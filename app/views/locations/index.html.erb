@@ -17,7 +17,7 @@
             placeholder: "Type a keyword...",
             data: {"spinner-target" => "input"}
         %>
-        <%= submit_tag "Search", name: "", class: "btn btn-primary", data: { action: "click->spinner#insert", "spinner-target" => "sBtn"} %>
+        <%= submit_tag "Search", name: "", class: "btn btn-primary", style:"font-size:14px;", data: { action: "click->spinner#insert", "spinner-target" => "sBtn"} %>
       <% end %>
       <div class="search-icon" data-action="click->spinner#collapse">
         <i class="fas fa-search"></i>
@@ -56,44 +56,43 @@
         </div>
       </div>
     <% end %>
-  </div>
-  <!-- Top Attractions -->
-  <div class="text-and-card">
-    <div class="location-text">
-      <h1>Top <%= current_user.trip.destination %> attractions</h1>
+    <!-- Top Attractions -->
+    <div class="text-and-card">
+      <div class="location-text">
+        <h1>Top <%= current_user.trip.destination %> attractions</h1>
+      </div>
+      <div class="section-wrapper">
+        <div class="card-locations">
+          <% @top_attractions.each do |location| %>
+            <%= render "location_card", location: location%>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="section-wrapper">
-      <div class="card-locations">
-        <% @top_attractions.each do |location| %>
-          <%= render "location_card", location: location%>
-        <% end %>
+    <!-- Top Restaurants -->
+    <div class="text-and-card">
+      <div class="location-text">
+        <h1>Top <%= current_user.trip.destination %> restaurants</h1>
+      </div>
+      <div class="section-wrapper">
+        <div class="card-locations">
+          <% @top_restaurants.each do |location| %>
+            <%= render "location_card", location: location%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- Top Shopping -->
+    <div class="text-and-card pb-5 mb-5">
+      <div class="location-text">
+        <h1>Top <%= current_user.trip.destination %> shopping</h1>
+      </div>
+      <div class="section-wrapper">
+        <div class="card-locations">
+          <% @top_shoppings.each do |location| %>
+            <%= render "location_card", location: location%>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-  <!-- Top Restaurants -->
-  <div class="text-and-card">
-    <div class="location-text">
-      <h1>Top <%= current_user.trip.destination %> restaurants</h1>
-    </div>
-    <div class="section-wrapper">
-      <div class="card-locations">
-        <% @top_restaurants.each do |location| %>
-          <%= render "location_card", location: location%>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <!-- Top Shopping -->
-  <div class="text-and-card pb-5 mb-5">
-    <div class="location-text">
-      <h1>Top <%= current_user.trip.destination %> shopping</h1>
-    </div>
-    <div class="section-wrapper">
-      <div class="card-locations">
-        <% @top_shoppings.each do |location| %>
-          <%= render "location_card", location: location%>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>

@@ -16,9 +16,8 @@
 
 .search-box-fixed-bottom {
   display: flex;
-  justify-content: center;
-  // padding: 10px;
-  left: 3px;
+  justify-content: end;
+  left: -30px;
   position: fixed;
   bottom: 20px;
   width: 100%;
@@ -52,7 +51,8 @@
 
 .search-box-bg.active {
   opacity: 1;
-  width: 300px;
+  width: 252px;
+  margin-right: 22px;
 }
 
 .location-text {
