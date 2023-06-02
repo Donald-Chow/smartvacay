@@ -2,9 +2,8 @@
   <img class="bg-img" src="https://images.unsplash.com/photo-1554797589-7241bb691973?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80">
   <% if user_signed_in? %>
     <% if current_user.trip.nil? %>
-      <div class="banner-form">
-
-        <%= simple_form_for(@trip, data: { controller: "flatpickr", controller: "spinner", action: "submit->spinner#insert" } )  do |f| %>
+      <div class="banner-form" data-controller = "spinner">
+        <%= simple_form_for(@trip, data: { controller: "flatpickr", action: "submit->spinner#insert" } )  do |f| %>
           <%= f.input :destination, label: false, placeholder: "Where is your next destination?", class: "form-control"%>
           <div class="d-flex">
             <div class="col m-1">
