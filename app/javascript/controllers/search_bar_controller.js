@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="search-bar"
 export default class extends Controller {
-  static targets =["btn", "bar"]
+  static targets =["box", "sBtn", "cBtn", "input", "data"]
 
   connect() {
     console.log("search bar controller!!!");
@@ -10,8 +10,11 @@ export default class extends Controller {
 
   collapse(event) {
     console.log("COLLAPSE!");
-    this.barTarget.classList.toggle("active")
-    this.btnTarget.innerHTML="hello"
+    this.boxTarget.classList.toggle("active")
+    this.sBtnTarget.classList.toggle("active")
+    // this.cBtnTarget.classList.toggle("active")
+    this.inputTarget.classList.toggle("active")
     // this.inputTarget.classList.add("active")
   }
+
 }
