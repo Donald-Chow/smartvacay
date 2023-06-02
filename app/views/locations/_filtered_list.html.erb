@@ -1,8 +1,8 @@
 <h6 class="mt-2"><%= "This category is currently empty.  Try bookmarking more locations!" if @favorites.empty? %></h6>
-<div class="card-my-fav-locations" >
+<div class="card-my-fav-locations mb-3" >
   <% @favorites.each do |favorite| %>
     <%# favoritable = @category.present? ? favorite : favorite.favoritable %>
-    <div class="card-location">
+    <div class="card-location h-100">
       <%# Bookmark starts here %>
       <div class="bookmark">
         <% if current_user %>

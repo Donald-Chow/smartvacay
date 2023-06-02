@@ -28,6 +28,9 @@ application.register("hello", HelloController)
 import ItinCollapseController from "./itin_collapse_controller"
 application.register("itin-collapse", ItinCollapseController)
 
+import SearchBarController from "./search_bar_controller"
+application.register("search-bar", SearchBarController)
+
 import SortableController from "./sortable_controller"
 application.register("sortable", SortableController)
 

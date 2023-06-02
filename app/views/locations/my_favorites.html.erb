@@ -1,25 +1,24 @@
 <div class="page-content">
-
-	<div class="container">
-		<h1 class="location-text">Saved locations</h1>
-		<div class="d-flex justify-content-center">
-			<% if current_user.trip.present? %>
-				<% if current_user.trip.itineraries.present? %>
-					<%= link_to generate_trip_path(current_user.trip), data: {turbo_method: :get, turbo_confirm: "Do you want to regenerate?"} do %>
-						<button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Regenerate itinerary</button>
-					<% end %>
-				<% else %>
-					<%= link_to generate_trip_path(current_user.trip) do %>
-						<button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Generate itinerary</button>
-					<% end %>
-				<% end %>
-			<% end %>
-		</div>
-		<%# From here we have the category avatars %>
-		<div data-controller="category-search" data-category-search-baseurl-value="<%= request.base_url %>">
-			<div class="container">
-				<div class="category-avatars">
-					<% categories = [
+  <div class="container">
+    <h1 class="location-text">Saved Locations</h1>
+    <div class="d-flex justify-content-center">
+      <% if current_user.trip.present? %>
+        <% if current_user.trip.itineraries.present? %>
+          <%= link_to generate_trip_path(current_user.trip), data: {turbo_method: :get, turbo_confirm: "Do you want to regenerate?"} do %>
+            <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Regenerate itinerary</button>
+          <% end %>
+        <% else %>
+          <%= link_to generate_trip_path(current_user.trip) do %>
+            <button type="button" class="btn btn-secondary btn-sm mt-2 mb-3">Generate itinerary</button>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <%# From here we have the category avatars %>
+    <div data-controller="category-search" data-category-search-baseurl-value="<%= request.base_url %>">
+      <div class="container">
+        <div class="category-avatars">
+          <% categories = [
       { display: "All", image: "https://res.cloudinary.com/da2dzfqsn/image/upload/v1685615777/mountain-city-solid_h4rbmg.svg", query: ""},
       { display: "Sightseeing", image: "https://res.cloudinary.com/dfdergjip/image/upload/v1685618913/camera-solid_w30zus.svg", query: "sightseeing" },
       { display: "Food", image: "https://res.cloudinary.com/da2dzfqsn/image/upload/v1685617516/Food_-_utensils-solid_ku7anf.svg", query: "food" },

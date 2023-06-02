@@ -17,7 +17,7 @@
     </div>
   <% else %>
     <div data-controller="active-tab">
-      <%= link_to root_path, data: { action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
+      <%= link_to locations_path, data: { action: "click->active-tab#setActiveTab", active_tab_target: "link"} do %>
         <i class="fa-solid fa-magnifying-glass"></i>
         <br>
         <span class="nav-text">Explore</span>

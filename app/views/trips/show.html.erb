@@ -36,7 +36,7 @@
         <button onclick="window.print()" class="btn btn-secondary mt-3 mb-3 transport-btn" ><i class="fa-solid fa-arrow-up-right-from-square"></i> Save as PDF </button>
       </div>
       <div class="share-itin text-center my-3">
-        <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!">
+        <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!" data-clipboard-original-text-value="Copy to Clipboard">
           <input data-clipboard-target="input" type="text" value="https://smartvacay.herokuapp.com/trips/<%=@trip.id%>" readonly>
           <button class="btn btn-secondary py-2" id="clipboard-btn" data-action="click->clipboard#copy">Copy to Clipboard</button>
         </div>

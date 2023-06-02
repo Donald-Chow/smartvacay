@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="spinner"
 export default class extends Controller {
-  static targets = ["explore"]
+  static targets = ["explore", "sBtn", "box", "input"]
 
   connect() {
     console.log("Connected to spinner controller!");
@@ -30,5 +30,12 @@ export default class extends Controller {
     // this.element.appendChild(spinner);
     overlay.appendChild(spinner);
     document.body.appendChild(overlay);
+  }
+
+  collapse() {
+    console.log("COLLAPSE!");
+    this.boxTarget.classList.toggle("active")
+    this.sBtnTarget.classList.toggle("active")
+    this.inputTarget.classList.toggle("active")
   }
 }

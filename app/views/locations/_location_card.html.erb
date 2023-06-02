@@ -1,7 +1,7 @@
 <div class="card-location">
   <div class="bookmark">
     <% if user_signed_in? %>
-      <%= link_to favorite_location_path(location), class: "#{"text-warning" if current_user.favorited?(location)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-warning')" do %>
+      <%= link_to favorite_location_path(location), class: "bookmark-icon #{"text-warning" if current_user.favorited?(location)}", data: {turbo_method: :post}, onclick: "this.classList.toggle('text-warning')" do %>
         <i class="fa-solid fa-bookmark"></i>
       <% end %>
     <% end %>
@@ -15,17 +15,17 @@
     <h4><%= location.name %></h4>
     <%if location.rating%>
       <p><% location.rating.times do%>
-        <i class="fa-solid fa-star"></i>
-      <% end %>
-      <% (5 - location.rating).times do %>
-        <i class="fa-regular fa-star"></i>
+          <i class="fa-solid fa-star"></i>
         <% end %>
-    <% end %></p>
+        <% (5 - location.rating).times do %>
+          <i class="fa-regular fa-star"></i>
+        <% end %>
+      <% end %></p>
     <%if location.price_level%>
       <p><% location.price_level.times do%>
-        <i class='fa-solid fa-dollar-sign'></i>
-      <% end %>
-    <% end %></p>
+          <i class='fa-solid fa-dollar-sign'></i>
+        <% end %>
+      <% end %></p>
     <div class='mt-1'>
       <%if location.type_of_place%>
         <% location_type = location.type_of_place.gsub("_", " ").split.map { |each| each.capitalize }.join(" ") %>
