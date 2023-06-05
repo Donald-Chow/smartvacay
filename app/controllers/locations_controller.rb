@@ -92,7 +92,9 @@ class LocationsController < ApplicationController
       end
       # clean key words (if i take queries)
       # random key words search
-      if tags != []
+      if tags == []
+        @recommendations = []
+      else
         @query = tags.uniq.sample.gsub('_', ' ').to_s
         @recommendations = GooglePlaces.new(query: @query, trip: current_user.trip).call.map do |location|
           Location.find_by(place_id: location["place_id"]) || Location.google_create(location_details(location["place_id"]))
