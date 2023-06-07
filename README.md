@@ -1,22 +1,19 @@
 # ✈️ SmartVacay
 
-Final project for Batch 1190 Web Development course.
-This Web App allows user to create an itinerary for their trip with a single click of a button.
-After creating a trip with the destination and dates, a user will save all the location they want to go on their vacation, and the app will create the itinerary for you based on how far the locations are from each other to minimize travel time for your holiday.
+Final project for Batch 1190 Web Development course.<br><br>
+This Web App allows user to create an itinerary for their trip with a single click of a button.<br>
+After creating a trip with the destination and dates, a user will save all the location they want to go on their vacation, and the app will create the itinerary for you based on how far the locations are from each other to minimize travel time for your holiday.<br>
 
 _DROP SCREENSHOT HERE_
 <br>
 App home: https://www.smartvacay.app
 
------
 ## Team Members
 
-Donald Chow
-Yin Lee
-Joyce Lau Homing
-Arthur Andrade West
-
------
+Donald Chow [Github](https://github.com/Donald-Chow/), [Linkedin](https://www.linkedin.com/in/donald-wh-chow/)<br>
+Yin Lee [Github](https://github.com/tyhyun309)<br>
+Joyce Lau Homing [Github](https://github.com/jshizuki), [Linkedin](https://www.linkedin.com/in/joyce-lau-046b8689)<br>
+Arthur Andrade West [Github](https://github.com/Arthur-Andrade194), [Linkedin](https://www.linkedin.com/in/arthur-andrade-west/)<br>
 
 ## Getting Started
 ### Setup
