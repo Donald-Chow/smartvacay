@@ -16,7 +16,7 @@ App home: https://www.smartvacay.app
 ## Team Members
 
 Donald Chow [Github](https://github.com/Donald-Chow/), [Linkedin](https://www.linkedin.com/in/donald-wh-chow/)<br>
-Yin Lee [Github](https://github.com/tyhyun309)<br>
+Yin Lee [Github](https://github.com/tyhyun309), [Linkedin](https://www.linkedin.com/in/yin-lee-tokyo/)<br>
 Joyce Lau Homing [Github](https://github.com/jshizuki), [Linkedin](https://www.linkedin.com/in/joyce-lau-046b8689)<br>
 Arthur Andrade West [Github](https://github.com/Arthur-Andrade194), [Linkedin](https://www.linkedin.com/in/arthur-andrade-west/)<br>
 
